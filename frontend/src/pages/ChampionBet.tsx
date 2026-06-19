@@ -22,7 +22,6 @@ import SectionCard from '../components/common/SectionCard';
 import Loading from '../components/common/Loading';
 import ErrorAlert from '../components/common/ErrorAlert';
 import EmptyState from '../components/common/EmptyState';
-import { formatDateTime } from '../utils/format';
 import type { Season, Team, ChampionPoolStats } from '../api/bets';
 
 export default function ChampionBet() {
@@ -43,7 +42,7 @@ export default function ChampionBet() {
   // Bet modal state
   const [betModalOpen, setBetModalOpen] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
-  const [betAmount, setBetAmount] = useState(10);
+  const [betAmountText, setBetAmountText] = useState('10');
   const [betLoading, setBetLoading] = useState(false);
   const [betError, setBetError] = useState('');
 
@@ -85,11 +84,10 @@ export default function ChampionBet() {
         // Build set of team IDs the user has already bet on
         const seasonBets = myBets.list.filter((b) => b.seasonId === selectedSeasonId);
         setMyChampionBetTeamIds(new Set(seasonBets.map((b) => b.teamId)));
-        // Can bet if season is upcoming/active AND deadline hasn't passed
+        // Can bet if season is upcoming or active (no deadline restriction)
         const season = seasons.find((s) => s.id === selectedSeasonId);
         const seasonOpen = season?.status === 'UPCOMING' || season?.status === 'ACTIVE';
-        const deadlineOpen = !stats.deadline || new Date() < new Date(stats.deadline);
-        setCanBet(seasonOpen && deadlineOpen);
+        setCanBet(seasonOpen);
       })
       .catch(() => {});
   }, [selectedSeasonId, seasons]);
@@ -98,14 +96,15 @@ export default function ChampionBet() {
     const team = teams.find((t) => t.id === teamId);
     if (!team) return;
     setSelectedTeam(team);
-    setBetAmount(10);
+    setBetAmountText('10');
     setBetError('');
     setBetModalOpen(true);
   };
 
   const handleConfirmBet = async () => {
     if (!selectedTeam || !selectedSeasonId) return;
-    if (betAmount < 1) {
+    const betAmount = parseInt(betAmountText, 10);
+    if (isNaN(betAmount) || betAmount < 1) {
       setBetError('最低投注 1 币');
       return;
     }
@@ -189,23 +188,14 @@ export default function ChampionBet() {
                 </Box>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <AccessTime sx={{ color: canBet ? '#66BB6A' : '#EF5350', fontSize: 20 }} />
+                <AccessTime sx={{ color: '#66BB6A', fontSize: 20 }} />
                 <Box>
-                  <Typography sx={{ fontSize: 10, color: '#8890A8' }}>投注截止</Typography>
-                  <Typography sx={{ fontSize: 14, fontWeight: 700, color: canBet ? '#66BB6A' : '#EF5350' }}>
-                    {!poolStats.deadline
-                      ? '暂无赛程'
-                      : canBet
-                        ? formatDateTime(poolStats.deadline)
-                        : '已截止'}
+                  <Typography sx={{ fontSize: 10, color: '#8890A8' }}>投注状态</Typography>
+                  <Typography sx={{ fontSize: 14, fontWeight: 700, color: '#66BB6A' }}>
+                    进行中
                   </Typography>
                 </Box>
               </Box>
-              {!canBet && (
-                <Box sx={{ display: 'flex', alignItems: 'center', px: 2, py: 0.5, bgcolor: 'rgba(239,83,80,0.1)', borderRadius: 1 }}>
-                  <Typography sx={{ fontSize: 12, color: '#EF5350', fontWeight: 600 }}>投注已截止</Typography>
-                </Box>
-              )}
             </SectionCard>
           )}
 
@@ -251,8 +241,8 @@ export default function ChampionBet() {
               <TextField
                 label="投注金额"
                 type="number"
-                value={betAmount}
-                onChange={(e) => setBetAmount(Math.max(1, Number(e.target.value)))}
+                value={betAmountText}
+                onChange={(e) => setBetAmountText(e.target.value)}
                 helperText={user ? `可用余额: ${user.coins} 币` : ''}
                 inputProps={{ min: 1 }}
               />

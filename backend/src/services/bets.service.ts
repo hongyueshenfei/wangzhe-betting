@@ -288,16 +288,10 @@ export class BetsService {
 
   /**
    * Check if champion betting is still open for a season.
-   * Returns false if the first match has already started.
+   * Always open — no deadline restriction.
    */
-  async isChampionBettingOpen(seasonId: number): Promise<boolean> {
-    const firstMatch = await prisma.match.findFirst({
-      where: { seasonId },
-      orderBy: { matchTime: 'asc' },
-      select: { matchTime: true },
-    });
-    if (!firstMatch) return true; // No matches yet = still open
-    return new Date() < firstMatch.matchTime;
+  async isChampionBettingOpen(_seasonId: number): Promise<boolean> {
+    return true;
   }
 }
 
