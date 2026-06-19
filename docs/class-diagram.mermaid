@@ -1,0 +1,110 @@
+erDiagram
+    User ||--o{ Bet : places
+    User ||--o{ ChampionBet : places
+    User ||--o{ CoinTransaction : has
+    Season ||--o{ Team : contains
+    Season ||--o{ Match : contains
+    Season ||--o{ ChampionBet : receives
+    Season ||--o| Team : "champion"
+    Team ||--o{ Match : "as teamA"
+    Team ||--o{ Match : "as teamB"
+    Team ||--o{ Match : "forfeits"
+    Team ||--o{ Bet : "picked in"
+    Team ||--o{ ChampionBet : "picked in"
+    Match ||--o{ Bet : receives
+
+    User {
+        int id PK
+        string username UK
+        string passwordHash
+        enum role
+        int coins
+        boolean isBanned
+        datetime lastCheckInDate
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Season {
+        int id PK
+        string name
+        enum status
+        datetime startDate
+        datetime endDate
+        int championTeamId FK
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Team {
+        int id PK
+        string name
+        string logoUrl
+        string description
+        string members
+        int seasonId FK
+        int wins
+        int losses
+        int forfeits
+        datetime createdAt
+    }
+
+    Match {
+        int id PK
+        int seasonId FK
+        enum stage
+        string groupName
+        string round
+        int matchOrder
+        int teamAId FK
+        int teamBId FK
+        int teamAScore
+        int teamBScore
+        datetime matchTime
+        enum status
+        int forfeitTeamId FK
+        int winnerTeamId FK
+        float oddsA
+        float oddsB
+        int betTotalA
+        int betTotalB
+        int betCountA
+        int betCountB
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Bet {
+        int id PK
+        int userId FK
+        int matchId FK
+        int pickedTeamId FK
+        int amount
+        float oddsAtBet
+        enum status
+        datetime createdAt
+        datetime settledAt
+    }
+
+    ChampionBet {
+        int id PK
+        int userId FK
+        int seasonId FK
+        int teamId FK
+        int amount
+        float oddsAtBet
+        enum status
+        datetime createdAt
+        datetime settledAt
+    }
+
+    CoinTransaction {
+        int id PK
+        int userId FK
+        int amount
+        enum type
+        string referenceType
+        int referenceId
+        int balanceAfter
+        datetime createdAt
+    }

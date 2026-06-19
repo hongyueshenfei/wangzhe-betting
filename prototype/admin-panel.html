@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王者竞猜 · 管理后台完整原型</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #0B0E17;
+  color: #E8EAF0;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #0F1119;
+  border-right: 1px solid #1E2340;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.sb-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px 24px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #C8A951;
+}
+.sb-logo-icon {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, #C8A951, #B8942E);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: #0F1119;
+}
+.sb-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6B7394;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.sb-nav-item:hover { background: #1A1D2E; color: #CBD0E0; }
+.sb-nav-item.active {
+  background: #1F2342;
+  color: #C8A951;
+  border: 1px solid rgba(200,169,81,0.15);
+}
+.sb-nav-icon { font-size: 16px; width: 22px; text-align: center; }
+.sb-section {
+  font-size: 10px;
+  color: #3A3F58;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 16px 14px 8px;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.topbar {
+  height: 56px;
+  border-bottom: 1px solid #1E2340;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: #0F1119;
+  flex-shrink: 0;
+}
+.topbar-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+}
+.admin-badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(200,169,81,0.12);
+  color: #C8A951;
+  border: 1px solid rgba(200,169,81,0.2);
+}
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+.content-area::-webkit-scrollbar { width: 4px; }
+.content-area::-webkit-scrollbar-thumb { background: #2A2F45; border-radius: 2px; }
+
+/* Panel */
+.panel {
+  background: #1A1D2E;
+  border-radius: 16px;
+  border: 1px solid #242840;
+  padding: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.panel.full-row {
+  grid-column: 1 / -1;
+}
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.panel-title {
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title::before {
+  content: '';
+  width: 3px; height: 16px;
+  background: linear-gradient(180deg, #C8A951, #D32F2F);
+  border-radius: 2px;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-primary { background: linear-gradient(135deg, #C8A951, #B8942E); color: #0F1119; }
+.btn-danger { background: linear-gradient(135deg, #D32F2F, #E53935); color: #FFF; }
+.btn-outline {
+  background: transparent;
+  border: 1px solid #3A3F58;
+  color: #CBD0E0;
+  padding: 7px 17px;
+}
+.btn-sm { padding: 5px 12px; font-size: 11px; border-radius: 6px; }
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.stat-item {
+  background: #0F1119;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #1E2340;
+  text-align: center;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #C8A951;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 11px;
+  color: #6B7394;
+  font-weight: 600;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+thead th {
+  text-align: left;
+  padding: 10px 14px;
+  color: #6B7394;
+  font-weight: 600;
+  font-size: 11px;
+  border-bottom: 1px solid #1E2340;
+  white-space: nowrap;
+}
+tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #151827;
+}
+tr:hover { background: rgba(255,255,255,0.02); }
+
+/* Badges */
+.badge {
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.badge-green { background: rgba(76,175,80,0.15); color: #4CAF50; }
+.badge-red { background: rgba(239,83,80,0.15); color: #EF5350; }
+.badge-gold { background: rgba(200,169,81,0.15); color: #C8A951; }
+.badge-blue { background: rgba(66,165,245,0.15); color: #42A5F5; }
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.badge-dot.green { background: #4CAF50; }
+.badge-dot.red { background: #EF5350; }
+
+/* Form */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-field.full { grid-column: 1 / -1; }
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8890A8;
+}
+.form-input, .form-select, .form-textarea {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #2A2F45;
+  background: #0F1119;
+  color: #E8EAF0;
+  font-size: 13px;
+  outline: none;
+  font-family: inherit;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: #C8A951;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: #3A3F58; }
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%236B7394' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+.form-hint {
+  font-size: 11px;
+  color: #3A3F58;
+}
+.form-textarea { min-height: 60px; resize: vertical; }
+
+/* Tournament config card */
+.config-section {
+  background: #0F1119;
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid #1E2340;
+  margin-bottom: 14px;
+}
+.config-section-header {
+  font-size: 13px;
+  font-weight: 700;
+  color: #C8A951;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.config-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Match bracket preview */
+.bracket-mini {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 12px;
+  padding: 16px;
+  background: #0F1119;
+  border-radius: 12px;
+  border: 1px solid #1E2340;
+}
+.bracket-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bracket-slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: #1A1D2E;
+  border-radius: 8px;
+  border: 1px solid #242840;
+  white-space: nowrap;
+}
+.bracket-slot.qualify { border-color: rgba(76,175,80,0.3); }
+.bracket-connector {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.bracket-connector-line {
+  width: 28px;
+  height: 0;
+  border-top: 1.5px dashed #3A3F58;
+}
+
+/* Team list */
+.team-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #0F1119;
+  border-radius: 8px;
+  border: 1px solid #1E2340;
+  margin-bottom: 6px;
+}
+.team-mini-badge {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  color: #FFF;
+  flex-shrink: 0;
+}
+.team-mini-info { flex: 1; }
+.team-mini-name { font-size: 13px; font-weight: 600; }
+.team-mini-members { font-size: 10px; color: #6B7394; margin-top: 2px; }
+
+/* Action button row */
+.action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Sidebar ═══ -->
+<div class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-icon">竞</div>
+    王者竞猜
+  </div>
+
+  <div class="sb-section">主菜单</div>
+  <a class="sb-nav-item active"><span class="sb-nav-icon">📊</span> 数据看板</a>
+  <a class="sb-nav-item"><span class="sb-nav-icon">🏆</span> 赛季管理</a>
+  <a class="sb-nav-item"><span class="sb-nav-icon">👥</span> 队伍管理</a>
+  <a class="sb-nav-item"><span class="sb-nav-icon">⚔️</span> 比赛管理</a>
+  <a class="sb-nav-item"><span class="sb-nav-icon">💰</span> 赔率管理</a>
+
+  <div class="sb-section">系统</div>
+  <a class="sb-nav-item"><span class="sb-nav-icon">👤</span> 用户管理</a>
+  <a class="sb-nav-item"><span class="sb-nav-icon">📋</span> 操作日志</a>
+</div>
+
+<!-- ═══ Main Content ═══ -->
+<div class="main">
+  <!-- Top bar -->
+  <div class="topbar">
+    <span class="topbar-title">📊 数据看板</span>
+    <div class="topbar-right">
+      <span style="color:#6B7394">管理员</span>
+      <span class="admin-badge">👑 admin</span>
+    </div>
+  </div>
+
+  <!-- Content grid: 4 panels -->
+  <div class="content-area">
+
+    <!-- ═══ Panel 1: 数据统计 ═══ -->
+    <div class="panel full-row" style="padding:20px 24px">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">48</div>
+          <div class="stat-label">注册用户</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">3</div>
+          <div class="stat-label">赛季进行中</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">24</div>
+          <div class="stat-label">参赛队伍</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">¥18.5K</div>
+          <div class="stat-label">总投注池</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">156</div>
+          <div class="stat-label">投注笔数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">92</div>
+          <div class="stat-label">已结算比赛</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">12</div>
+          <div class="stat-label">待录入赛果</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">68%</div>
+          <div class="stat-label">玩家胜率中位数</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Panel 2: 赛季管理 + 赛制配置 ═══ -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">🏆 赛季管理 · 赛制配置</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline btn-sm">查看所有赛季</button>
+          <button class="btn btn-primary btn-sm">+ 新建赛季</button>
+        </div>
+      </div>
+
+      <!-- Active season card -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#0F1119;border-radius:10px;border:1px solid rgba(200,169,81,0.2);margin-bottom:16px">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#C8A951">S3 夏季赛</div>
+          <div style="font-size:11px;color:#6B7394;margin-top:2px">2026-06-01 → 2026-07-15 · 小组赛阶段</div>
+        </div>
+        <span class="badge badge-green"><span class="badge-dot green"></span> 进行中</span>
+      </div>
+
+      <!-- Tournament config -->
+      <div class="config-section">
+        <div class="config-section-header">📐 小组赛配置</div>
+        <div class="config-row">
+          <div class="form-field">
+            <div class="form-label">参赛队伍数</div>
+            <select class="form-select"><option>8 支</option><option>12 支</option><option>16 支</option></select>
+          </div>
+          <div class="form-field">
+            <div class="form-label">分组数</div>
+            <select class="form-select"><option>2 组</option><option>4 组</option></select>
+          </div>
+          <div class="form-field">
+            <div class="form-label">每组队伍数</div>
+            <input class="form-input" value="4" placeholder="自动计算">
+          </div>
+          <div class="form-field">
+            <div class="form-label">晋级规则</div>
+            <select class="form-select"><option>每组前 2 名</option><option>每组第 1 名</option></select>
+          </div>
+          <div class="form-field">
+            <div class="form-label">胜场积分</div>
+            <input class="form-input" value="3">
+          </div>
+          <div class="form-field">
+            <div class="form-label">负场积分</div>
+            <input class="form-input" value="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-section-header">⚔️ 淘汰赛配置</div>
+        <div class="config-row">
+          <div class="form-field">
+            <div class="form-label">半决赛局数</div>
+            <select class="form-select"><option>BO3 (三局两胜)</option><option>BO1</option><option>BO5</option></select>
+          </div>
+          <div class="form-field">
+            <div class="form-label">决赛局数</div>
+            <select class="form-select"><option>BO5 (五局三胜)</option><option>BO3</option></select>
+          </div>
+          <div class="form-field">
+            <div class="form-label">对阵规则</div>
+            <select class="form-select"><option>A1 vs B2, B1 vs A2</option></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button class="btn btn-primary">💾 保存赛制配置</button>
+      </div>
+    </div>
+
+    <!-- ═══ Panel 3: 队伍管理 · 批量录入 ═══ -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">👥 队伍管理 · 初始录入</span>
+        <button class="btn btn-outline btn-sm">+ 添加队伍</button>
+      </div>
+
+      <!-- Quick add form -->
+      <div style="display:flex;gap:10px;margin-bottom:14px;align-items:flex-end">
+        <div class="form-field" style="flex:1">
+          <div class="form-label">队伍名称</div>
+          <input class="form-input" placeholder="输入队伍名称">
+        </div>
+        <div class="form-field" style="flex:1">
+          <div class="form-label">标识缩写 (2字)</div>
+          <input class="form-input" placeholder="如: TK">
+        </div>
+        <div class="form-field" style="flex:1">
+          <div class="form-label">标识颜色</div>
+          <input class="form-input" type="color" style="height:38px;width:100%;cursor:pointer" value="#1565C0">
+        </div>
+        <button class="btn btn-primary" style="margin-bottom:1px">快速添加</button>
+      </div>
+
+      <div class="form-field" style="margin-bottom:14px">
+        <div class="form-label">批量导入（每行一支队伍：队伍名,缩写,颜色）</div>
+        <textarea class="form-textarea" rows="3" placeholder="天穹战队,TK,#1565C0&#10;烈焰风暴,LF,#E65100&#10;星辰战队,SC,#2E7D32&#10;幻影联盟,PH,#6A1B9A&#10;雷霆之怒,TL,#D32F2F&#10;暗影猎手,SH,#37474F&#10;极光战队,AO,#00BCD4&#10;龙啸九天,DX,#F57C00"></textarea>
+        <div class="form-hint">每行格式：队伍名,缩写,颜色  |  颜色支持 #HEX 格式</div>
+      </div>
+      <button class="btn btn-primary btn-sm" style="align-self:flex-start">📥 批量导入 8 支队伍</button>
+
+      <!-- Team list -->
+      <div style="margin-top:16px;max-height:240px;overflow-y:auto">
+        <div class="team-mini">
+          <div class="team-mini-badge" style="background:linear-gradient(135deg,#1565C0,#1976D2)">TK</div>
+          <div class="team-mini-info">
+            <div class="team-mini-name">天穹战队</div>
+            <div class="team-mini-members">成员：天明、星痕、苍穹、影刃、幽狼</div>
+          </div>
+          <span class="badge badge-blue">S3 赛季</span>
+          <button class="btn btn-outline btn-sm" style="margin-left:8px">编辑</button>
+        </div>
+        <div class="team-mini">
+          <div class="team-mini-badge" style="background:linear-gradient(135deg,#E65100,#F57C00)">LF</div>
+          <div class="team-mini-info">
+            <div class="team-mini-name">烈焰风暴</div>
+            <div class="team-mini-members">成员：炎帝、赤焰、熔岩、火山、烈风</div>
+          </div>
+          <span class="badge badge-blue">S3 赛季</span>
+          <button class="btn btn-outline btn-sm" style="margin-left:8px">编辑</button>
+        </div>
+        <div class="team-mini">
+          <div class="team-mini-badge" style="background:linear-gradient(135deg,#2E7D32,#388E3C)">SC</div>
+          <div class="team-mini-info">
+            <div class="team-mini-name">星辰战队</div>
+            <div class="team-mini-members">成员：耀光、辰星、银河、彗星、北极</div>
+          </div>
+          <span class="badge badge-blue">S3 赛季</span>
+          <button class="btn btn-outline btn-sm" style="margin-left:8px">编辑</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Panel 4: 比赛赛程 ═══ -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">⚔️ 比赛管理 · 赛程</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline btn-sm">📋 导出赛程</button>
+          <button class="btn btn-primary btn-sm">⚡ 生成赛程</button>
+        </div>
+      </div>
+
+      <!-- Match table -->
+      <div style="max-height:260px;overflow-y:auto">
+        <table>
+          <thead>
+            <tr><th>#</th><th>阶段</th><th>组</th><th>队伍A</th><th>比分</th><th>队伍B</th><th>时间</th><th>状态</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:#6B7394;font-size:11px">1</td>
+              <td>小组赛</td>
+              <td>A组</td>
+              <td>天穹战队</td>
+              <td style="color:#C8A951;font-weight:700">2 : 1</td>
+              <td>烈焰风暴</td>
+              <td style="color:#6B7394;font-size:11px">06-17 14:30</td>
+              <td><span class="badge badge-green">已完成</span></td>
+            </tr>
+            <tr>
+              <td style="color:#6B7394;font-size:11px">2</td>
+              <td>小组赛</td>
+              <td>A组</td>
+              <td>星辰战队</td>
+              <td style="color:#C8A951;font-weight:700">— : —</td>
+              <td>幻影联盟</td>
+              <td style="color:#6B7394;font-size:11px">06-17 15:00</td>
+              <td><span class="badge badge-gold">即将开始</span></td>
+            </tr>
+            <tr>
+              <td style="color:#6B7394;font-size:11px">3</td>
+              <td>小组赛</td>
+              <td>A组</td>
+              <td>雷霆之怒</td>
+              <td style="color:#C8A951;font-weight:700">— : —</td>
+              <td>暗影猎手</td>
+              <td style="color:#6B7394;font-size:11px">06-17 15:30</td>
+              <td><span class="badge badge-blue">待开始</span></td>
+            </tr>
+            <tr>
+              <td style="color:#6B7394;font-size:11px">4</td>
+              <td>小组赛</td>
+              <td>B组</td>
+              <td>极光战队</td>
+              <td style="color:#C8A951;font-weight:700">— : —</td>
+              <td>龙啸九天</td>
+              <td style="color:#6B7394;font-size:11px">06-17 16:00</td>
+              <td><span class="badge badge-blue">待开始</span></td>
+            </tr>
+            <tr>
+              <td style="color:#6B7394;font-size:11px">5</td>
+              <td>小组赛</td>
+              <td>B组</td>
+              <td>天穹战队</td>
+              <td style="color:#C8A951;font-weight:700">— : —</td>
+              <td>星辰战队</td>
+              <td style="color:#6B7394;font-size:11px">06-18 14:00</td>
+              <td><span class="badge badge-blue">待开始</span></td>
+            </tr>
+            <tr>
+              <td style="color:#6B7394;font-size:11px">13</td>
+              <td style="color:#D32F2F;font-weight:600">淘汰赛</td>
+              <td>半决赛</td>
+              <td style="color:#6B7394">待定</td>
+              <td style="color:#C8A951;font-weight:700">BO3</td>
+              <td style="color:#6B7394">待定</td>
+              <td style="color:#6B7394;font-size:11px">小组赛后</td>
+              <td><span class="badge badge-red">未生成</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Bracket preview -->
+      <div style="margin-top:14px">
+        <div style="font-size:12px;font-weight:600;color:#6B7394;margin-bottom:8px">淘汰赛对阵预览（小组赛结束后自动生成）</div>
+        <div class="bracket-mini">
+          <div class="bracket-col">
+            <div class="bracket-slot qualify" style="font-size:11px">🏆 A组第1</div>
+            <div class="bracket-slot qualify" style="font-size:11px">🥈 B组第2</div>
+            <div class="bracket-slot qualify" style="font-size:11px">🥇 B组第1</div>
+            <div class="bracket-slot qualify" style="font-size:11px">🥈 A组第2</div>
+          </div>
+          <div class="bracket-connector">
+            <div class="bracket-connector-line"></div>
+            <span style="font-size:10px;color:#3A3F58">半决赛 BO3</span>
+            <div class="bracket-connector-line"></div>
+          </div>
+          <div class="bracket-col">
+            <div class="bracket-slot" style="font-size:11px">半决赛胜者 1</div>
+            <div class="bracket-slot" style="font-size:11px">半决赛胜者 2</div>
+          </div>
+          <div class="bracket-connector">
+            <span style="font-size:10px;color:#3A3F58">决赛 BO5</span>
+          </div>
+          <div class="bracket-col">
+            <div class="bracket-slot" style="font-size:11px;border-color:rgba(200,169,81,0.3);background:rgba(200,169,81,0.05)">
+              👑 冠军
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Panel 5: 赛果录入 ═══ -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">📝 赛果录入</span>
+        <span class="badge badge-red" style="font-size:10px">3 场待录入</span>
+      </div>
+
+      <!-- Match 1 result entry -->
+      <div style="background:#0F1119;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #1E2340">
+        <div style="font-size:11px;color:#6B7394;margin-bottom:10px">A组 · BO1 · 14:30 已结束</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="flex:1;display:flex;align-items:center;gap:8px">
+            <div class="team-mini-badge" style="background:linear-gradient(135deg,#1565C0,#1976D2)">TK</div>
+            <span style="font-size:13px;font-weight:600">天穹战队</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input class="form-input" style="width:52px;text-align:center;font-size:16px;font-weight:800;padding:8px" value="2" placeholder="分">
+            <span style="font-size:16px;color:#6B7394;font-weight:700">:</span>
+            <input class="form-input" style="width:52px;text-align:center;font-size:16px;font-weight:800;padding:8px" value="1" placeholder="分">
+          </div>
+          <div style="flex:1;display:flex;align-items:center;gap:8px;justify-content:flex-end">
+            <span style="font-size:13px;font-weight:600">烈焰风暴</span>
+            <div class="team-mini-badge" style="background:linear-gradient(135deg,#E65100,#F57C00)">LF</div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-primary btn-sm">确认</button>
+            <button class="btn btn-danger btn-sm">弃赛</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#0F1119;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #1E2340;opacity:0.6">
+        <div style="font-size:11px;color:#6B7394;margin-bottom:10px">A组 · BO1 · 15:00 进行中</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="flex:1;display:flex;align-items:center;gap:8px">
+            <div class="team-mini-badge" style="background:linear-gradient(135deg,#2E7D32,#388E3C)">SC</div>
+            <span style="font-size:13px;font-weight:600">星辰战队</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input class="form-input" style="width:52px;text-align:center;font-size:16px;font-weight:800;padding:8px" placeholder="—" disabled>
+            <span style="font-size:16px;color:#3A3F58;font-weight:700">:</span>
+            <input class="form-input" style="width:52px;text-align:center;font-size:16px;font-weight:800;padding:8px" placeholder="—" disabled>
+          </div>
+          <div style="flex:1;display:flex;align-items:center;gap:8px;justify-content:flex-end">
+            <span style="font-size:13px;font-weight:600">幻影联盟</span>
+            <div class="team-mini-badge" style="background:linear-gradient(135deg,#6A1B9A,#7B1FA2)">PH</div>
+          </div>
+          <span style="font-size:11px;color:#6B7394">比赛中</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

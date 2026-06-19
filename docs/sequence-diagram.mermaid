@@ -1,0 +1,44 @@
+sequenceDiagram
+    actor B as 投注人
+    participant FE as 前端 (React)
+    participant API as Express API
+    participant Auth as Auth Middleware
+    participant BS as BetService
+    participant OS as OddsService
+    participant DB as Prisma/SQLite
+
+    B->>FE: 进入比赛详情页，点击投注
+    FE->>FE: 弹出 BetModal，选择投注方+金额
+    B->>FE: 确认投注
+
+    FE->>API: POST /api/bets { matchId, teamId, amount }
+    API->>Auth: 验证 JWT Token
+    Auth-->>API: userId (bettor)
+
+    API->>BS: placeBet(userId, matchId, teamId, amount)
+    
+    BS->>DB: 查询比赛状态
+    DB-->>BS: match (status=UPCOMING)
+    
+    BS->>BS: 校验: 比赛未开始 && 用户未被封禁
+    BS->>DB: 检查唯一约束 [userId, matchId]
+    DB-->>BS: 无重复投注
+
+    BS->>DB: 查询用户余额
+    DB-->>BS: balance (如: 100)
+    BS->>BS: 校验: amount <= balance
+
+    BS->>DB: 开启事务
+    BS->>DB: UPDATE User.coins -= amount
+    BS->>DB: INSERT Bet (oddsAtBet=当前赔率, status=PENDING)
+    BS->>DB: INSERT CoinTransaction (type=BET, amount=-amount)
+    BS->>DB: UPDATE Match.betTotalX += amount, betCountX += 1
+    BS->>DB: 提交事务
+
+    BS->>OS: recalculateOdds(matchId)
+    OS->>DB: 计算新赔率 (基于 betTotalA/betTotalB 比例)
+    OS->>DB: UPDATE Match.oddsA, Match.oddsB
+
+    BS-->>API: { betId, oddsAtBet, newBalance }
+    API-->>FE: 201 { code:0, data: { betId, newBalance } }
+    FE->>B: 显示投注成功 + 新余额

@@ -1,0 +1,431 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - heading "🏆 王者荣耀竞猜 · 管理后台" [level=6] [ref=e6]
+      - generic [ref=e7]:
+        - paragraph [ref=e8]: admin
+        - generic [ref=e9]: ADMIN
+        - paragraph [ref=e10] [cursor=pointer]: 退出
+  - generic [ref=e12]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: 竞
+      - paragraph [ref=e16]: 王者竞猜
+    - generic [ref=e17]: 主菜单
+    - list [ref=e18]:
+      - button "数据看板" [ref=e19] [cursor=pointer]:
+        - img [ref=e21]
+        - generic [ref=e24]: 数据看板
+      - button "赛季管理" [ref=e25] [cursor=pointer]:
+        - img [ref=e27]
+        - generic [ref=e30]: 赛季管理
+      - button "队伍管理" [ref=e31] [cursor=pointer]:
+        - img [ref=e33]
+        - generic [ref=e36]: 队伍管理
+      - button "比赛管理" [ref=e37] [cursor=pointer]:
+        - img [ref=e39]
+        - generic [ref=e42]: 比赛管理
+      - button "赔率管理" [ref=e43] [cursor=pointer]:
+        - img [ref=e45]
+        - generic [ref=e48]: 赔率管理
+      - button "用户管理" [ref=e49] [cursor=pointer]:
+        - img [ref=e51]
+        - generic [ref=e54]: 用户管理
+  - main [ref=e55]:
+    - generic [ref=e58]:
+      - heading "💰 赔率管理" [level=4] [ref=e59]
+      - generic [ref=e60]:
+        - generic: 赛季
+        - generic [ref=e61]:
+          - combobox [ref=e62] [cursor=pointer]
+          - textbox
+          - img
+          - group:
+            - generic: 赛季
+      - table [ref=e64]:
+        - rowgroup [ref=e65]:
+          - row "ID 比赛 状态 A 赔率 A 投注 B 赔率 B 投注 操作" [ref=e66]:
+            - columnheader "ID" [ref=e67]
+            - columnheader "比赛" [ref=e68]
+            - columnheader "状态" [ref=e69]
+            - columnheader "A 赔率" [ref=e70]
+            - columnheader "A 投注" [ref=e71]
+            - columnheader "B 赔率" [ref=e72]
+            - columnheader "B 投注" [ref=e73]
+            - columnheader "操作" [ref=e74]
+        - rowgroup [ref=e75]:
+          - row "37 eStarPro VS Test Team QA Updated 2026/06/18 18:00 未开始 1.10 100 币 (1人) 5.00 0 币 (0人) 调整赔率" [ref=e76]:
+            - cell "37" [ref=e77]
+            - cell "eStarPro VS Test Team QA Updated 2026/06/18 18:00" [ref=e78]:
+              - paragraph [ref=e79]: eStarPro VS Test Team QA Updated
+              - text: 2026/06/18 18:00
+            - cell "未开始" [ref=e80]:
+              - generic [ref=e82]: 未开始
+            - cell "1.10" [ref=e83]:
+              - paragraph [ref=e84]: "1.10"
+            - cell "100 币 (1人)" [ref=e85]:
+              - generic [ref=e86]: 100 币 (1人)
+            - cell "5.00" [ref=e87]:
+              - paragraph [ref=e88]: "5.00"
+            - cell "0 币 (0人)" [ref=e89]:
+              - generic [ref=e90]: 0 币 (0人)
+            - cell "调整赔率" [ref=e91]:
+              - button "调整赔率" [ref=e92] [cursor=pointer]:
+                - img [ref=e93]
+          - row "2 QGha VS DYG.JC 2026/06/18 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e95]:
+            - cell "2" [ref=e96]
+            - cell "QGha VS DYG.JC 2026/06/18 20:00" [ref=e97]:
+              - paragraph [ref=e98]: QGha VS DYG.JC
+              - text: 2026/06/18 20:00
+            - cell "未开始" [ref=e99]:
+              - generic [ref=e101]: 未开始
+            - cell "2.00" [ref=e102]:
+              - paragraph [ref=e103]: "2.00"
+            - cell "0 币 (0人)" [ref=e104]:
+              - generic [ref=e105]: 0 币 (0人)
+            - cell "2.00" [ref=e106]:
+              - paragraph [ref=e107]: "2.00"
+            - cell "0 币 (0人)" [ref=e108]:
+              - generic [ref=e109]: 0 币 (0人)
+            - cell "调整赔率" [ref=e110]:
+              - button "调整赔率" [ref=e111] [cursor=pointer]:
+                - img [ref=e112]
+          - row "38 QGha VS DYG.JC 2026/06/18 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e114]:
+            - cell "38" [ref=e115]
+            - cell "QGha VS DYG.JC 2026/06/18 20:00" [ref=e116]:
+              - paragraph [ref=e117]: QGha VS DYG.JC
+              - text: 2026/06/18 20:00
+            - cell "未开始" [ref=e118]:
+              - generic [ref=e120]: 未开始
+            - cell "2.00" [ref=e121]:
+              - paragraph [ref=e122]: "2.00"
+            - cell "0 币 (0人)" [ref=e123]:
+              - generic [ref=e124]: 0 币 (0人)
+            - cell "2.00" [ref=e125]:
+              - paragraph [ref=e126]: "2.00"
+            - cell "0 币 (0人)" [ref=e127]:
+              - generic [ref=e128]: 0 币 (0人)
+            - cell "调整赔率" [ref=e129]:
+              - button "调整赔率" [ref=e130] [cursor=pointer]:
+                - img [ref=e131]
+          - row "3 Hero久竞 VS TS豚首 2026/06/19 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e133]:
+            - cell "3" [ref=e134]
+            - cell "Hero久竞 VS TS豚首 2026/06/19 18:00" [ref=e135]:
+              - paragraph [ref=e136]: Hero久竞 VS TS豚首
+              - text: 2026/06/19 18:00
+            - cell "未开始" [ref=e137]:
+              - generic [ref=e139]: 未开始
+            - cell "2.00" [ref=e140]:
+              - paragraph [ref=e141]: "2.00"
+            - cell "0 币 (0人)" [ref=e142]:
+              - generic [ref=e143]: 0 币 (0人)
+            - cell "2.00" [ref=e144]:
+              - paragraph [ref=e145]: "2.00"
+            - cell "0 币 (0人)" [ref=e146]:
+              - generic [ref=e147]: 0 币 (0人)
+            - cell "调整赔率" [ref=e148]:
+              - button "调整赔率" [ref=e149] [cursor=pointer]:
+                - img [ref=e150]
+          - row "39 Hero久竞 VS TS豚首 2026/06/19 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e152]:
+            - cell "39" [ref=e153]
+            - cell "Hero久竞 VS TS豚首 2026/06/19 18:00" [ref=e154]:
+              - paragraph [ref=e155]: Hero久竞 VS TS豚首
+              - text: 2026/06/19 18:00
+            - cell "未开始" [ref=e156]:
+              - generic [ref=e158]: 未开始
+            - cell "2.00" [ref=e159]:
+              - paragraph [ref=e160]: "2.00"
+            - cell "0 币 (0人)" [ref=e161]:
+              - generic [ref=e162]: 0 币 (0人)
+            - cell "2.00" [ref=e163]:
+              - paragraph [ref=e164]: "2.00"
+            - cell "0 币 (0人)" [ref=e165]:
+              - generic [ref=e166]: 0 币 (0人)
+            - cell "调整赔率" [ref=e167]:
+              - button "调整赔率" [ref=e168] [cursor=pointer]:
+                - img [ref=e169]
+          - row "4 RNG.M VS EDG.M 2026/06/19 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e171]:
+            - cell "4" [ref=e172]
+            - cell "RNG.M VS EDG.M 2026/06/19 20:00" [ref=e173]:
+              - paragraph [ref=e174]: RNG.M VS EDG.M
+              - text: 2026/06/19 20:00
+            - cell "未开始" [ref=e175]:
+              - generic [ref=e177]: 未开始
+            - cell "2.00" [ref=e178]:
+              - paragraph [ref=e179]: "2.00"
+            - cell "0 币 (0人)" [ref=e180]:
+              - generic [ref=e181]: 0 币 (0人)
+            - cell "2.00" [ref=e182]:
+              - paragraph [ref=e183]: "2.00"
+            - cell "0 币 (0人)" [ref=e184]:
+              - generic [ref=e185]: 0 币 (0人)
+            - cell "调整赔率" [ref=e186]:
+              - button "调整赔率" [ref=e187] [cursor=pointer]:
+                - img [ref=e188]
+          - row "40 RNG.M VS EDG.M 2026/06/19 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e190]:
+            - cell "40" [ref=e191]
+            - cell "RNG.M VS EDG.M 2026/06/19 20:00" [ref=e192]:
+              - paragraph [ref=e193]: RNG.M VS EDG.M
+              - text: 2026/06/19 20:00
+            - cell "未开始" [ref=e194]:
+              - generic [ref=e196]: 未开始
+            - cell "2.00" [ref=e197]:
+              - paragraph [ref=e198]: "2.00"
+            - cell "0 币 (0人)" [ref=e199]:
+              - generic [ref=e200]: 0 币 (0人)
+            - cell "2.00" [ref=e201]:
+              - paragraph [ref=e202]: "2.00"
+            - cell "0 币 (0人)" [ref=e203]:
+              - generic [ref=e204]: 0 币 (0人)
+            - cell "调整赔率" [ref=e205]:
+              - button "调整赔率" [ref=e206] [cursor=pointer]:
+                - img [ref=e207]
+          - row "5 11 VS Test Team QA Updated 2026/06/20 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e209]:
+            - cell "5" [ref=e210]
+            - cell "11 VS Test Team QA Updated 2026/06/20 18:00" [ref=e211]:
+              - paragraph [ref=e212]: 11 VS Test Team QA Updated
+              - text: 2026/06/20 18:00
+            - cell "未开始" [ref=e213]:
+              - generic [ref=e215]: 未开始
+            - cell "2.00" [ref=e216]:
+              - paragraph [ref=e217]: "2.00"
+            - cell "0 币 (0人)" [ref=e218]:
+              - generic [ref=e219]: 0 币 (0人)
+            - cell "2.00" [ref=e220]:
+              - paragraph [ref=e221]: "2.00"
+            - cell "0 币 (0人)" [ref=e222]:
+              - generic [ref=e223]: 0 币 (0人)
+            - cell "调整赔率" [ref=e224]:
+              - button "调整赔率" [ref=e225] [cursor=pointer]:
+                - img [ref=e226]
+          - row "41 11 VS Test Team QA Updated 2026/06/20 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e228]:
+            - cell "41" [ref=e229]
+            - cell "11 VS Test Team QA Updated 2026/06/20 18:00" [ref=e230]:
+              - paragraph [ref=e231]: 11 VS Test Team QA Updated
+              - text: 2026/06/20 18:00
+            - cell "未开始" [ref=e232]:
+              - generic [ref=e234]: 未开始
+            - cell "2.00" [ref=e235]:
+              - paragraph [ref=e236]: "2.00"
+            - cell "0 币 (0人)" [ref=e237]:
+              - generic [ref=e238]: 0 币 (0人)
+            - cell "2.00" [ref=e239]:
+              - paragraph [ref=e240]: "2.00"
+            - cell "0 币 (0人)" [ref=e241]:
+              - generic [ref=e242]: 0 币 (0人)
+            - cell "调整赔率" [ref=e243]:
+              - button "调整赔率" [ref=e244] [cursor=pointer]:
+                - img [ref=e245]
+          - row "6 eStarPro VS TS豚首 2026/06/20 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e247]:
+            - cell "6" [ref=e248]
+            - cell "eStarPro VS TS豚首 2026/06/20 20:00" [ref=e249]:
+              - paragraph [ref=e250]: eStarPro VS TS豚首
+              - text: 2026/06/20 20:00
+            - cell "未开始" [ref=e251]:
+              - generic [ref=e253]: 未开始
+            - cell "2.00" [ref=e254]:
+              - paragraph [ref=e255]: "2.00"
+            - cell "0 币 (0人)" [ref=e256]:
+              - generic [ref=e257]: 0 币 (0人)
+            - cell "2.00" [ref=e258]:
+              - paragraph [ref=e259]: "2.00"
+            - cell "0 币 (0人)" [ref=e260]:
+              - generic [ref=e261]: 0 币 (0人)
+            - cell "调整赔率" [ref=e262]:
+              - button "调整赔率" [ref=e263] [cursor=pointer]:
+                - img [ref=e264]
+          - row "42 eStarPro VS TS豚首 2026/06/20 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e266]:
+            - cell "42" [ref=e267]
+            - cell "eStarPro VS TS豚首 2026/06/20 20:00" [ref=e268]:
+              - paragraph [ref=e269]: eStarPro VS TS豚首
+              - text: 2026/06/20 20:00
+            - cell "未开始" [ref=e270]:
+              - generic [ref=e272]: 未开始
+            - cell "2.00" [ref=e273]:
+              - paragraph [ref=e274]: "2.00"
+            - cell "0 币 (0人)" [ref=e275]:
+              - generic [ref=e276]: 0 币 (0人)
+            - cell "2.00" [ref=e277]:
+              - paragraph [ref=e278]: "2.00"
+            - cell "0 币 (0人)" [ref=e279]:
+              - generic [ref=e280]: 0 币 (0人)
+            - cell "调整赔率" [ref=e281]:
+              - button "调整赔率" [ref=e282] [cursor=pointer]:
+                - img [ref=e283]
+          - row "7 QGha VS EDG.M 2026/06/21 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e285]:
+            - cell "7" [ref=e286]
+            - cell "QGha VS EDG.M 2026/06/21 18:00" [ref=e287]:
+              - paragraph [ref=e288]: QGha VS EDG.M
+              - text: 2026/06/21 18:00
+            - cell "未开始" [ref=e289]:
+              - generic [ref=e291]: 未开始
+            - cell "2.00" [ref=e292]:
+              - paragraph [ref=e293]: "2.00"
+            - cell "0 币 (0人)" [ref=e294]:
+              - generic [ref=e295]: 0 币 (0人)
+            - cell "2.00" [ref=e296]:
+              - paragraph [ref=e297]: "2.00"
+            - cell "0 币 (0人)" [ref=e298]:
+              - generic [ref=e299]: 0 币 (0人)
+            - cell "调整赔率" [ref=e300]:
+              - button "调整赔率" [ref=e301] [cursor=pointer]:
+                - img [ref=e302]
+          - row "43 QGha VS EDG.M 2026/06/21 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e304]:
+            - cell "43" [ref=e305]
+            - cell "QGha VS EDG.M 2026/06/21 18:00" [ref=e306]:
+              - paragraph [ref=e307]: QGha VS EDG.M
+              - text: 2026/06/21 18:00
+            - cell "未开始" [ref=e308]:
+              - generic [ref=e310]: 未开始
+            - cell "2.00" [ref=e311]:
+              - paragraph [ref=e312]: "2.00"
+            - cell "0 币 (0人)" [ref=e313]:
+              - generic [ref=e314]: 0 币 (0人)
+            - cell "2.00" [ref=e315]:
+              - paragraph [ref=e316]: "2.00"
+            - cell "0 币 (0人)" [ref=e317]:
+              - generic [ref=e318]: 0 币 (0人)
+            - cell "调整赔率" [ref=e319]:
+              - button "调整赔率" [ref=e320] [cursor=pointer]:
+                - img [ref=e321]
+          - row "8 Hero久竞 VS RNG.M 2026/06/21 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e323]:
+            - cell "8" [ref=e324]
+            - cell "Hero久竞 VS RNG.M 2026/06/21 20:00" [ref=e325]:
+              - paragraph [ref=e326]: Hero久竞 VS RNG.M
+              - text: 2026/06/21 20:00
+            - cell "未开始" [ref=e327]:
+              - generic [ref=e329]: 未开始
+            - cell "2.00" [ref=e330]:
+              - paragraph [ref=e331]: "2.00"
+            - cell "0 币 (0人)" [ref=e332]:
+              - generic [ref=e333]: 0 币 (0人)
+            - cell "2.00" [ref=e334]:
+              - paragraph [ref=e335]: "2.00"
+            - cell "0 币 (0人)" [ref=e336]:
+              - generic [ref=e337]: 0 币 (0人)
+            - cell "调整赔率" [ref=e338]:
+              - button "调整赔率" [ref=e339] [cursor=pointer]:
+                - img [ref=e340]
+          - row "44 Hero久竞 VS RNG.M 2026/06/21 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e342]:
+            - cell "44" [ref=e343]
+            - cell "Hero久竞 VS RNG.M 2026/06/21 20:00" [ref=e344]:
+              - paragraph [ref=e345]: Hero久竞 VS RNG.M
+              - text: 2026/06/21 20:00
+            - cell "未开始" [ref=e346]:
+              - generic [ref=e348]: 未开始
+            - cell "2.00" [ref=e349]:
+              - paragraph [ref=e350]: "2.00"
+            - cell "0 币 (0人)" [ref=e351]:
+              - generic [ref=e352]: 0 币 (0人)
+            - cell "2.00" [ref=e353]:
+              - paragraph [ref=e354]: "2.00"
+            - cell "0 币 (0人)" [ref=e355]:
+              - generic [ref=e356]: 0 币 (0人)
+            - cell "调整赔率" [ref=e357]:
+              - button "调整赔率" [ref=e358] [cursor=pointer]:
+                - img [ref=e359]
+          - row "9 11 VS DYG.JC 2026/06/22 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e361]:
+            - cell "9" [ref=e362]
+            - cell "11 VS DYG.JC 2026/06/22 18:00" [ref=e363]:
+              - paragraph [ref=e364]: 11 VS DYG.JC
+              - text: 2026/06/22 18:00
+            - cell "未开始" [ref=e365]:
+              - generic [ref=e367]: 未开始
+            - cell "2.00" [ref=e368]:
+              - paragraph [ref=e369]: "2.00"
+            - cell "0 币 (0人)" [ref=e370]:
+              - generic [ref=e371]: 0 币 (0人)
+            - cell "2.00" [ref=e372]:
+              - paragraph [ref=e373]: "2.00"
+            - cell "0 币 (0人)" [ref=e374]:
+              - generic [ref=e375]: 0 币 (0人)
+            - cell "调整赔率" [ref=e376]:
+              - button "调整赔率" [ref=e377] [cursor=pointer]:
+                - img [ref=e378]
+          - row "45 11 VS DYG.JC 2026/06/22 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e380]:
+            - cell "45" [ref=e381]
+            - cell "11 VS DYG.JC 2026/06/22 18:00" [ref=e382]:
+              - paragraph [ref=e383]: 11 VS DYG.JC
+              - text: 2026/06/22 18:00
+            - cell "未开始" [ref=e384]:
+              - generic [ref=e386]: 未开始
+            - cell "2.00" [ref=e387]:
+              - paragraph [ref=e388]: "2.00"
+            - cell "0 币 (0人)" [ref=e389]:
+              - generic [ref=e390]: 0 币 (0人)
+            - cell "2.00" [ref=e391]:
+              - paragraph [ref=e392]: "2.00"
+            - cell "0 币 (0人)" [ref=e393]:
+              - generic [ref=e394]: 0 币 (0人)
+            - cell "调整赔率" [ref=e395]:
+              - button "调整赔率" [ref=e396] [cursor=pointer]:
+                - img [ref=e397]
+          - row "10 Test Team QA Updated VS TS豚首 2026/06/22 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e399]:
+            - cell "10" [ref=e400]
+            - cell "Test Team QA Updated VS TS豚首 2026/06/22 20:00" [ref=e401]:
+              - paragraph [ref=e402]: Test Team QA Updated VS TS豚首
+              - text: 2026/06/22 20:00
+            - cell "未开始" [ref=e403]:
+              - generic [ref=e405]: 未开始
+            - cell "2.00" [ref=e406]:
+              - paragraph [ref=e407]: "2.00"
+            - cell "0 币 (0人)" [ref=e408]:
+              - generic [ref=e409]: 0 币 (0人)
+            - cell "2.00" [ref=e410]:
+              - paragraph [ref=e411]: "2.00"
+            - cell "0 币 (0人)" [ref=e412]:
+              - generic [ref=e413]: 0 币 (0人)
+            - cell "调整赔率" [ref=e414]:
+              - button "调整赔率" [ref=e415] [cursor=pointer]:
+                - img [ref=e416]
+          - row "46 Test Team QA Updated VS TS豚首 2026/06/22 20:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e418]:
+            - cell "46" [ref=e419]
+            - cell "Test Team QA Updated VS TS豚首 2026/06/22 20:00" [ref=e420]:
+              - paragraph [ref=e421]: Test Team QA Updated VS TS豚首
+              - text: 2026/06/22 20:00
+            - cell "未开始" [ref=e422]:
+              - generic [ref=e424]: 未开始
+            - cell "2.00" [ref=e425]:
+              - paragraph [ref=e426]: "2.00"
+            - cell "0 币 (0人)" [ref=e427]:
+              - generic [ref=e428]: 0 币 (0人)
+            - cell "2.00" [ref=e429]:
+              - paragraph [ref=e430]: "2.00"
+            - cell "0 币 (0人)" [ref=e431]:
+              - generic [ref=e432]: 0 币 (0人)
+            - cell "调整赔率" [ref=e433]:
+              - button "调整赔率" [ref=e434] [cursor=pointer]:
+                - img [ref=e435]
+          - row "11 eStarPro VS RNG.M 2026/06/23 18:00 未开始 2.00 0 币 (0人) 2.00 0 币 (0人) 调整赔率" [ref=e437]:
+            - cell "11" [ref=e438]
+            - cell "eStarPro VS RNG.M 2026/06/23 18:00" [ref=e439]:
+              - paragraph [ref=e440]: eStarPro VS RNG.M
+              - text: 2026/06/23 18:00
+            - cell "未开始" [ref=e441]:
+              - generic [ref=e443]: 未开始
+            - cell "2.00" [ref=e444]:
+              - paragraph [ref=e445]: "2.00"
+            - cell "0 币 (0人)" [ref=e446]:
+              - generic [ref=e447]: 0 币 (0人)
+            - cell "2.00" [ref=e448]:
+              - paragraph [ref=e449]: "2.00"
+            - cell "0 币 (0人)" [ref=e450]:
+              - generic [ref=e451]: 0 币 (0人)
+            - cell "调整赔率" [ref=e452]:
+              - button "调整赔率" [ref=e453] [cursor=pointer]:
+                - img [ref=e454]
+      - navigation "pagination navigation" [ref=e457]:
+        - list [ref=e458]:
+          - listitem [ref=e459]:
+            - button "Go to previous page" [disabled]:
+              - img
+          - listitem [ref=e460]:
+            - button "page 1" [ref=e461] [cursor=pointer]: "1"
+          - listitem [ref=e462]:
+            - button "Go to page 2" [ref=e463] [cursor=pointer]: "2"
+          - listitem [ref=e464]:
+            - button "Go to page 3" [ref=e465] [cursor=pointer]: "3"
+          - listitem [ref=e466]:
+            - button "Go to page 4" [ref=e467] [cursor=pointer]: "4"
+          - listitem [ref=e468]:
+            - button "Go to next page" [ref=e469] [cursor=pointer]:
+              - img [ref=e470]

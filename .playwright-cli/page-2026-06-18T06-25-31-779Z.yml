@@ -1,0 +1,137 @@
+- generic [ref=e37]:
+  - banner [ref=e38]:
+    - generic [ref=e39]:
+      - heading "🏆 王者荣耀竞猜 · 管理后台" [level=6] [ref=e40]
+      - generic [ref=e41]:
+        - paragraph [ref=e42]: admin
+        - generic [ref=e43]: ADMIN
+        - paragraph [ref=e44] [cursor=pointer]: 退出
+  - generic [ref=e46]:
+    - generic [ref=e48]:
+      - generic [ref=e49]: 竞
+      - paragraph [ref=e50]: 王者竞猜
+    - generic [ref=e51]: 主菜单
+    - list [ref=e52]:
+      - button "数据看板" [ref=e53] [cursor=pointer]:
+        - img [ref=e55]
+        - generic [ref=e58]: 数据看板
+      - button "赛季管理" [ref=e59] [cursor=pointer]:
+        - img [ref=e61]
+        - generic [ref=e64]: 赛季管理
+      - button "队伍管理" [ref=e65] [cursor=pointer]:
+        - img [ref=e67]
+        - generic [ref=e70]: 队伍管理
+      - button "比赛管理" [ref=e71] [cursor=pointer]:
+        - img [ref=e73]
+        - generic [ref=e76]: 比赛管理
+      - button "赔率管理" [ref=e77] [cursor=pointer]:
+        - img [ref=e79]
+        - generic [ref=e82]: 赔率管理
+      - button "用户管理" [active] [ref=e83] [cursor=pointer]:
+        - img [ref=e85]
+        - generic [ref=e88]: 用户管理
+  - main [ref=e89]:
+    - generic [ref=e463]:
+      - heading "👤 用户管理" [level=5] [ref=e464]
+      - generic [ref=e465]:
+        - generic [ref=e467]:
+          - textbox "搜索用户名..." [ref=e468]
+          - group
+        - button "搜索" [ref=e469] [cursor=pointer]
+        - button "+ 批量新增用户" [ref=e471] [cursor=pointer]
+      - table [ref=e473]:
+        - rowgroup [ref=e474]:
+          - row "ID 用户名 角色 余额 状态 注册时间 操作" [ref=e475]:
+            - columnheader "ID" [ref=e476]
+            - columnheader "用户名" [ref=e477]
+            - columnheader "角色" [ref=e478]
+            - columnheader "余额" [ref=e479]
+            - columnheader "状态" [ref=e480]
+            - columnheader "注册时间" [ref=e481]
+            - columnheader "操作" [ref=e482]
+        - rowgroup [ref=e483]:
+          - row "5 qauser99 投注人 100 币 正常 2026/06/18 10:57 重置密码 调整余额 封禁" [ref=e484]:
+            - cell "5" [ref=e485]
+            - cell "qauser99" [ref=e486]
+            - cell "投注人" [ref=e487]:
+              - generic [ref=e489]: 投注人
+            - cell "100 币" [ref=e490]
+            - cell "正常" [ref=e491]:
+              - generic [ref=e493]: 正常
+            - cell "2026/06/18 10:57" [ref=e494]
+            - cell "重置密码 调整余额 封禁" [ref=e495]:
+              - generic [ref=e496]:
+                - button "重置密码" [ref=e497] [cursor=pointer]:
+                  - img [ref=e498]
+                - button "调整余额" [ref=e500] [cursor=pointer]:
+                  - img [ref=e501]
+                - button "封禁" [ref=e503] [cursor=pointer]:
+                  - img [ref=e504]
+          - row "4 player3 投注人 200 币 正常 2026/06/18 10:05 重置密码 调整余额 封禁" [ref=e506]:
+            - cell "4" [ref=e507]
+            - cell "player3" [ref=e508]
+            - cell "投注人" [ref=e509]:
+              - generic [ref=e511]: 投注人
+            - cell "200 币" [ref=e512]
+            - cell "正常" [ref=e513]:
+              - generic [ref=e515]: 正常
+            - cell "2026/06/18 10:05" [ref=e516]
+            - cell "重置密码 调整余额 封禁" [ref=e517]:
+              - generic [ref=e518]:
+                - button "重置密码" [ref=e519] [cursor=pointer]:
+                  - img [ref=e520]
+                - button "调整余额" [ref=e522] [cursor=pointer]:
+                  - img [ref=e523]
+                - button "封禁" [ref=e525] [cursor=pointer]:
+                  - img [ref=e526]
+          - row "3 player2 投注人 300 币 正常 2026/06/18 10:05 重置密码 调整余额 封禁" [ref=e528]:
+            - cell "3" [ref=e529]
+            - cell "player2" [ref=e530]
+            - cell "投注人" [ref=e531]:
+              - generic [ref=e533]: 投注人
+            - cell "300 币" [ref=e534]
+            - cell "正常" [ref=e535]:
+              - generic [ref=e537]: 正常
+            - cell "2026/06/18 10:05" [ref=e538]
+            - cell "重置密码 调整余额 封禁" [ref=e539]:
+              - generic [ref=e540]:
+                - button "重置密码" [ref=e541] [cursor=pointer]:
+                  - img [ref=e542]
+                - button "调整余额" [ref=e544] [cursor=pointer]:
+                  - img [ref=e545]
+                - button "封禁" [ref=e547] [cursor=pointer]:
+                  - img [ref=e548]
+          - row "2 player1 投注人 400 币 正常 2026/06/18 10:05 重置密码 调整余额 封禁" [ref=e550]:
+            - cell "2" [ref=e551]
+            - cell "player1" [ref=e552]
+            - cell "投注人" [ref=e553]:
+              - generic [ref=e555]: 投注人
+            - cell "400 币" [ref=e556]
+            - cell "正常" [ref=e557]:
+              - generic [ref=e559]: 正常
+            - cell "2026/06/18 10:05" [ref=e560]
+            - cell "重置密码 调整余额 封禁" [ref=e561]:
+              - generic [ref=e562]:
+                - button "重置密码" [ref=e563] [cursor=pointer]:
+                  - img [ref=e564]
+                - button "调整余额" [ref=e566] [cursor=pointer]:
+                  - img [ref=e567]
+                - button "封禁" [ref=e569] [cursor=pointer]:
+                  - img [ref=e570]
+          - row "1 admin 管理员 1000 币 正常 2026/06/18 10:05 重置密码 调整余额 封禁" [ref=e572]:
+            - cell "1" [ref=e573]
+            - cell "admin" [ref=e574]
+            - cell "管理员" [ref=e575]:
+              - generic [ref=e577]: 管理员
+            - cell "1000 币" [ref=e578]
+            - cell "正常" [ref=e579]:
+              - generic [ref=e581]: 正常
+            - cell "2026/06/18 10:05" [ref=e582]
+            - cell "重置密码 调整余额 封禁" [ref=e583]:
+              - generic [ref=e584]:
+                - button "重置密码" [ref=e585] [cursor=pointer]:
+                  - img [ref=e586]
+                - button "调整余额" [ref=e588] [cursor=pointer]:
+                  - img [ref=e589]
+                - button "封禁" [disabled]:
+                  - img

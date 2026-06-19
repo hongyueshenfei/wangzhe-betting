@@ -1,0 +1,199 @@
+// Prisma Schema for 王者荣耀竞猜平台
+// Datasource: SQLite (开发) / MySQL (生产)
+// 切换数据库只需改 provider 和 DATABASE_URL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  BETTOR
+}
+
+enum SeasonStatus {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+}
+
+enum MatchStage {
+  GROUP
+  KNOCKOUT
+}
+
+enum MatchStatus {
+  UPCOMING
+  LIVE
+  COMPLETED
+  FORFEITED
+}
+
+enum BetStatus {
+  PENDING
+  WON
+  LOST
+  REFUNDED
+}
+
+enum TransactionType {
+  INITIAL
+  CHECKIN
+  BET
+  BET_WIN
+  BET_LOST
+  BET_REFUND
+  CHAMPION_BET
+  CHAMPION_WIN
+  CHAMPION_LOST
+  CHAMPION_REFUND
+  ADMIN_ADJUST
+}
+
+// ─── Models ───────────────────────────────────────────
+
+model User {
+  id              Int       @id @default(autoincrement())
+  username        String    @unique
+  passwordHash    String
+  role            Role      @default(BETTOR)
+  coins           Int       @default(100)
+  isBanned        Boolean   @default(false)
+  lastCheckInDate DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  bets             Bet[]
+  championBets     ChampionBet[]
+  coinTransactions CoinTransaction[]
+}
+
+model Season {
+  id               Int          @id @default(autoincrement())
+  name             String
+  status           SeasonStatus @default(UPCOMING)
+  startDate        DateTime
+  endDate          DateTime
+  championTeamId   Int?
+  tournamentConfig String?      // JSON: 多轮赛制配置 [{name, type, order, config:{...}}]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  championTeam  Team?          @relation("SeasonChampion", fields: [championTeamId], references: [id])
+  teams         Team[]
+  matches       Match[]
+  championBets  ChampionBet[]
+}
+
+model Team {
+  id          Int      @id @default(autoincrement())
+  name        String
+  logoUrl     String?
+  description String?
+  members     String?
+  posterUrl   String?
+  seasonId    Int?
+  wins        Int      @default(0)
+  losses      Int      @default(0)
+  forfeits    Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  season         Season?         @relation(fields: [seasonId], references: [id])
+  seasonChampion Season[]        @relation("SeasonChampion")
+  // Match relations
+  matchesAsA     Match[]         @relation("MatchTeamA")
+  matchesAsB     Match[]         @relation("MatchTeamB")
+  matchesForfeit Match[]         @relation("MatchForfeit")
+  matchesWon     Match[]         @relation("MatchWinner")
+  // Bet relations
+  bets           Bet[]
+  championBets   ChampionBet[]
+}
+
+model Match {
+  id           Int         @id @default(autoincrement())
+  seasonId     Int
+  stage        MatchStage
+  groupName    String?
+  round        String?
+  matchOrder   Int?
+  teamAId      Int
+  teamBId      Int
+  teamAScore   Int?
+  teamBScore   Int?
+  matchTime    DateTime
+  status       MatchStatus @default(UPCOMING)
+  forfeitTeamId Int?
+  winnerTeamId Int?
+  oddsA        Float       @default(2.0)
+  oddsB        Float       @default(2.0)
+  betTotalA    Int         @default(0)
+  betTotalB    Int         @default(0)
+  betCountA    Int         @default(0)
+  betCountB    Int         @default(0)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  season      Season @relation(fields: [seasonId], references: [id])
+  teamA       Team   @relation("MatchTeamA", fields: [teamAId], references: [id])
+  teamB       Team   @relation("MatchTeamB", fields: [teamBId], references: [id])
+  forfeitTeam Team?  @relation("MatchForfeit", fields: [forfeitTeamId], references: [id])
+  winnerTeam  Team?  @relation("MatchWinner", fields: [winnerTeamId], references: [id])
+  bets        Bet[]
+}
+
+model Bet {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  matchId      Int
+  pickedTeamId Int
+  amount       Int
+  oddsAtBet    Float
+  status       BetStatus @default(PENDING)
+  createdAt    DateTime  @default(now())
+  settledAt    DateTime?
+
+  user        User  @relation(fields: [userId], references: [id])
+  match       Match @relation(fields: [matchId], references: [id])
+  pickedTeam  Team  @relation(fields: [pickedTeamId], references: [id])
+
+  @@unique([userId, matchId])
+}
+
+model ChampionBet {
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  seasonId   Int
+  teamId     Int
+  amount     Int
+  oddsAtBet  Float
+  status     BetStatus @default(PENDING)
+  createdAt  DateTime  @default(now())
+  settledAt  DateTime?
+
+  user   User   @relation(fields: [userId], references: [id])
+  season Season @relation(fields: [seasonId], references: [id])
+  team   Team   @relation(fields: [teamId], references: [id])
+
+  @@unique([userId, seasonId, teamId])
+}
+
+model CoinTransaction {
+  id            Int             @id @default(autoincrement())
+  userId        Int
+  amount        Int
+  type          TransactionType
+  referenceType String?
+  referenceId   Int?
+  balanceAfter  Int
+  createdAt     DateTime        @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}

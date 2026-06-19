@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=2560, initial-scale=1.0">
+<title>王者荣耀竞猜平台 · UI 原型</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #0B0E17;
+    color: #E8EAF0;
+    padding: 32px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  /* — Screen container — */
+  .screen-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .screen-label {
+    font-size: 13px;
+    color: #6B7394;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* — Phone frame — */
+  .phone {
+    width: 390px;
+    height: 844px;
+    border-radius: 44px;
+    border: 3px solid #2A2F45;
+    background: #0F1119;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,169,81,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* — Status bar — */
+  .status-bar {
+    height: 48px;
+    padding: 14px 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #CBD0E0;
+    flex-shrink: 0;
+  }
+  .status-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 11px;
+  }
+  .status-icons .battery {
+    width: 22px; height: 11px;
+    border: 1px solid #CBD0E0;
+    border-radius: 3px;
+    padding: 1.5px;
+    display: flex;
+    align-items: center;
+  }
+  .status-icons .battery-fill {
+    width: 100%; height: 100%;
+    background: #4CAF50;
+    border-radius: 2px;
+  }
+
+  /* — Nav bar — */
+  .nav-bar {
+    height: 52px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1E2340;
+    flex-shrink: 0;
+    background: #0F1119;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo-icon {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, #C8A951, #D4A843);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    color: #0F1119;
+  }
+  .nav-logo-text {
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #C8A951, #E8C97A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .nav-login {
+    font-size: 13px;
+    color: #C8A951;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-sm {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-gold {
+    background: linear-gradient(135deg, #C8A951, #B8942E);
+    color: #0F1119;
+  }
+  .btn-red {
+    background: linear-gradient(135deg, #D32F2F, #B71C1C);
+    color: #FFF;
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid #3A3F58;
+    color: #CBD0E0;
+  }
+
+  /* — Content area — */
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+  }
+  .content::-webkit-scrollbar { width: 3px; }
+  .content::-webkit-scrollbar-thumb { background: #2A2F45; border-radius: 2px; }
+
+  /* — Tab bar — */
+  .tab-bar {
+    height: 68px;
+    padding: 8px 16px 16px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    border-top: 1px solid #1E2340;
+    flex-shrink: 0;
+    background: #0F1119;
+  }
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    color: #6B7394;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .tab-item.active { color: #C8A951; }
+  .tab-icon {
+    width: 22px; height: 22px;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .tab-item.active .tab-icon { opacity: 1; }
+
+  /* — Cards — */
+  .card {
+    background: #1A1D2E;
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid #242840;
+  }
+  .card-glow {
+    border: 1px solid rgba(200,169,81,0.18);
+  }
+
+  /* — Section title — */
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::before {
+    content: '';
+    width: 3px;
+    height: 16px;
+    background: linear-gradient(180deg, #C8A951, #D32F2F);
+    border-radius: 2px;
+  }
+
+  /* — Match card — */
+  .match-card {
+    background: linear-gradient(135deg, #1A1D2E, #1F2342);
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid #242840;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .match-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #6B7394;
+  }
+  .match-teams {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .match-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+  .team-badge {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    color: #FFF;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .team-name {
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .match-vs {
+    font-size: 14px;
+    font-weight: 900;
+    color: #C8A951;
+    white-space: nowrap;
+  }
+  .match-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+  }
+  .odds-row {
+    display: flex;
+    gap: 8px;
+  }
+  .odds-tag {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #242840;
+    color: #C8A951;
+  }
+  .btn-bet {
+    padding: 5px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #D32F2F, #E53935);
+    color: #FFF;
+  }
+
+  /* — Leaderboard — */
+  .rank-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    gap: 10px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    background: #1A1D2E;
+  }
+  .rank-row.highlight { background: #1F2342; border: 1px solid rgba(200,169,81,0.15); }
+  .rank-num {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .rank-gold { background: linear-gradient(135deg, #C8A951, #D4A843); color: #0F1119; }
+  .rank-silver { background: #8890A8; color: #FFF; }
+  .rank-bronze { background: #8D6E63; color: #FFF; }
+  .rank-avatar {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    color: #FFF;
+  }
+  .rank-info { flex: 1; }
+  .rank-name { font-size: 13px; font-weight: 600; }
+  .rank-sub { font-size: 11px; color: #6B7394; }
+  .rank-coins { font-size: 13px; font-weight: 700; color: #C8A951; }
+
+  /* — Login form — */
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 24px;
+  }
+  .login-icon {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #C8A951, #D4A843);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 900;
+    color: #0F1119;
+    box-shadow: 0 8px 30px rgba(200,169,81,0.25);
+  }
+  .form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .input-field {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid #2A2F45;
+    background: #1A1D2E;
+    color: #E8EAF0;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+  }
+  .input-field:focus { border-color: #C8A951; }
+  .input-field::placeholder { color: #4A5070; }
+  .btn-full {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    color: #0F1119;
+    background: linear-gradient(135deg, #C8A951, #B8942E);
+  }
+  .link-text {
+    color: #6B7394;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .link-text span { color: #C8A951; }
+
+  /* — Hero banner — */
+  .hero-banner {
+    background: linear-gradient(135deg, #1F1B3A, #1A1140, #0F1A30);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    border: 1px solid rgba(200,169,81,0.12);
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-size: 20px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #C8A951, #E8C97A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .hero-sub {
+    font-size: 12px;
+    color: #6B7394;
+    margin-bottom: 16px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 12px 16px;
+    text-align: center;
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .hero-stat-num {
+    font-size: 22px;
+    font-weight: 800;
+    color: #C8A951;
+  }
+  .hero-stat-label {
+    font-size: 10px;
+    color: #6B7394;
+    margin-top: 2px;
+  }
+
+  /* — Checkin area — */
+  .checkin-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #1F2342, #242840);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(200,169,81,0.1);
+  }
+  .checkin-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .checkin-title { font-size: 13px; font-weight: 600; }
+  .checkin-sub { font-size: 11px; color: #6B7394; }
+  .checkin-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #C8A951, #B8942E);
+    color: #0F1119;
+  }
+
+  /* — Admin panel — */
+  .admin-sidebar {
+    display: flex;
+    height: 100%;
+  }
+  .admin-nav {
+    width: 72px;
+    background: #13151E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+    gap: 8px;
+    border-right: 1px solid #1E2340;
+    flex-shrink: 0;
+  }
+  .admin-nav-item {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #6B7394;
+    cursor: pointer;
+  }
+  .admin-nav-item.active {
+    background: #1F2342;
+    color: #C8A951;
+  }
+  .admin-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+  }
+
+  /* — Stat cards row — */
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: #1A1D2E;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #242840;
+  }
+  .stat-card-value {
+    font-size: 26px;
+    font-weight: 800;
+    color: #C8A951;
+  }
+  .stat-card-label {
+    font-size: 11px;
+    color: #6B7394;
+    margin-top: 4px;
+  }
+
+  /* — Match result form — */
+  .result-form {
+    background: #1A1D2E;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #242840;
+    margin-bottom: 12px;
+  }
+  .result-form .team-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .result-form .team-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .score-input {
+    width: 52px;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+    background: #0F1119;
+    border: 1px solid #2A2F45;
+    border-radius: 8px;
+    color: #E8EAF0;
+    outline: none;
+  }
+  .score-input:focus { border-color: #C8A951; }
+  .score-vs { font-size: 16px; color: #6B7394; font-weight: 700; }
+
+  /* — Data table — */
+  .data-table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 10px 12px;
+    color: #6B7394;
+    font-weight: 600;
+    border-bottom: 1px solid #1E2340;
+    font-size: 11px;
+  }
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #1A1D2E;
+  }
+  .badge {
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .badge-green { background: rgba(76,175,80,0.15); color: #4CAF50; }
+  .badge-red { background: rgba(239,83,80,0.15); color: #EF5350; }
+  .badge-gold { background: rgba(200,169,81,0.15); color: #C8A951; }
+
+  /* — Season badge — */
+  .season-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #1F2342;
+    color: #C8A951;
+    border: 1px solid rgba(200,169,81,0.2);
+    margin-bottom: 16px;
+  }
+  .season-badge .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #4CAF50;
+  }
+
+  /* — Champion bet card — */
+  .champion-card {
+    background: linear-gradient(135deg, #1F1B3A, #1F2342);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(200,169,81,0.15);
+  }
+  .champion-icon { font-size: 36px; margin-bottom: 8px; }
+  .champion-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .champion-sub { font-size: 11px; color: #6B7394; margin-bottom: 14px; }
+
+  /* Scrollbar for content */
+  .content::-webkit-scrollbar { width: 3px; }
+  .content::-webkit-scrollbar-thumb { background: #2A2F45; border-radius: 2px; }
+  .admin-main::-webkit-scrollbar { width: 3px; }
+  .admin-main::-webkit-scrollbar-thumb { background: #2A2F45; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ Screen 1: 首页 (Home) ════════════════ -->
+<div class="screen-col">
+  <div class="screen-label">🏠 首页 · Home</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons">
+        <span style="font-size:11px">●●●●○</span>
+        <span>WiFi</span>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">竞</div>
+        <span class="nav-logo-text">王者竞猜</span>
+      </div>
+      <div class="nav-actions">
+        <span style="font-size:13px;color:#C8A951;font-weight:600">💰 2,340</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Hero -->
+      <div class="hero-banner">
+        <div class="hero-title">S3 夏季赛 火热进行中</div>
+        <div class="hero-sub">8支战队 · 小组赛第3轮 · 4场即将开始</div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">8</div>
+            <div class="hero-stat-label">参赛队伍</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">24</div>
+            <div class="hero-stat-label">总场次</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">¥18.5K</div>
+            <div class="hero-stat-label">总投注池</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checkin -->
+      <div class="checkin-bar">
+        <div class="checkin-info">
+          <div class="checkin-title">📅 每日签到</div>
+          <div class="checkin-sub">签到获得 +10 投注币</div>
+        </div>
+        <button class="checkin-btn">签到</button>
+      </div>
+
+      <!-- Upcoming matches -->
+      <div class="section-title">🔥 即将开始</div>
+      <div class="match-card">
+        <div class="match-header">
+          <span>🏟 小组赛 A组 · BO1</span>
+          <span>14:30 · 28分钟后截止</span>
+        </div>
+        <div class="match-teams">
+          <div class="match-team">
+            <div class="team-badge" style="background:linear-gradient(135deg,#1565C0,#1976D2)">TK</div>
+            <div class="team-name">天穹战队</div>
+          </div>
+          <div class="match-vs">VS</div>
+          <div class="match-team">
+            <div class="team-badge" style="background:linear-gradient(135deg,#E65100,#F57C00)">LF</div>
+            <div class="team-name">烈焰风暴</div>
+          </div>
+        </div>
+        <div class="match-footer">
+          <div class="odds-row">
+            <span class="odds-tag">赔率 1.8</span>
+            <span class="odds-tag">赔率 2.1</span>
+          </div>
+          <button class="btn-bet">立即投注</button>
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-header">
+          <span>🏟 小组赛 B组 · BO1</span>
+          <span>15:00 · 58分钟后截止</span>
+        </div>
+        <div class="match-teams">
+          <div class="match-team">
+            <div class="team-badge" style="background:linear-gradient(135deg,#2E7D32,#388E3C)">SC</div>
+            <div class="team-name">星辰战队</div>
+          </div>
+          <div class="match-vs">VS</div>
+          <div class="match-team">
+            <div class="team-badge" style="background:linear-gradient(135deg,#6A1B9A,#7B1FA2)">PH</div>
+            <div class="team-name">幻影联盟</div>
+          </div>
+        </div>
+        <div class="match-footer">
+          <div class="odds-row">
+            <span class="odds-tag">赔率 1.5</span>
+            <span class="odds-tag">赔率 2.8</span>
+          </div>
+          <button class="btn-bet">立即投注</button>
+        </div>
+      </div>
+
+      <!-- Quick rank preview -->
+      <div class="section-title">🏆 竞猜达人</div>
+      <div class="rank-row highlight">
+        <div class="rank-num rank-gold">1</div>
+        <div class="rank-avatar" style="background:linear-gradient(135deg,#C8A951,#B8942E)">王</div>
+        <div class="rank-info"><div class="rank-name">王者猎人</div><div class="rank-sub">胜率 68% · 连续命中 8 场</div></div>
+        <div class="rank-coins">¥15,230</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num rank-silver">2</div>
+        <div class="rank-avatar" style="background:linear-gradient(135deg,#607D8B,#78909C)">李</div>
+        <div class="rank-info"><div class="rank-name">峡谷预言家</div><div class="rank-sub">胜率 62%</div></div>
+        <div class="rank-coins">¥12,450</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num rank-bronze">3</div>
+        <div class="rank-avatar" style="background:linear-gradient(135deg,#795548,#8D6E63)">张</div>
+        <div class="rank-info"><div class="rank-name">水晶守护者</div><div class="rank-sub">胜率 59%</div></div>
+        <div class="rank-coins">¥9,870</div>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab-item active"> <div class="tab-icon">🏠</div> <span>首页</span> </div>
+      <div class="tab-item"> <div class="tab-icon">⚔️</div> <span>比赛</span> </div>
+      <div class="tab-item"> <div class="tab-icon">🏆</div> <span>排行</span> </div>
+      <div class="tab-item"> <div class="tab-icon">👑</div> <span>冠军</span> </div>
+      <div class="tab-item"> <div class="tab-icon">👤</div> <span>我的</span> </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ Screen 2: 登录页 (Login) ════════════════ -->
+<div class="screen-col">
+  <div class="screen-label">🔐 登录 · Login</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons">
+        <span style="font-size:11px">●●●●○</span>
+        <span>WiFi</span>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+    <div class="nav-bar">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">竞</div>
+        <span class="nav-logo-text">王者竞猜</span>
+      </div>
+    </div>
+
+    <div class="content" style="display:flex;align-items:center;justify-content:center">
+      <div class="login-container" style="width:280px">
+        <div class="login-icon">竞</div>
+        <div style="font-size:20px;font-weight:800;text-align:center">欢迎回来</div>
+        <div style="font-size:13px;color:#6B7394;text-align:center;margin-top:-12px">登录你的账户开始竞猜</div>
+        <div class="form-group">
+          <input class="input-field" placeholder="用户名" value="player01">
+          <input class="input-field" type="password" placeholder="密码" value="········">
+          <button class="btn-full">登 录</button>
+          <div class="link-text">还没有账户？<span>立即注册</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item"> <div class="tab-icon">🏠</div> <span>首页</span> </div>
+      <div class="tab-item"> <div class="tab-icon">⚔️</div> <span>比赛</span> </div>
+      <div class="tab-item"> <div class="tab-icon">🏆</div> <span>排行</span> </div>
+      <div class="tab-item"> <div class="tab-icon">👑</div> <span>冠军</span> </div>
+      <div class="tab-item active"> <div class="tab-icon">👤</div> <span>我的</span> </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ Screen 3: 比赛详情 + 投注 (Match Detail) ════════════════ -->
+<div class="screen-col">
+  <div class="screen-label">⚔️ 比赛详情 · Match Detail + 投注</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons">
+        <span style="font-size:11px">●●●●○</span>
+        <span>WiFi</span>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <span style="font-size:18px">←</span>
+        <span style="font-size:14px;font-weight:600">比赛详情</span>
+      </div>
+      <span style="font-size:13px;color:#C8A951;font-weight:600">💰 2,340</span>
+    </div>
+
+    <div class="content">
+      <div class="season-badge"><span class="dot"></span> S3 夏季赛 · A组 · 小组赛 BO1</div>
+
+      <!-- Match detail -->
+      <div class="card card-glow" style="margin-bottom:16px;padding:24px">
+        <div style="text-align:center;font-size:12px;color:#6B7394;margin-bottom:16px">⏰ 2026-06-17 14:30 · 28分钟后截止投注</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px">
+          <div style="text-align:center;flex:1">
+            <div class="team-badge" style="width:56px;height:56px;border-radius:16px;font-size:22px;background:linear-gradient(135deg,#1565C0,#1976D2)">TK</div>
+            <div style="font-size:15px;font-weight:700;margin-top:8px">天穹战队</div>
+            <div style="font-size:11px;color:#6B7394">3胜 1负</div>
+          </div>
+          <div style="font-size:28px;font-weight:900;color:#C8A951">VS</div>
+          <div style="text-align:center;flex:1">
+            <div class="team-badge" style="width:56px;height:56px;border-radius:16px;font-size:22px;background:linear-gradient(135deg,#E65100,#F57C00)">LF</div>
+            <div style="font-size:15px;font-weight:700;margin-top:8px">烈焰风暴</div>
+            <div style="font-size:11px;color:#6B7394">2胜 2负</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bet section -->
+      <div class="card" style="margin-bottom:16px">
+        <div class="section-title" style="font-size:14px">🎲 投注竞猜</div>
+        <div style="display:flex;gap:10px;margin-bottom:14px">
+          <div style="flex:1;background:#1F2342;border-radius:10px;padding:14px;text-align:center;border:2px solid #C8A951;cursor:pointer">
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px">天穹战队 胜</div>
+            <div style="font-size:22px;font-weight:800;color:#C8A951">1.80</div>
+            <div style="font-size:10px;color:#6B7394;margin-top:4px">投注池 ¥3,200</div>
+          </div>
+          <div style="flex:1;background:#1F2342;border-radius:10px;padding:14px;text-align:center;border:2px solid transparent;cursor:pointer">
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px">烈焰风暴 胜</div>
+            <div style="font-size:22px;font-weight:800;color:#E8EAF0">2.10</div>
+            <div style="font-size:10px;color:#6B7394;margin-top:4px">投注池 ¥1,800</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="flex:1;display:flex;align-items:center;gap:8px;background:#0F1119;border-radius:10px;padding:4px 12px">
+            <span style="color:#6B7394;font-size:13px">金额</span>
+            <input style="flex:1;background:transparent;border:none;color:#E8EAF0;font-size:16px;font-weight:700;outline:none;text-align:right" value="200">
+            <span style="color:#6B7394;font-size:12px">币</span>
+          </div>
+          <div style="display:flex;gap:4px">
+            <button class="btn-sm btn-outline">50</button>
+            <button class="btn-sm btn-outline">100</button>
+            <button class="btn-sm btn-outline">全部</button>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:11px;color:#6B7394;text-align:center">预计赢得 · 1.80 × 200 = <span style="color:#4CAF50">360 币</span></div>
+        <button class="btn-full" style="margin-top:12px;background:linear-gradient(135deg,#D32F2F,#E53935);color:#FFF">确认投注 200 币</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="card">
+        <div class="section-title" style="font-size:14px">📊 投注分布</div>
+        <div style="margin-bottom:8px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px">
+            <span>天穹战队 64%</span> <span>烈焰风暴 36%</span>
+          </div>
+          <div style="height:6px;background:#242840;border-radius:3px;overflow:hidden;display:flex">
+            <div style="width:64%;background:linear-gradient(90deg,#1565C0,#42A5F5);border-radius:3px"></div>
+            <div style="width:36%;background:linear-gradient(90deg,#F57C00,#E65100);border-radius:3px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab-item"> <div class="tab-icon">🏠</div> <span>首页</span> </div>
+      <div class="tab-item active"> <div class="tab-icon">⚔️</div> <span>比赛</span> </div>
+      <div class="tab-item"> <div class="tab-icon">🏆</div> <span>排行</span> </div>
+      <div class="tab-item"> <div class="tab-icon">👑</div> <span>冠军</span> </div>
+      <div class="tab-item"> <div class="tab-icon">👤</div> <span>我的</span> </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ Screen 4: 排行榜 (Leaderboard) ════════════════ -->
+<div class="screen-col">
+  <div class="screen-label">🏆 排行榜 · Leaderboard</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons">
+        <span style="font-size:11px">●●●●○</span>
+        <span>WiFi</span>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <span style="font-size:16px;font-weight:700">排行榜</span>
+      <div style="display:flex;gap:4px">
+        <button class="btn-sm btn-gold" style="font-size:11px">用户榜</button>
+        <button class="btn-sm btn-outline" style="font-size:11px">战队榜</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="season-badge"><span class="dot"></span> S3 夏季赛</div>
+
+      <!-- Top 3 -->
+      <div style="display:flex;gap:8px;margin-bottom:20px;align-items:flex-end">
+        <div style="flex:1;text-align:center">
+          <div class="rank-avatar" style="width:48px;height:48px;margin:0 auto 8px;background:linear-gradient(135deg,#607D8B,#90A4AE);font-size:18px">李</div>
+          <div style="font-size:13px;font-weight:600">峡谷预言家</div>
+          <div style="font-size:10px;color:#6B7394">🏆 62% 胜率</div>
+          <div style="font-size:14px;font-weight:800;color:#8890A8;margin-top:4px">¥12,450</div>
+        </div>
+        <div style="flex:1;text-align:center">
+          <div class="rank-avatar" style="width:60px;height:60px;margin:0 auto 8px;background:linear-gradient(135deg,#C8A951,#FFD700);font-size:24px">👑</div>
+          <div style="font-size:15px;font-weight:800;color:#C8A951">王者猎人</div>
+          <div style="font-size:11px;color:#6B7394">🔥 连续命中 8 场</div>
+          <div style="font-size:18px;font-weight:800;color:#C8A951;margin-top:4px">¥15,230</div>
+        </div>
+        <div style="flex:1;text-align:center">
+          <div class="rank-avatar" style="width:48px;height:48px;margin:0 auto 8px;background:linear-gradient(135deg,#795548,#A1887F);font-size:18px">张</div>
+          <div style="font-size:13px;font-weight:600">水晶守护者</div>
+          <div style="font-size:10px;color:#6B7394">🏆 59% 胜率</div>
+          <div style="font-size:14px;font-weight:800;color:#8D6E63;margin-top:4px">¥9,870</div>
+        </div>
+      </div>
+
+      <!-- Rank list -->
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#6B7394;padding:0 4px;margin-bottom:8px">
+        <span>排名</span><span>用户</span><span style="flex:1"></span><span>余额</span>
+      </div>
+      <div class="rank-row highlight">
+        <div class="rank-num rank-gold">1</div>
+        <div class="rank-avatar" style="background:linear-gradient(135deg,#C8A951,#B8942E)">王</div>
+        <div class="rank-info"><div class="rank-name">王者猎人</div></div>
+        <div class="rank-coins">¥15,230</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num rank-silver">2</div>
+        <div class="rank-avatar" style="background:linear-gradient(135deg,#607D8B,#90A4AE)">李</div>
+        <div class="rank-info"><div class="rank-name">峡谷预言家</div></div>
+        <div class="rank-coins">¥12,450</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num rank-bronze">3</div>
+        <div class="rank-avatar" style="background:linear-gradient(135deg,#795548,#A1887F)">张</div>
+        <div class="rank-info"><div class="rank-name">水晶守护者</div></div>
+        <div class="rank-coins">¥9,870</div>
+      </div>
+      <div class="rank-row"><div class="rank-num" style="background:#242840">4</div><div class="rank-avatar" style="background:#2E7D32">赵</div><div class="rank-info"><div class="rank-name">深渊捕手</div></div><div class="rank-coins">¥7,200</div></div>
+      <div class="rank-row"><div class="rank-num" style="background:#242840">5</div><div class="rank-avatar" style="background:#1565C0">刘</div><div class="rank-info"><div class="rank-name">暴君杀手</div></div><div class="rank-coins">¥5,890</div></div>
+      <div class="rank-row"><div class="rank-num" style="background:#242840">6</div><div class="rank-avatar" style="background:#6A1B9A">陈</div><div class="rank-info"><div class="rank-name">主宰之力</div></div><div class="rank-coins">¥4,320</div></div>
+      <div class="rank-row"><div class="rank-num" style="background:#242840">7</div><div class="rank-avatar" style="background:#E65100">周</div><div class="rank-info"><div class="rank-name">风暴龙王</div></div><div class="rank-coins">¥3,100</div></div>
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab-item"> <div class="tab-icon">🏠</div> <span>首页</span> </div>
+      <div class="tab-item"> <div class="tab-icon">⚔️</div> <span>比赛</span> </div>
+      <div class="tab-item active"> <div class="tab-icon">🏆</div> <span>排行</span> </div>
+      <div class="tab-item"> <div class="tab-icon">👑</div> <span>冠军</span> </div>
+      <div class="tab-item"> <div class="tab-icon">👤</div> <span>我的</span> </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ Screen 5: 管理后台 (Admin Dashboard) ════════════════ -->
+<div class="screen-col">
+  <div class="screen-label">👑 管理后台 · Admin Dashboard</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons">
+        <span style="font-size:11px">●●●●○</span>
+        <span>WiFi</span>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="nav-bar" style="background:#13151E">
+      <span style="font-size:15px;font-weight:700">管理后台</span>
+      <span style="font-size:11px;color:#C8A951;padding:4px 10px;background:rgba(200,169,81,0.1);border-radius:6px">👑 ADMIN</span>
+    </div>
+
+    <div class="admin-sidebar" style="flex:1;overflow:hidden">
+      <!-- Sidebar -->
+      <div class="admin-nav">
+        <div class="admin-nav-item active">📊</div>
+        <div class="admin-nav-item">🏆</div>
+        <div class="admin-nav-item">👥</div>
+        <div class="admin-nav-item">⚔️</div>
+        <div class="admin-nav-item">💰</div>
+        <div class="admin-nav-item">👤</div>
+      </div>
+
+      <!-- Main content -->
+      <div class="admin-main">
+        <!-- Stat cards -->
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-card-value">48</div>
+            <div class="stat-card-label">注册用户</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-value">¥18.5K</div>
+            <div class="stat-card-label">总投注池</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-value">3</div>
+            <div class="stat-card-label">活跃赛季</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-value">156</div>
+            <div class="stat-card-label">总投注笔数</div>
+          </div>
+        </div>
+
+        <!-- Season management -->
+        <div class="section-title" style="font-size:14px">📅 当前赛季</div>
+        <div class="card" style="margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:15px;font-weight:700;color:#C8A951">S3 夏季赛</div>
+              <div style="font-size:11px;color:#6B7394;margin-top:2px">06-01 → 07-15 · 小组赛阶段</div>
+            </div>
+            <span class="badge badge-green">进行中</span>
+          </div>
+        </div>
+
+        <!-- Match results to enter -->
+        <div class="section-title" style="font-size:14px">📝 待录入赛果</div>
+        <div class="result-form">
+          <div style="font-size:12px;color:#6B7394;margin-bottom:10px">A组 · 天穹战队 vs 烈焰风暴 · BO1</div>
+          <div class="team-row">
+            <div class="team-info">
+              <div class="team-badge" style="width:32px;height:32px;font-size:12px;background:linear-gradient(135deg,#1565C0,#1976D2)">TK</div>
+              <span style="font-size:13px;font-weight:600">天穹战队</span>
+            </div>
+            <input class="score-input" value="2" placeholder="分">
+          </div>
+          <div style="display:flex;justify-content:center;margin-bottom:12px">
+            <span style="font-size:18px;font-weight:900;color:#6B7394">VS</span>
+          </div>
+          <div class="team-row">
+            <div class="team-info">
+              <div class="team-badge" style="width:32px;height:32px;font-size:12px;background:linear-gradient(135deg,#E65100,#F57C00)">LF</div>
+              <span style="font-size:13px;font-weight:600">烈焰风暴</span>
+            </div>
+            <input class="score-input" value="1" placeholder="分">
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn-sm btn-red" style="flex:1;padding:10px;font-size:13px">确认赛果</button>
+            <button class="btn-sm btn-outline" style="flex:1;padding:10px;font-size:13px">标记弃赛</button>
+          </div>
+        </div>
+
+        <!-- Quick user list -->
+        <div class="section-title" style="font-size:14px">👥 最近用户</div>
+        <table class="data-table">
+          <thead><tr><th>用户</th><th>余额</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td>王者猎人</td><td>¥15,230</td><td><span class="badge badge-green">正常</span></td><td><button class="btn-sm btn-outline" style="font-size:10px;padding:2px 8px">管理</button></td></tr>
+            <tr><td>峡谷预言家</td><td>¥12,450</td><td><span class="badge badge-green">正常</span></td><td><button class="btn-sm btn-outline" style="font-size:10px;padding:2px 8px">管理</button></td></tr>
+            <tr><td>水晶守护者</td><td>¥9,870</td><td><span class="badge badge-red">封禁</span></td><td><button class="btn-sm btn-outline" style="font-size:10px;padding:2px 8px">解封</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

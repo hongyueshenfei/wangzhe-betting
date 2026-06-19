@@ -1,0 +1,43 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "竞 王者竞猜" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e7]: 竞
+        - heading "王者竞猜" [level=6] [ref=e8]
+      - generic [ref=e9]:
+        - link "比赛" [ref=e10] [cursor=pointer]:
+          - /url: /matches
+        - link "战队" [ref=e11] [cursor=pointer]:
+          - /url: /teams
+        - link "排行榜" [ref=e12] [cursor=pointer]:
+          - /url: /leaderboard
+      - generic [ref=e13]:
+        - link "登录" [ref=e14] [cursor=pointer]:
+          - /url: /login
+        - link "注册" [ref=e15] [cursor=pointer]:
+          - /url: /register
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]: 竞
+      - heading "欢迎回来" [level=5] [ref=e20]
+      - paragraph [ref=e21]: 登录你的账户参与竞猜
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e24]: 用户名
+        - generic [ref=e25]:
+          - textbox "用户名" [active] [ref=e26]
+          - group:
+            - generic: 用户名
+      - generic [ref=e27]:
+        - generic: 密码
+        - generic [ref=e28]:
+          - textbox "密码" [ref=e29]
+          - group:
+            - generic: 密码
+      - button "登 录" [ref=e30] [cursor=pointer]
+      - paragraph [ref=e32]:
+        - text: 还没有账户？
+        - link "立即注册" [ref=e33] [cursor=pointer]:
+          - /url: /register
+  - paragraph [ref=e35]: 王者荣耀竞猜平台 · 仅供娱乐

@@ -1,0 +1,75 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - heading "🏆 王者荣耀竞猜 · 管理后台" [level=6] [ref=e6]
+      - generic [ref=e7]:
+        - paragraph [ref=e8]: admin
+        - generic [ref=e9]: ADMIN
+        - paragraph [ref=e10] [cursor=pointer]: 退出
+  - generic [ref=e12]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: 竞
+      - paragraph [ref=e16]: 王者竞猜
+    - generic [ref=e17]: 主菜单
+    - list [ref=e18]:
+      - button "数据看板" [ref=e19] [cursor=pointer]:
+        - img [ref=e21]
+        - generic [ref=e24]: 数据看板
+      - button "赛季管理" [ref=e25] [cursor=pointer]:
+        - img [ref=e27]
+        - generic [ref=e30]: 赛季管理
+      - button "队伍管理" [ref=e31] [cursor=pointer]:
+        - img [ref=e33]
+        - generic [ref=e36]: 队伍管理
+      - button "比赛管理" [ref=e37] [cursor=pointer]:
+        - img [ref=e39]
+        - generic [ref=e42]: 比赛管理
+      - button "赔率管理" [ref=e43] [cursor=pointer]:
+        - img [ref=e45]
+        - generic [ref=e48]: 赔率管理
+      - button "用户管理" [ref=e49] [cursor=pointer]:
+        - img [ref=e51]
+        - generic [ref=e54]: 用户管理
+  - main [ref=e55]:
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - heading "🏆 赛季管理" [level=5] [ref=e60]
+        - button "新建赛季" [ref=e61] [cursor=pointer]:
+          - img [ref=e63]
+          - text: 新建赛季
+      - table [ref=e66]:
+        - rowgroup [ref=e67]:
+          - row "赛季名称 日期 赛制轮次 状态 队伍/比赛 操作" [ref=e68]:
+            - columnheader "赛季名称" [ref=e69]
+            - columnheader "日期" [ref=e70]
+            - columnheader "赛制轮次" [ref=e71]
+            - columnheader "状态" [ref=e72]
+            - columnheader "队伍/比赛" [ref=e73]
+            - columnheader "操作" [ref=e74]
+        - rowgroup [ref=e75]:
+          - row "QA测试赛季 2026/8/1 ~ 2026/9/1 小组赛 淘汰赛 即将开始 0 队 / 0 场" [ref=e76]:
+            - cell "QA测试赛季" [ref=e77]
+            - cell "2026/8/1 ~ 2026/9/1" [ref=e78]
+            - cell "小组赛 淘汰赛" [ref=e79]:
+              - generic [ref=e80]:
+                - generic [ref=e81]:
+                  - generic [ref=e83]: 小组赛
+                  - img [ref=e84]
+                - generic [ref=e88]: 淘汰赛
+            - cell "即将开始" [ref=e89]:
+              - generic [ref=e91]: 即将开始
+            - cell "0 队 / 0 场" [ref=e92]
+            - cell [ref=e93]:
+              - button [ref=e94] [cursor=pointer]:
+                - img [ref=e95]
+          - row "测试赛季(已更新) 2026/7/1 ~ 2026/8/1 小组赛 即将开始 10 队 / 72 场" [ref=e97]:
+            - cell "测试赛季(已更新)" [ref=e98]
+            - cell "2026/7/1 ~ 2026/8/1" [ref=e99]
+            - cell "小组赛" [ref=e100]:
+              - generic [ref=e104]: 小组赛
+            - cell "即将开始" [ref=e105]:
+              - generic [ref=e107]: 即将开始
+            - cell "10 队 / 72 场" [ref=e108]
+            - cell [ref=e109]:
+              - button [ref=e110] [cursor=pointer]:
+                - img [ref=e111]

@@ -1,0 +1,67 @@
+- generic [ref=e37]:
+  - banner [ref=e38]:
+    - generic [ref=e39]:
+      - heading "🏆 王者荣耀竞猜 · 管理后台" [level=6] [ref=e40]
+      - generic [ref=e41]:
+        - paragraph [ref=e42]: admin
+        - generic [ref=e43]: ADMIN
+        - paragraph [ref=e44] [cursor=pointer]: 退出
+  - generic [ref=e46]:
+    - generic [ref=e48]:
+      - generic [ref=e49]: 竞
+      - paragraph [ref=e50]: 王者竞猜
+    - generic [ref=e51]: 主菜单
+    - list [ref=e52]:
+      - button "数据看板" [ref=e53] [cursor=pointer]:
+        - img [ref=e55]
+        - generic [ref=e58]: 数据看板
+      - button "赛季管理" [ref=e59] [cursor=pointer]:
+        - img [ref=e61]
+        - generic [ref=e64]: 赛季管理
+      - button "队伍管理" [ref=e65] [cursor=pointer]:
+        - img [ref=e67]
+        - generic [ref=e70]: 队伍管理
+      - button "比赛管理" [active] [ref=e71] [cursor=pointer]:
+        - img [ref=e73]
+        - generic [ref=e76]: 比赛管理
+      - button "赔率管理" [ref=e77] [cursor=pointer]:
+        - img [ref=e79]
+        - generic [ref=e82]: 赔率管理
+      - button "用户管理" [ref=e83] [cursor=pointer]:
+        - img [ref=e85]
+        - generic [ref=e88]: 用户管理
+  - main [ref=e89]:
+    - generic [ref=e426]:
+      - generic [ref=e427]:
+        - heading "⚔️ 比赛管理" [level=5] [ref=e428]
+        - generic [ref=e429]:
+          - generic [ref=e431]:
+            - combobox [ref=e432] [cursor=pointer]: QA测试赛季
+            - textbox: "4"
+            - img
+            - group
+          - button "生成赛程" [ref=e433] [cursor=pointer]:
+            - img [ref=e435]
+            - text: 生成赛程
+      - generic [ref=e437]:
+        - paragraph [ref=e438]: 赛制配置：
+        - generic [ref=e439]:
+          - generic [ref=e441]: 1. 小组赛 (BO1)
+          - paragraph [ref=e442]: →
+        - generic [ref=e445]: 2. 淘汰赛 (BO3)
+        - paragraph [ref=e446]: 每组晋级 2 队
+      - table [ref=e448]:
+        - rowgroup [ref=e449]:
+          - row "# 阶段 组/轮次 队伍A 比分 队伍B 时间 状态 操作" [ref=e450]:
+            - columnheader "#" [ref=e451]
+            - columnheader "阶段" [ref=e452]
+            - columnheader "组/轮次" [ref=e453]
+            - columnheader "队伍A" [ref=e454]
+            - columnheader "比分" [ref=e455]
+            - columnheader "队伍B" [ref=e456]
+            - columnheader "时间" [ref=e457]
+            - columnheader "状态" [ref=e458]
+            - columnheader "操作" [ref=e459]
+        - rowgroup [ref=e460]:
+          - row "暂无比赛 · 请先生成赛程" [ref=e461]:
+            - cell "暂无比赛 · 请先生成赛程" [ref=e462]
