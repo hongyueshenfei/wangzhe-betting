@@ -193,9 +193,11 @@ export default function ChampionBet() {
                 <Box>
                   <Typography sx={{ fontSize: 10, color: '#8890A8' }}>投注截止</Typography>
                   <Typography sx={{ fontSize: 14, fontWeight: 700, color: canBet ? '#66BB6A' : '#EF5350' }}>
-                    {poolStats.deadline
-                      ? formatDateTime(poolStats.deadline)
-                      : '暂无赛程'}
+                    {!poolStats.deadline
+                      ? '暂无赛程'
+                      : canBet
+                        ? formatDateTime(poolStats.deadline)
+                        : '已截止'}
                   </Typography>
                 </Box>
               </Box>
