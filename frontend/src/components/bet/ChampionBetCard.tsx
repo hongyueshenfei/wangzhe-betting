@@ -82,7 +82,7 @@ export default function ChampionBetCard({
         <Typography sx={{ fontWeight: 700, color: '#E8EAF0', fontSize: 14, mb: 1 }}>
           {team.name}
         </Typography>
-        <Typography sx={{ fontSize: 10, color: '#6B7394', mb: 1.5 }}>
+        <Typography sx={{ fontSize: 10, color: '#8890A8', mb: 1.5 }}>
           奖池模式 · 按比例分奖
         </Typography>
         <Button

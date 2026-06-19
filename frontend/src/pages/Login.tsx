@@ -36,7 +36,7 @@ export default function Login() {
           boxShadow: '0 8px 30px rgba(200,169,81,0.2)',
         }}>竞</Box>
         <Typography variant="h5" sx={{ fontWeight: 800, color: '#E8EAF0' }}>欢迎回来</Typography>
-        <Typography variant="body2" sx={{ color: '#6B7394', mt: 0.5 }}>登录你的账户参与竞猜</Typography>
+        <Typography variant="body2" sx={{ color: '#8890A8', mt: 0.5 }}>登录你的账户参与竞猜</Typography>
       </Box>
 
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
@@ -57,7 +57,7 @@ export default function Login() {
           {loading ? '登录中...' : '登 录'}
         </Button>
         <Box sx={{ textAlign: 'center', mt: 2 }}>
-          <Typography variant="body2" sx={{ color: '#6B7394' }}>
+          <Typography variant="body2" sx={{ color: '#8890A8' }}>
             还没有账户？<RouterLink to="/register" style={{ color: '#C8A951', textDecoration: 'none' }}>立即注册</RouterLink>
           </Typography>
         </Box>

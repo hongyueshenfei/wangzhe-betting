@@ -62,7 +62,7 @@ export default function TransactionList({ transactions }: TransactionListProps) 
               sx={{ bgcolor: color.bg, color: color.fg, fontWeight: 600, fontSize: 11 }}
             />
             <Box sx={{ flex: 1, minWidth: 0 }}>
-              <Typography sx={{ fontSize: 12, color: '#6B7394' }}>
+              <Typography sx={{ fontSize: 12, color: '#8890A8' }}>
                 {formatDateTime(tx.createdAt)}
               </Typography>
             </Box>

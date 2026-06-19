@@ -50,7 +50,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <IconButton
             onClick={() => setDrawerOpen(true)}
-            sx={{ display: { md: 'none' }, color: '#CBD0E0' }}
+            sx={{ display: { lg: 'none' }, color: '#CBD0E0' }}
           >
             <MenuIcon />
           </IconButton>
@@ -85,7 +85,7 @@ export default function Navbar() {
           </Box>
 
           {/* Nav links — desktop */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
+          <Box sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: 0.5 }}>
             {NAV_ITEMS.map((item) => (
               <Button
                 key={item.to}
@@ -130,7 +130,7 @@ export default function Navbar() {
                   >管理</Button>
                 )}
                 <Button onClick={handleLogout} sx={{
-                  color: '#6B7394', fontSize: { xs: 10, sm: 12 },
+                  color: '#8890A8', fontSize: { xs: 10, sm: 12 },
                   minWidth: 'auto', px: { xs: 0.5, sm: 1 },
                 }}>退出</Button>
               </>
@@ -158,7 +158,7 @@ export default function Navbar() {
       >
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 2, mb: 1 }}>
           <Typography sx={{ fontWeight: 800, color: '#C8A951', fontSize: 18 }}>王者竞猜</Typography>
-          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: '#6B7394' }}>
+          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: '#8890A8' }}>
             <Close />
           </IconButton>
         </Box>

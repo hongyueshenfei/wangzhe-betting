@@ -95,6 +95,8 @@ model Season {
 model Team {
   id          Int      @id @default(autoincrement())
   name        String
+  abbr        String?                // 简称，如 "AG" "ES"
+  color       String?                // 代表色 HEX，如 "#1565C0"
   logoUrl     String?
   description String?
   members     String?

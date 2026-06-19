@@ -123,12 +123,12 @@ export default function SeasonManage() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>赛季名称</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>日期</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>赛制轮次</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>状态</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>队伍/比赛</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>操作</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>赛季名称</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>日期</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>赛制轮次</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>状态</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>队伍/比赛</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>操作</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -258,7 +258,7 @@ export default function SeasonManage() {
                     <Select value={round.type}
                       onChange={e => updateRound(idx, defaultRound(e.target.value as RoundType, round.order))}
                       label="赛制类型"
-                      sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', fontSize: 14, '& .MuiSelect-icon': { color: '#6B7394' }, '& fieldset': { borderColor: '#2A2F45' } }}
+                      sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', fontSize: 14, '& .MuiSelect-icon': { color: '#8890A8' }, '& fieldset': { borderColor: '#2A2F45' } }}
                     >
                       {ROUND_TYPES.map(t => <MenuItem key={t.value} value={t.value} sx={{ fontSize: 14 }}>{t.label}</MenuItem>)}
                     </Select>
@@ -268,7 +268,7 @@ export default function SeasonManage() {
                     <Select value={round.matchFormat}
                       onChange={e => updateRound(idx, { matchFormat: e.target.value as 'BO1' | 'BO3' | 'BO5' })}
                       label="比赛局数"
-                      sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', fontSize: 14, '& .MuiSelect-icon': { color: '#6B7394' }, '& fieldset': { borderColor: '#2A2F45' } }}
+                      sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', fontSize: 14, '& .MuiSelect-icon': { color: '#8890A8' }, '& fieldset': { borderColor: '#2A2F45' } }}
                     >
                       {FORMAT_OPTIONS.map(f => <MenuItem key={f} value={f} sx={{ fontSize: 14 }}>{f}</MenuItem>)}
                     </Select>
@@ -329,7 +329,7 @@ export default function SeasonManage() {
                       <Select value={round.seedingRule || 'cross_group'}
                         onChange={e => updateRound(idx, { seedingRule: e.target.value as any })}
                         label="对阵生成规则"
-                        sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', fontSize: 14, '& .MuiSelect-icon': { color: '#6B7394' }, '& fieldset': { borderColor: '#2A2F45' } }}
+                        sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', fontSize: 14, '& .MuiSelect-icon': { color: '#8890A8' }, '& fieldset': { borderColor: '#2A2F45' } }}
                       >
                         <MenuItem value="cross_group" sx={{ fontSize: 14 }}>交叉对阵 (A1vsB2, B1vsA2)</MenuItem>
                         <MenuItem value="auto" sx={{ fontSize: 14 }}>按排名自动配对</MenuItem>
@@ -349,7 +349,7 @@ export default function SeasonManage() {
           {msg && <Alert severity={msg.includes('成功') ? 'success' : 'error'} sx={{ mt: 2, bgcolor: 'rgba(211,47,47,0.1)', color: '#EF5350' }}>{msg}</Alert>}
         </DialogContent>
         <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-          <Button onClick={() => setDialogOpen(false)} sx={{ color: '#6B7394' }}>取消</Button>
+          <Button onClick={() => setDialogOpen(false)} sx={{ color: '#8890A8' }}>取消</Button>
           <Button onClick={handleSave} disabled={saving} variant="contained"
             sx={{ bgcolor: '#C8A951', color: '#0F1119', fontWeight: 700, '&:hover': { bgcolor: '#B8942E' } }}>
             {saving ? '保存中...' : '保存赛季'}

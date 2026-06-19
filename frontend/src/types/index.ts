@@ -59,6 +59,8 @@ export interface TeamMemberPositions {
 export interface Team {
   id: number;
   name: string;
+  abbr: string | null;           // 简称
+  color: string | null;          // 代表色 HEX
   logoUrl: string | null;
   description: string | null;
   members: string | null;        // JSON string of TeamMemberPositions
@@ -99,8 +101,8 @@ export interface MatchItem {
   matchOrder: number | null;
   teamAId: number;
   teamBId: number;
-  teamA: { id: number; name: string; logoUrl: string | null };
-  teamB: { id: number; name: string; logoUrl: string | null };
+  teamA: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null };
+  teamB: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null };
   teamAScore: number | null;
   teamBScore: number | null;
   matchTime: string;
@@ -120,8 +122,8 @@ export interface MatchItem {
 }
 
 export interface MatchDetail extends MatchItem {
-  teamA: { id: number; name: string; logoUrl: string | null; wins: number; losses: number; members: string | null };
-  teamB: { id: number; name: string; logoUrl: string | null; wins: number; losses: number; members: string | null };
+  teamA: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null; wins: number; losses: number; members: string | null };
+  teamB: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null; wins: number; losses: number; members: string | null };
   _count?: { bets: number };
   userBet?: { amount: number; pickedTeamId: number; oddsAtBet: number } | null;
 }

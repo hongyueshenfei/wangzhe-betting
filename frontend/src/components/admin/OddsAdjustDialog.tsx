@@ -104,11 +104,11 @@ export default function OddsAdjustDialog({
             InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
             InputProps={{
               startAdornment: <InputAdornment position="start">
-                <Typography sx={{ color: '#6B7394', fontSize: 13 }}>赔</Typography>
+                <Typography sx={{ color: '#8890A8', fontSize: 13 }}>赔</Typography>
               </InputAdornment>,
             }}
             helperText={`当前 ${match.teamA.name} 赔率: ${match.oddsA.toFixed(2)}`}
-            FormHelperTextProps={{ sx: { color: '#6B7394', fontSize: 11 } }}
+            FormHelperTextProps={{ sx: { color: '#8890A8', fontSize: 11 } }}
             sx={{
               '& .MuiOutlinedInput-root': {
                 bgcolor: '#0F1119',
@@ -127,11 +127,11 @@ export default function OddsAdjustDialog({
             InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
             InputProps={{
               startAdornment: <InputAdornment position="start">
-                <Typography sx={{ color: '#6B7394', fontSize: 13 }}>赔</Typography>
+                <Typography sx={{ color: '#8890A8', fontSize: 13 }}>赔</Typography>
               </InputAdornment>,
             }}
             helperText={`当前 ${match.teamB.name} 赔率: ${match.oddsB.toFixed(2)}`}
-            FormHelperTextProps={{ sx: { color: '#6B7394', fontSize: 11 } }}
+            FormHelperTextProps={{ sx: { color: '#8890A8', fontSize: 11 } }}
             sx={{
               '& .MuiOutlinedInput-root': {
                 bgcolor: '#0F1119',
@@ -149,7 +149,7 @@ export default function OddsAdjustDialog({
         )}
       </DialogContent>
       <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-        <Button onClick={onClose} disabled={loading} sx={{ color: '#6B7394', fontSize: 14 }}>
+        <Button onClick={onClose} disabled={loading} sx={{ color: '#8890A8', fontSize: 14 }}>
           取消
         </Button>
         <Button onClick={handleSubmit} variant="contained" disabled={loading}

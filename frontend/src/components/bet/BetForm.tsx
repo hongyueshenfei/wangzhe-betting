@@ -97,7 +97,7 @@ export default function BetForm({ match, onSuccess, onClose }: BetFormProps) {
         >
           <FormControlLabel
             value={match.teamAId}
-            control={<Radio sx={{ color: '#6B7394', '&.Mui-checked': { color: '#C8A951' } }} />}
+            control={<Radio sx={{ color: '#8890A8', '&.Mui-checked': { color: '#C8A951' } }} />}
             label={
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Typography sx={{ fontWeight: 700, fontSize: 15, color: '#E8EAF0' }}>
@@ -124,7 +124,7 @@ export default function BetForm({ match, onSuccess, onClose }: BetFormProps) {
         >
           <FormControlLabel
             value={match.teamBId}
-            control={<Radio sx={{ color: '#6B7394', '&.Mui-checked': { color: '#C8A951' } }} />}
+            control={<Radio sx={{ color: '#8890A8', '&.Mui-checked': { color: '#C8A951' } }} />}
             label={
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Typography sx={{ fontWeight: 700, fontSize: 15, color: '#E8EAF0' }}>
@@ -150,11 +150,11 @@ export default function BetForm({ match, onSuccess, onClose }: BetFormProps) {
         InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
         InputProps={{
           endAdornment: <InputAdornment position="end">
-            <Typography sx={{ color: '#6B7394', fontSize: 13 }}>币</Typography>
+            <Typography sx={{ color: '#8890A8', fontSize: 13 }}>币</Typography>
           </InputAdornment>,
         }}
         helperText={user ? `可用余额: ${user.coins} 币` : ''}
-        FormHelperTextProps={{ sx: { color: '#6B7394', fontSize: 12 } }}
+        FormHelperTextProps={{ sx: { color: '#8890A8', fontSize: 12 } }}
         sx={{
           mt: 2.5, mb: 1,
           '& .MuiOutlinedInput-root': {
@@ -185,7 +185,7 @@ export default function BetForm({ match, onSuccess, onClose }: BetFormProps) {
       {/* Actions */}
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1.5, mt: 3 }}>
         <Button onClick={onClose} disabled={loading}
-          sx={{ color: '#6B7394', fontSize: 14 }}>
+          sx={{ color: '#8890A8', fontSize: 14 }}>
           取消
         </Button>
         <Button

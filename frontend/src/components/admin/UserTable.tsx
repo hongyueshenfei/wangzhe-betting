@@ -36,13 +36,13 @@ export default function UserTable({
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>ID</TableCell>
-            <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>用户名</TableCell>
-            <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>角色</TableCell>
-            <TableCell align="right" sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>余额</TableCell>
-            <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>状态</TableCell>
-            <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>注册时间</TableCell>
-            <TableCell align="center" sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340' }}>操作</TableCell>
+            <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>ID</TableCell>
+            <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>用户名</TableCell>
+            <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>角色</TableCell>
+            <TableCell align="right" sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>余额</TableCell>
+            <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>状态</TableCell>
+            <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>注册时间</TableCell>
+            <TableCell align="center" sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340' }}>操作</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

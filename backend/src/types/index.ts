@@ -81,6 +81,8 @@ export interface CreateTeamDTO {
   members?: string;
   seasonId?: number;
   posterUrl?: string;
+  color?: string;
+  abbr?: string;
   memberPositions?: TeamMemberPositions;
 }
 
@@ -89,6 +91,8 @@ export interface UpdateTeamDTO {
   description?: string;
   members?: string;
   posterUrl?: string;
+  color?: string;
+  abbr?: string;
   memberPositions?: TeamMemberPositions;
 }
 

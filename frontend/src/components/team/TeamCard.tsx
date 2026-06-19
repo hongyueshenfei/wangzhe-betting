@@ -57,7 +57,7 @@ export default function TeamCard({ team }: TeamCardProps) {
         </Box>
 
         {team.season && (
-          <Typography variant="caption" sx={{ color: '#6B7394', mb: 1.5, display: 'block' }}>
+          <Typography variant="caption" sx={{ color: '#8890A8', mb: 1.5, display: 'block' }}>
             赛季: {team.season.name}
           </Typography>
         )}

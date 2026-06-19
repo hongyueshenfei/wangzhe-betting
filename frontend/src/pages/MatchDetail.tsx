@@ -105,7 +105,7 @@ export default function MatchDetail() {
             <Typography sx={{ fontWeight: 700, color: '#E8EAF0', fontSize: { xs: 12, sm: 16 }, wordBreak: 'break-all' }}>
               {match.teamA.name}
             </Typography>
-            <Typography sx={{ color: '#6B7394', fontSize: { xs: 10, sm: 12 } }}>
+            <Typography sx={{ color: '#8890A8', fontSize: { xs: 10, sm: 12 } }}>
               {match.teamA.wins}胜{match.teamA.losses}负
             </Typography>
           </Box>
@@ -128,7 +128,7 @@ export default function MatchDetail() {
               </Box>
             ) : (
               <Box>
-                <Typography sx={{ fontWeight: 700, color: '#6B7394', fontSize: { xs: 22, sm: 28 }, lineHeight: 1.2 }}>
+                <Typography sx={{ fontWeight: 700, color: '#8890A8', fontSize: { xs: 22, sm: 28 }, lineHeight: 1.2 }}>
                   VS
                 </Typography>
                 <Typography sx={{ color: '#8890A8', fontSize: { xs: 10, sm: 13 } }}>
@@ -159,7 +159,7 @@ export default function MatchDetail() {
             <Typography sx={{ fontWeight: 700, color: '#E8EAF0', fontSize: { xs: 12, sm: 16 }, wordBreak: 'break-all' }}>
               {match.teamB.name}
             </Typography>
-            <Typography sx={{ color: '#6B7394', fontSize: { xs: 10, sm: 12 } }}>
+            <Typography sx={{ color: '#8890A8', fontSize: { xs: 10, sm: 12 } }}>
               {match.teamB.wins}胜{match.teamB.losses}负
             </Typography>
           </Box>
@@ -204,7 +204,7 @@ export default function MatchDetail() {
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     py: 0.5, borderBottom: '1px solid rgba(255,255,255,0.04)',
                   }}>
-                    <Typography sx={{ fontSize: { xs: 11, sm: 12 }, color: '#6B7394', fontWeight: 600, minWidth: 40 }}>
+                    <Typography sx={{ fontSize: { xs: 11, sm: 12 }, color: '#8890A8', fontWeight: 600, minWidth: 40 }}>
                       {pos.label}
                     </Typography>
                     <Typography sx={{
@@ -252,7 +252,7 @@ export default function MatchDetail() {
               {' '}· <strong>{match.userBet.amount}</strong> 币
               {match.userBet.oddsAtBet ? ` · 赔率 ${match.userBet.oddsAtBet.toFixed(2)}` : ''}
             </Typography>
-            <Typography sx={{ color: '#6B7394', fontSize: 11, mt: 0.5 }}>
+            <Typography sx={{ color: '#8890A8', fontSize: 11, mt: 0.5 }}>
               每场比赛只能投注一次，不可追加
             </Typography>
           </Box>
@@ -286,7 +286,7 @@ export default function MatchDetail() {
               disabled
               sx={{
                 bgcolor: 'rgba(200,169,81,0.15)',
-                color: '#6B7394',
+                color: '#8890A8',
                 fontWeight: 700,
               }}
             >
@@ -311,7 +311,7 @@ export default function MatchDetail() {
       </SectionCard>
 
       {/* Bet count */}
-      <Typography variant="body2" sx={{ color: '#6B7394', mb: 3 }}>
+      <Typography variant="body2" sx={{ color: '#8890A8', mb: 3 }}>
         已有 {match._count?.bets || 0} 人投注
       </Typography>
 

@@ -115,7 +115,7 @@ export default function TeamDetail() {
               </Typography>
             )}
             {team.members && (
-              <Typography variant="body2" sx={{ color: '#6B7394' }}>
+              <Typography variant="body2" sx={{ color: '#8890A8' }}>
                 队员: {team.members}
               </Typography>
             )}

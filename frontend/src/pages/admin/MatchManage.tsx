@@ -127,7 +127,7 @@ export default function MatchManage() {
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
           <FormControl size="small" sx={{ width: 180 }}>
             <Select value={selectedSeason || ''} onChange={e => { setSelectedSeason(Number(e.target.value)); setPage(1); }}
-              sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', '& .MuiSelect-icon': { color: '#6B7394' }, '& fieldset': { borderColor: '#2A2F45' } }}>
+              sx={{ bgcolor: '#1A1D2E', color: '#E8EAF0', '& .MuiSelect-icon': { color: '#8890A8' }, '& fieldset': { borderColor: '#2A2F45' } }}>
               {seasons.map(s => <MenuItem key={s.id} value={s.id}>{s.name}</MenuItem>)}
             </Select>
           </FormControl>
@@ -163,7 +163,7 @@ export default function MatchManage() {
             </Box>
           ))}
           {roundRobin && (
-            <Typography sx={{ fontSize: 10, color: '#6B7394', ml: 'auto' }}>
+            <Typography sx={{ fontSize: 10, color: '#8890A8', ml: 'auto' }}>
               每组晋级 {roundRobin.promotionCount || 2} 队
             </Typography>
           )}
@@ -177,21 +177,21 @@ export default function MatchManage() {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>#</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>阶段</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>组/轮次</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>队伍A</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>比分</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>队伍B</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>时间</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>状态</TableCell>
-              <TableCell sx={{ color: '#6B7394', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>操作</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>#</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>阶段</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>组/轮次</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>队伍A</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>比分</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>队伍B</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>时间</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>状态</TableCell>
+              <TableCell sx={{ color: '#8890A8', fontWeight: 600, borderColor: '#1E2340', fontSize: 11 }}>操作</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {matches.map(m => (
               <TableRow key={m.id} hover>
-                <TableCell sx={{ color: '#6B7394', fontSize: 10, borderColor: '#151827' }}>{m.id}</TableCell>
+                <TableCell sx={{ color: '#8890A8', fontSize: 10, borderColor: '#151827' }}>{m.id}</TableCell>
                 <TableCell sx={{ borderColor: '#151827' }}>
                   <Chip label={m.stage === 'GROUP' ? '小组赛' : '淘汰赛'} size="small"
                     sx={{ fontSize: 10, bgcolor: m.stage === 'GROUP' ? 'rgba(66,165,245,0.08)' : 'rgba(211,47,47,0.08)', color: m.stage === 'GROUP' ? '#42A5F5' : '#EF5350' }} />
@@ -244,7 +244,7 @@ export default function MatchManage() {
               </TableRow>
             ))}
             {matches.length === 0 && (
-              <TableRow><TableCell colSpan={9} sx={{ textAlign: 'center', color: '#6B7394', py: 4, borderColor: '#151827' }}>
+              <TableRow><TableCell colSpan={9} sx={{ textAlign: 'center', color: '#8890A8', py: 4, borderColor: '#151827' }}>
                 暂无比赛 · 请先生成赛程
               </TableCell></TableRow>
             )}
@@ -265,7 +265,7 @@ export default function MatchManage() {
         <DialogContent sx={{ pt: 3 }}>
           {config ? (
             <Box>
-              <Typography sx={{ mb: 2, fontSize: 13, color: '#6B7394' }}>
+              <Typography sx={{ mb: 2, fontSize: 13, color: '#8890A8' }}>
                 根据赛季赛制配置生成以下比赛：
               </Typography>
               {roundRobin && (
@@ -335,7 +335,7 @@ export default function MatchManage() {
                       {generating ? '生成中...' : '生成淘汰赛赛程'}
                     </Button>
                   ) : (
-                    <Typography sx={{ fontSize: 11, color: '#6B7394' }}>
+                    <Typography sx={{ fontSize: 11, color: '#8890A8' }}>
                       此轮将在上一轮淘汰赛完成后自动生成
                     </Typography>
                   )}
@@ -356,7 +356,7 @@ export default function MatchManage() {
           {msg && <Alert severity={msg.includes('成功') ? 'success' : 'error'} sx={{ mt: 2 }}>{msg}</Alert>}
         </DialogContent>
         <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 1.5 }}>
-          <Button onClick={() => setGenDialogOpen(false)} sx={{ color: '#6B7394' }}>关闭</Button>
+          <Button onClick={() => setGenDialogOpen(false)} sx={{ color: '#8890A8' }}>关闭</Button>
         </DialogActions>
       </Dialog>
 
@@ -396,7 +396,7 @@ export default function MatchManage() {
             InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 15 } }}
             inputProps={{ style: { color: '#E8EAF0', fontSize: 18, padding: '14px 16px' } }}
             helperText="点击右侧日历图标选择日期和时间"
-            FormHelperTextProps={{ sx: { color: '#6B7394', fontSize: 12, mt: 0.5 } }}
+            FormHelperTextProps={{ sx: { color: '#8890A8', fontSize: 12, mt: 0.5 } }}
             sx={{
               '& .MuiOutlinedInput-root': {
                 bgcolor: '#0F1119',
@@ -413,7 +413,7 @@ export default function MatchManage() {
           />
         </DialogContent>
         <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-          <Button onClick={() => setEditingTime(null)} sx={{ color: '#6B7394', fontSize: 14 }}>取消</Button>
+          <Button onClick={() => setEditingTime(null)} sx={{ color: '#8890A8', fontSize: 14 }}>取消</Button>
           <Button onClick={handleTimeSave} variant="contained"
             sx={{ bgcolor: '#C8A951', color: '#0F1119', fontWeight: 700, fontSize: 14, px: 3, '&:hover': { bgcolor: '#B8942E' } }}>
             确认修改

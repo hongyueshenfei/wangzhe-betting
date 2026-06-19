@@ -230,7 +230,7 @@ export default function TeamManage() {
               '&:hover fieldset': { borderColor: '#3A3F58' },
               '&.Mui-focused fieldset': { borderColor: '#C8A951' },
             },
-            '& .MuiInputBase-input::placeholder': { color: '#6B7394' },
+            '& .MuiInputBase-input::placeholder': { color: '#8890A8' },
           }}
         />
       </Paper>
@@ -327,7 +327,7 @@ export default function TeamManage() {
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
                     ) : (
-                      <Typography variant="caption" sx={{ color: '#6B7394' }}>-</Typography>
+                      <Typography variant="caption" sx={{ color: '#8890A8' }}>-</Typography>
                     )}
                   </Box>
                 </TableCell>

@@ -35,7 +35,7 @@ export default function BracketView({ matches }: BracketViewProps) {
   if (sortedRounds.length === 0) {
     return (
       <Box sx={{ py: 4, textAlign: 'center' }}>
-        <Typography sx={{ color: '#6B7394' }}>暂无淘汰赛数据</Typography>
+        <Typography sx={{ color: '#8890A8' }}>暂无淘汰赛数据</Typography>
       </Box>
     );
   }

@@ -34,7 +34,7 @@ const theme = createTheme({
             '&:hover fieldset': { borderColor: '#3A3F58' },
             '&.Mui-focused fieldset': { borderColor: '#C8A951' },
           },
-          '& .MuiInputLabel-root': { color: '#6B7394' },
+          '& .MuiInputLabel-root': { color: '#8890A8' },
           '& .MuiInputBase-input': { color: '#E8EAF0' },
         },
       },
@@ -87,7 +87,7 @@ const theme = createTheme({
           borderBottom: '1px solid #1E2340',
           color: '#E8EAF0',
         },
-        head: { fontWeight: 700, color: '#6B7394' },
+        head: { fontWeight: 700, color: '#8890A8' },
       },
     },
     MuiTableRow: {
@@ -120,7 +120,7 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           fontWeight: 600,
-          color: '#6B7394',
+          color: '#8890A8',
           '&.Mui-selected': { color: '#C8A951' },
         },
       },

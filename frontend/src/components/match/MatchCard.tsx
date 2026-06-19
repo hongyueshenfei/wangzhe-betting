@@ -8,11 +8,7 @@ interface MatchCardProps {
   hasBet?: boolean;
 }
 
-const TEAM_COLORS: Record<string, string> = {
-  'AG超玩会': '#1565C0', 'eStarPro': '#E65100', 'QGha': '#2E7D32',
-  'Hero久竞': '#6A1B9A', 'RNG.M': '#D32F2F', 'EDG.M': '#37474F',
-  'TS豚首': '#00BCD4', 'DYG.JC': '#F57C00',
-};
+const DEFAULT_COLORS = ['#1976D2', '#E65100', '#2E7D32', '#6A1B9A', '#D32F2F', '#37474F', '#00BCD4', '#F57C00'];
 
 const STATUS_CONFIG: Record<string, { bg: string; fg: string }> = {
   UPCOMING: { bg: 'rgba(66,165,245,0.1)', fg: '#42A5F5' },
@@ -21,17 +17,21 @@ const STATUS_CONFIG: Record<string, { bg: string; fg: string }> = {
   FORFEITED: { bg: 'rgba(239,83,80,0.1)', fg: '#EF5350' },
 };
 
-function getTeamAbbr(name: string): string {
-  const map: Record<string, string> = {
-    'AG超玩会': 'AG', 'eStarPro': 'ES', 'QGha': 'QG', 'Hero久竞': 'HE',
-    'RNG.M': 'RN', 'EDG.M': 'ED', 'TS豚首': 'TS', 'DYG.JC': 'DY',
-  };
-  return map[name] || name.slice(0, 2);
+/** 从 API team.color 或通过名称哈希得到一个战队色 */
+function getTeamColor(team: { color?: string | null; name: string }): string {
+  if (team.color) return team.color;
+  // Fallback: 用名称哈希
+  let hash = 0;
+  for (let i = 0; i < team.name.length; i++) hash = team.name.charCodeAt(i) + ((hash << 5) - hash);
+  return DEFAULT_COLORS[Math.abs(hash) % DEFAULT_COLORS.length];
 }
 
 export default function MatchCard({ match, hasBet }: MatchCardProps) {
   const navigate = useNavigate();
   const st = STATUS_CONFIG[match.status] || { bg: 'rgba(255,255,255,0.05)', fg: '#8890A8' };
+
+  const colorA = getTeamColor(match.teamA);
+  const colorB = getTeamColor(match.teamB);
 
   return (
     <Box
@@ -52,7 +52,7 @@ export default function MatchCard({ match, hasBet }: MatchCardProps) {
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5, alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.8 }}>
-          <Typography sx={{ fontSize: 11, color: '#6B7394' }}>
+          <Typography sx={{ fontSize: 11, color: '#8890A8' }}>
             {match.stage === 'GROUP' ? `小组赛 · ${match.groupName || ''}` : `淘汰赛 · ${match.round || ''}`}
           </Typography>
           {hasBet && (
@@ -80,11 +80,11 @@ export default function MatchCard({ match, hasBet }: MatchCardProps) {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, gap: 0.6 }}>
           <Box sx={{
             width: 44, height: 44, borderRadius: 1.5,
-            background: `linear-gradient(135deg, ${TEAM_COLORS[match.teamA.name] || '#1976D2'}, ${TEAM_COLORS[match.teamA.name] || '#42A5F5'})`,
+            background: `linear-gradient(135deg, ${colorA}, ${colorA}dd)`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 16, fontWeight: 900, color: '#FFF',
           }}>
-            {getTeamAbbr(match.teamA.name)}
+            {match.teamA.abbr || match.teamA.name.slice(0, 2)}
           </Box>
           <Typography sx={{ fontSize: 13, fontWeight: 700, textAlign: 'center', lineHeight: 1.3 }}>
             {match.teamA.name}
@@ -103,18 +103,18 @@ export default function MatchCard({ match, hasBet }: MatchCardProps) {
           ) : (
             <Typography sx={{ fontSize: 18, fontWeight: 900, color: '#C8A951' }}>VS</Typography>
           )}
-          <Typography sx={{ fontSize: 10, color: '#6B7394', mt: 0.5 }}>{formatDateTime(match.matchTime)}</Typography>
+          <Typography sx={{ fontSize: 10, color: '#8890A8', mt: 0.5 }}>{formatDateTime(match.matchTime)}</Typography>
         </Box>
 
         {/* Team B */}
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, gap: 0.6 }}>
           <Box sx={{
             width: 44, height: 44, borderRadius: 1.5,
-            background: `linear-gradient(135deg, ${TEAM_COLORS[match.teamB.name] || '#E65100'}, ${TEAM_COLORS[match.teamB.name] || '#F57C00'})`,
+            background: `linear-gradient(135deg, ${colorB}, ${colorB}dd)`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 16, fontWeight: 900, color: '#FFF',
           }}>
-            {getTeamAbbr(match.teamB.name)}
+            {match.teamB.abbr || match.teamB.name.slice(0, 2)}
           </Box>
           <Typography sx={{ fontSize: 13, fontWeight: 700, textAlign: 'center', lineHeight: 1.3 }}>
             {match.teamB.name}

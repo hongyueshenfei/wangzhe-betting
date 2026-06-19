@@ -88,13 +88,13 @@ export default function AdminLayout() {
             <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, sm: 16 } }}>🏆 管理后台</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 2 } }}>
-            <Typography variant="body2" sx={{ color: '#6B7394', display: { xs: 'none', sm: 'block' } }}>{user?.username}</Typography>
+            <Typography variant="body2" sx={{ color: '#8890A8', display: { xs: 'none', sm: 'block' } }}>{user?.username}</Typography>
             <Box sx={{
               px: 1.5, py: 0.4, borderRadius: 1, fontSize: { xs: 10, sm: 11 }, fontWeight: 700,
               bgcolor: 'rgba(200,169,81,0.1)', color: '#C8A951', border: '1px solid rgba(200,169,81,0.2)',
             }}>ADMIN</Box>
             <Typography variant="body2" onClick={() => { logout(); navigate('/'); }}
-              sx={{ color: '#6B7394', cursor: 'pointer', textDecoration: 'underline', fontSize: { xs: 11, sm: 13 }, whiteSpace: 'nowrap' }}
+              sx={{ color: '#8890A8', cursor: 'pointer', textDecoration: 'underline', fontSize: { xs: 11, sm: 13 }, whiteSpace: 'nowrap' }}
             >退出</Typography>
           </Box>
         </Toolbar>
@@ -121,7 +121,7 @@ export default function AdminLayout() {
         PaperProps={{ sx: { bgcolor: '#0F1119', width: DRAWER_WIDTH } }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1 }}>
-          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: '#6B7394' }}>
+          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: '#8890A8' }}>
             <Close />
           </IconButton>
         </Box>

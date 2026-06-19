@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Box, Grid, TextField, Pagination } from '@mui/material';
+import { Box, Grid, TextField, Pagination, IconButton, InputAdornment } from '@mui/material';
+import { Search } from '@mui/icons-material';
 import { getTeamList } from '../api/teams';
 import TeamCard from '../components/team/TeamCard';
 import PageHeader from '../components/common/PageHeader';
-import Loading from '../components/common/Loading';
+import { SectionSkeleton } from '../components/common/Skeletons';
+import EmptyState from '../components/common/EmptyState';
 import ErrorAlert from '../components/common/ErrorAlert';
 import type { Team } from '../types';
 
@@ -52,23 +54,21 @@ export default function Teams() {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          sx={{ minWidth: 260 }}
           InputProps={{
-            sx: { color: '#E8EAF0' },
-          }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              bgcolor: '#0F1119',
-              '& fieldset': { borderColor: '#2A2F45' },
-              '&:hover fieldset': { borderColor: '#3A3F58' },
-              '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-            },
-            '& .MuiInputBase-input::placeholder': { color: '#6B7394' },
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton size="small" onClick={handleSearch} sx={{ color: '#8890A8' }}>
+                  <Search />
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
       </Box>
 
       {loading ? (
-        <Loading />
+        <SectionSkeleton lines={6} />
       ) : error ? (
         <ErrorAlert message={error} onRetry={loadTeams} />
       ) : (
@@ -81,9 +81,10 @@ export default function Teams() {
             ))}
           </Grid>
           {teams.length === 0 && (
-            <Box sx={{ textAlign: 'center', py: 4, color: '#6B7394' }}>
-              暂无战队数据
-            </Box>
+            <EmptyState
+              title="未找到匹配的战队"
+              description={keyword ? `没有包含「${keyword}」的战队` : ''}
+            />
           )}
           {total > limit && (
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
@@ -92,10 +93,6 @@ export default function Teams() {
                 page={page}
                 onChange={(_, p) => setPage(p)}
                 color="primary"
-                sx={{
-                  '& .MuiPaginationItem-root': { color: '#8890A8' },
-                  '& .Mui-selected': { bgcolor: '#C8A951', color: '#0F1119' },
-                }}
               />
             </Box>
           )}

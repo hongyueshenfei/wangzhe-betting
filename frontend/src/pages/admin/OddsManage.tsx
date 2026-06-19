@@ -107,7 +107,7 @@ export default function OddsManage() {
         sx={{
           minWidth: 200,
           mb: 2,
-          '& .MuiInputLabel-root': { color: '#6B7394' },
+          '& .MuiInputLabel-root': { color: '#8890A8' },
           '& .MuiOutlinedInput-root': {
             bgcolor: '#0F1119',
             color: '#E8EAF0',
@@ -181,7 +181,7 @@ export default function OddsManage() {
                   <Typography variant="body2">
                     {match.teamA.name} VS {match.teamB.name}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#6B7394' }}>
+                  <Typography variant="caption" sx={{ color: '#8890A8' }}>
                     {formatDateTime(match.matchTime)}
                   </Typography>
                 </TableCell>

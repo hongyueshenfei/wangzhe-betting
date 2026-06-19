@@ -182,7 +182,7 @@ export default function ChampionBet() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Pool sx={{ color: '#C8A951', fontSize: 20 }} />
                 <Box>
-                  <Typography sx={{ fontSize: 10, color: '#6B7394' }}>奖池累计</Typography>
+                  <Typography sx={{ fontSize: 10, color: '#8890A8' }}>奖池累计</Typography>
                   <Typography sx={{ fontSize: 16, fontWeight: 800, color: '#C8A951' }}>
                     {poolStats.totalPool} 币
                   </Typography>
@@ -191,7 +191,7 @@ export default function ChampionBet() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <AccessTime sx={{ color: canBet ? '#66BB6A' : '#EF5350', fontSize: 20 }} />
                 <Box>
-                  <Typography sx={{ fontSize: 10, color: '#6B7394' }}>投注截止</Typography>
+                  <Typography sx={{ fontSize: 10, color: '#8890A8' }}>投注截止</Typography>
                   <Typography sx={{ fontSize: 14, fontWeight: 700, color: canBet ? '#66BB6A' : '#EF5350' }}>
                     {poolStats.deadline
                       ? formatDateTime(poolStats.deadline)
@@ -239,11 +239,11 @@ export default function ChampionBet() {
                 预测 <strong style={{ color: '#C8A951' }}>{activeSeason.name}</strong> 冠军为 <strong style={{ color: '#C8A951' }}>{selectedTeam.name}</strong>
               </Typography>
               {poolStats && (
-                <Typography sx={{ fontSize: 12, color: '#6B7394', mb: 2, textAlign: 'center' }}>
+                <Typography sx={{ fontSize: 12, color: '#8890A8', mb: 2, textAlign: 'center' }}>
                   当前奖池 {poolStats.totalPool} 币 · {poolStats.betCount} 次投注
                 </Typography>
               )}
-              <Typography sx={{ fontSize: 11, color: '#6B7394', mb: 2, textAlign: 'center' }}>
+              <Typography sx={{ fontSize: 11, color: '#8890A8', mb: 2, textAlign: 'center' }}>
                 可对多个战队分别投注 · 最终冠军队伍按投注比例瓜分总奖池
               </Typography>
               <TextField

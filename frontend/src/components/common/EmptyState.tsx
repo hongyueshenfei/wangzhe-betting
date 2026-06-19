@@ -53,7 +53,7 @@ export default function EmptyState({
         {title}
       </Typography>
       {description && (
-        <Typography sx={{ fontSize: 13, color: '#6B7394', textAlign: 'center', maxWidth: 280 }}>
+        <Typography sx={{ fontSize: 13, color: '#8890A8', textAlign: 'center', maxWidth: 280 }}>
           {description}
         </Typography>
       )}

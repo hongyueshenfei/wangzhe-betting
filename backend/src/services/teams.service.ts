@@ -111,6 +111,8 @@ export class TeamsService {
         members: dto.members || null,
         posterUrl: dto.posterUrl || null,
         seasonId: dto.seasonId || null,
+        color: dto.color || null,
+        abbr: dto.abbr || null,
       },
     });
   }
@@ -131,6 +133,8 @@ export class TeamsService {
     if (dto.members !== undefined) data.members = dto.members;
     if (logoUrl !== undefined) data.logoUrl = logoUrl;
     if (dto.posterUrl !== undefined) data.posterUrl = dto.posterUrl;
+    if (dto.color !== undefined) data.color = dto.color;
+    if (dto.abbr !== undefined) data.abbr = dto.abbr;
 
     return prisma.team.update({ where: { id }, data });
   }

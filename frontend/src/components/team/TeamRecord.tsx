@@ -59,7 +59,7 @@ export default function TeamRecord({ matches }: TeamRecordProps) {
               >
                 <TableCell>
                   <Typography variant="body2">{match.opponent.name}</Typography>
-                  <Typography variant="caption" sx={{ color: '#6B7394' }}>
+                  <Typography variant="caption" sx={{ color: '#8890A8' }}>
                     {match.stage === 'GROUP' ? '小组赛' : '淘汰赛'}
                   </Typography>
                 </TableCell>

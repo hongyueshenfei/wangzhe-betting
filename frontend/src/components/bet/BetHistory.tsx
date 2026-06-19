@@ -103,7 +103,7 @@ export default function BetHistory({ bets }: BetHistoryProps) {
                     : `比赛 #${bet.matchId}`}
                 </Typography>
                 {bet.match?.season?.name && (
-                  <Typography sx={{ fontSize: 11, color: '#6B7394' }}>
+                  <Typography sx={{ fontSize: 11, color: '#8890A8' }}>
                     {bet.match.season.name}
                   </Typography>
                 )}
@@ -119,7 +119,7 @@ export default function BetHistory({ bets }: BetHistoryProps) {
                 <Typography sx={{ fontSize: 12, color: '#8890A8' }}>
                   投注: {bet.pickedTeam?.name || `#${bet.pickedTeamId}`}
                 </Typography>
-                <Typography sx={{ fontSize: 11, color: '#6B7394', mt: 0.3 }}>
+                <Typography sx={{ fontSize: 11, color: '#8890A8', mt: 0.3 }}>
                   {formatDateTime(bet.createdAt)}
                 </Typography>
               </Box>
@@ -127,7 +127,7 @@ export default function BetHistory({ bets }: BetHistoryProps) {
                 <Typography sx={{ fontSize: 14, fontWeight: 700, color: '#C8A951' }}>
                   {formatCoins(bet.amount)}
                 </Typography>
-                <Typography sx={{ fontSize: 11, color: '#6B7394' }}>
+                <Typography sx={{ fontSize: 11, color: '#8890A8' }}>
                   赔率 {bet.oddsAtBet.toFixed(2)}
                 </Typography>
               </Box>

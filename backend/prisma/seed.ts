@@ -69,15 +69,15 @@ async function main(): Promise<void> {
   // ─── 4. Sample Teams (8 teams in 2 groups) ───────
   const teamData = [
     // Group A
-    { name: 'AG超玩会', description: 'KPL老牌强队,以稳健打法著称', members: '["梦泪","老帅","VV","兰息","杰斯"]' },
-    { name: 'eStarPro', description: '进攻型战队,节奏极快', members: '["诺言","Cat","Alan","花海","无铭"]' },
-    { name: 'QGha', description: '战术大师,运营能力强', members: '["Fly","Hurt","Snow","Mojo","770"]' },
-    { name: 'Hero久竞', description: '新锐战队,充满活力', members: '["久诚","尘夏","柠栀","最初","七年"]' },
+    { name: 'AG超玩会', abbr: 'AG', color: '#1565C0', description: 'KPL老牌强队,以稳健打法著称', members: '["梦泪","老帅","VV","兰息","杰斯"]' },
+    { name: 'eStarPro', abbr: 'ES', color: '#E65100', description: '进攻型战队,节奏极快', members: '["诺言","Cat","Alan","花海","无铭"]' },
+    { name: 'QGha', abbr: 'QG', color: '#2E7D32', description: '战术大师,运营能力强', members: '["Fly","Hurt","Snow","Mojo","770"]' },
+    { name: 'Hero久竞', abbr: 'HE', color: '#6A1B9A', description: '新锐战队,充满活力', members: '["久诚","尘夏","柠栀","最初","七年"]' },
     // Group B
-    { name: 'RNG.M', description: '实力均衡,团队协作出色', members: '["虔诚","暴风锐","Zero","凉晨","雨雨"]' },
-    { name: 'EDG.M', description: '打法灵活多变', members: '["初晨","浪浪","koko","阿澈","无痕"]' },
-    { name: 'TS豚首', description: '新生代强队,天赋异禀', members: '["暖阳","诗酒","千世","阿豆","神人"]' },
-    { name: 'DYG.JC', description: '战术多变,难以预测', members: '["易峥","清清","久诚","星宇","纵情"]' },
+    { name: 'RNG.M', abbr: 'RN', color: '#D32F2F', description: '实力均衡,团队协作出色', members: '["虔诚","暴风锐","Zero","凉晨","雨雨"]' },
+    { name: 'EDG.M', abbr: 'ED', color: '#37474F', description: '打法灵活多变', members: '["初晨","浪浪","koko","阿澈","无痕"]' },
+    { name: 'TS豚首', abbr: 'TS', color: '#00BCD4', description: '新生代强队,天赋异禀', members: '["暖阳","诗酒","千世","阿豆","神人"]' },
+    { name: 'DYG.JC', abbr: 'DY', color: '#F57C00', description: '战术多变,难以预测', members: '["易峥","清清","久诚","星宇","纵情"]' },
   ];
 
   const teams: { id: number; name: string }[] = [];
@@ -85,6 +85,8 @@ async function main(): Promise<void> {
     const team = await prisma.team.create({
       data: {
         name: td.name,
+        abbr: td.abbr || null,
+        color: td.color || null,
         description: td.description,
         members: td.members,
         seasonId: season.id,

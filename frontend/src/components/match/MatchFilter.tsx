@@ -52,7 +52,7 @@ export default function MatchFilter({
         size="small"
         sx={{
           minWidth: { xs: '100%', sm: 140 },
-          '& .MuiInputLabel-root': { color: '#6B7394' },
+          '& .MuiInputLabel-root': { color: '#8890A8' },
           '& .MuiOutlinedInput-root': {
             bgcolor: '#0F1119',
             color: '#E8EAF0',

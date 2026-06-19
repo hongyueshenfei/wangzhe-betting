@@ -47,7 +47,7 @@ class TeamsController {
   /** POST /api/teams */
   async create(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { name, description, seasonId, posterUrl, memberPositions } = req.body;
+      const { name, description, seasonId, posterUrl, memberPositions, color, abbr } = req.body;
       if (!name) {
         error(res, '战队名称不能为空', 400);
         return;
@@ -66,6 +66,8 @@ class TeamsController {
           members,
           seasonId: seasonId ? Number(seasonId) : undefined,
           posterUrl: posterUrl || undefined,
+          color,
+          abbr,
         },
         logoUrl,
       );
@@ -87,7 +89,7 @@ class TeamsController {
         error(res, '无效的战队 ID', 400);
         return;
       }
-      const { name, description, logoUrl, posterUrl, memberPositions } = req.body;
+      const { name, description, logoUrl, posterUrl, memberPositions, color, abbr } = req.body;
 
       // Serialize memberPositions to JSON string for members field
       const members = memberPositions
@@ -101,6 +103,8 @@ class TeamsController {
           description,
           members,
           posterUrl: posterUrl || undefined,
+          color,
+          abbr,
         },
         logoUrl,
       );

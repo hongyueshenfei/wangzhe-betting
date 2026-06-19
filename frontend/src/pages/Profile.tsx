@@ -83,7 +83,7 @@ export default function Profile() {
         </Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
           <Box>
-            <Typography variant="body2" sx={{ color: '#6B7394' }}>
+            <Typography variant="body2" sx={{ color: '#8890A8' }}>
               用户名
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: 700, color: '#E8EAF0' }}>
@@ -91,7 +91,7 @@ export default function Profile() {
             </Typography>
           </Box>
           <Box>
-            <Typography variant="body2" sx={{ color: '#6B7394' }}>
+            <Typography variant="body2" sx={{ color: '#8890A8' }}>
               角色
             </Typography>
             <Typography variant="body1" sx={{ color: '#E8EAF0' }}>
@@ -99,13 +99,13 @@ export default function Profile() {
             </Typography>
           </Box>
           <Box>
-            <Typography variant="body2" sx={{ color: '#6B7394' }}>
+            <Typography variant="body2" sx={{ color: '#8890A8' }}>
               余额
             </Typography>
             <CoinDisplay coins={profile.coins} />
           </Box>
           <Box>
-            <Typography variant="body2" sx={{ color: '#6B7394' }}>
+            <Typography variant="body2" sx={{ color: '#8890A8' }}>
               注册时间
             </Typography>
             <Typography variant="body1" sx={{ color: '#E8EAF0' }}>
@@ -120,7 +120,7 @@ export default function Profile() {
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 700, color: '#E8EAF0' }}>
           每日签到
         </Typography>
-        <Typography variant="body2" sx={{ color: '#6B7394', mb: 1.5 }}>
+        <Typography variant="body2" sx={{ color: '#8890A8', mb: 1.5 }}>
           每天签到可获得 5 投注币奖励
         </Typography>
         <Button

@@ -81,7 +81,7 @@ export default function SeasonFormDialog({
           fullWidth
           margin="normal"
           placeholder="如: S1 春季赛"
-          InputLabelProps={{ sx: { color: '#6B7394' } }}
+          InputLabelProps={{ sx: { color: '#8890A8' } }}
           sx={{
             '& .MuiOutlinedInput-root': {
               bgcolor: '#0F1119',
@@ -99,7 +99,7 @@ export default function SeasonFormDialog({
           onChange={(e) => setStartDate(e.target.value)}
           fullWidth
           margin="normal"
-          InputLabelProps={{ shrink: true, sx: { color: '#6B7394' } }}
+          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
           sx={{
             '& .MuiOutlinedInput-root': {
               bgcolor: '#0F1119',
@@ -117,7 +117,7 @@ export default function SeasonFormDialog({
           onChange={(e) => setEndDate(e.target.value)}
           fullWidth
           margin="normal"
-          InputLabelProps={{ shrink: true, sx: { color: '#6B7394' } }}
+          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
           sx={{
             '& .MuiOutlinedInput-root': {
               bgcolor: '#0F1119',
@@ -154,7 +154,7 @@ export default function SeasonFormDialog({
             color: '#0F1119',
             fontWeight: 700,
             '&:hover': { bgcolor: '#B8942E' },
-            '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#6B7394' },
+            '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#8890A8' },
           }}
         >
           {loading ? '提交中...' : mode === 'create' ? '创建' : '保存'}

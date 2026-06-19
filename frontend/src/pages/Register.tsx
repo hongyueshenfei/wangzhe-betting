@@ -77,7 +77,7 @@ export default function Register() {
             {loading ? '注册中...' : '注册'}
           </Button>
         </Box>
-        <Typography variant="body2" sx={{ mt: 2, textAlign: 'center', color: '#6B7394' }}>
+        <Typography variant="body2" sx={{ mt: 2, textAlign: 'center', color: '#8890A8' }}>
           已有账号？{' '}
           <RouterLink to="/login" style={{ color: '#C8A951', textDecoration: 'none' }}>
             去登录

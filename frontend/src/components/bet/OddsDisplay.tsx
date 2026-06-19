@@ -83,7 +83,7 @@ export default function OddsDisplay({
 function OddsRow({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <Typography sx={{ fontSize: { xs: 11, sm: 12 }, color: '#6B7394' }}>{label}</Typography>
+      <Typography sx={{ fontSize: { xs: 11, sm: 12 }, color: '#8890A8' }}>{label}</Typography>
       <Typography sx={{
         fontSize: { xs: 13, sm: 14 }, fontWeight: highlight ? 800 : 600,
         color: highlight ? '#C8A951' : '#E8EAF0',

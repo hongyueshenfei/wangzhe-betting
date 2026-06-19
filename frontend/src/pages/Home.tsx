@@ -112,7 +112,7 @@ export default function Home() {
         }}>
           {activeSeason ? `${activeSeason.name} 火热进行中` : '王者荣耀在线竞猜'}
         </Typography>
-        <Typography sx={{ color: '#6B7394', mb: 3, fontSize: { xs: 13, sm: 14 } }}>
+        <Typography sx={{ color: '#8890A8', mb: 3, fontSize: { xs: 13, sm: 14 } }}>
           {matches.length} 场比赛即将开始 · 参与竞猜赢取丰厚奖励
         </Typography>
 
@@ -132,7 +132,7 @@ export default function Home() {
               minWidth: 75,
             }}>
               <Typography sx={{ fontSize: 22, fontWeight: 800, color: '#C8A951', lineHeight: 1.2 }}>{s.label}</Typography>
-              <Typography sx={{ fontSize: 10, color: '#6B7394' }}>{s.sub}</Typography>
+              <Typography sx={{ fontSize: 10, color: '#8890A8' }}>{s.sub}</Typography>
             </Box>
           ))}
         </Box>
@@ -155,7 +155,7 @@ export default function Home() {
                 '&:hover': canCheckIn
                   ? { background: 'linear-gradient(135deg, #B8942E, #C8A951)', boxShadow: '0 0 20px rgba(200,169,81,0.4)' }
                   : {},
-                '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#6B7394' },
+                '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#8890A8' },
               }}
             >
               {checkinLoading ? (
@@ -198,7 +198,7 @@ export default function Home() {
         sx={{
           mb: 3, '& .MuiTabs-indicator': { backgroundColor: '#C8A951' },
           '& .MuiTab-root': {
-            color: '#6B7394', fontWeight: { xs: 600, sm: 700 },
+            color: '#8890A8', fontWeight: { xs: 600, sm: 700 },
             fontSize: { xs: 13, sm: 14 }, minWidth: 0, flex: 1,
             '&.Mui-selected': { color: '#C8A951' },
           },

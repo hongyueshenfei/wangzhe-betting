@@ -141,7 +141,7 @@ export default function MatchFormDialog({
                 <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 15 }, color: '#E8EAF0' }}>
                   {match.teamA.name}
                 </Typography>
-                <Typography sx={{ fontSize: 11, color: '#6B7394', mt: 0.5 }}>
+                <Typography sx={{ fontSize: 11, color: '#8890A8', mt: 0.5 }}>
                   赔率 {match.oddsA.toFixed(2)}
                 </Typography>
               </Paper>
@@ -179,7 +179,7 @@ export default function MatchFormDialog({
                 <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 15 }, color: '#E8EAF0' }}>
                   {match.teamB.name}
                 </Typography>
-                <Typography sx={{ fontSize: 11, color: '#6B7394', mt: 0.5 }}>
+                <Typography sx={{ fontSize: 11, color: '#8890A8', mt: 0.5 }}>
                   赔率 {match.oddsB.toFixed(2)}
                 </Typography>
               </Paper>
@@ -207,7 +207,7 @@ export default function MatchFormDialog({
                 <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 16 }, color: '#E8EAF0', textAlign: 'center' }}>
                   {match.teamA.name}
                 </Typography>
-                <Typography sx={{ fontSize: 11, color: '#6B7394', mt: 0.5 }}>
+                <Typography sx={{ fontSize: 11, color: '#8890A8', mt: 0.5 }}>
                   赔率 {match.oddsA.toFixed(2)}
                 </Typography>
               </Box>
@@ -221,7 +221,7 @@ export default function MatchFormDialog({
                 <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 16 }, color: '#E8EAF0', textAlign: 'center' }}>
                   {match.teamB.name}
                 </Typography>
-                <Typography sx={{ fontSize: 11, color: '#6B7394', mt: 0.5 }}>
+                <Typography sx={{ fontSize: 11, color: '#8890A8', mt: 0.5 }}>
                   赔率 {match.oddsB.toFixed(2)}
                 </Typography>
               </Box>
@@ -277,7 +277,7 @@ export default function MatchFormDialog({
       </DialogContent>
 
       <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-        <Button onClick={onClose} disabled={loading} sx={{ color: '#6B7394' }}>
+        <Button onClick={onClose} disabled={loading} sx={{ color: '#8890A8' }}>
           取消
         </Button>
         <Button

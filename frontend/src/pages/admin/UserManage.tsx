@@ -245,9 +245,9 @@ export default function UserManage() {
             fullWidth
             helperText="正数 = 增加，负数 = 减少"
             InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
-            FormHelperTextProps={{ sx: { color: '#6B7394' } }}
+            FormHelperTextProps={{ sx: { color: '#8890A8' } }}
             InputProps={{
-              startAdornment: <InputAdornment position="start"><Typography sx={{ color: '#6B7394' }}>💰</Typography></InputAdornment>,
+              startAdornment: <InputAdornment position="start"><Typography sx={{ color: '#8890A8' }}>💰</Typography></InputAdornment>,
             }}
             sx={{
               mb: 2,
@@ -267,7 +267,7 @@ export default function UserManage() {
           />
         </DialogContent>
         <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-          <Button onClick={() => setAdjustOpen(false)} disabled={adjustLoading} sx={{ color: '#6B7394' }}>取消</Button>
+          <Button onClick={() => setAdjustOpen(false)} disabled={adjustLoading} sx={{ color: '#8890A8' }}>取消</Button>
           <Button variant="contained" onClick={handleAdjustCoins}
             disabled={adjustLoading || adjustAmount === 0}
             sx={{ bgcolor: '#C8A951', color: '#0F1119', fontWeight: 700, '&:hover': { bgcolor: '#B8942E' } }}>
@@ -294,7 +294,7 @@ export default function UserManage() {
             fullWidth
             helperText="至少 6 位字符"
             InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
-            FormHelperTextProps={{ sx: { color: '#6B7394' } }}
+            FormHelperTextProps={{ sx: { color: '#8890A8' } }}
             inputProps={{ minLength: 6, style: { color: '#E8EAF0', fontSize: 15 } }}
             sx={{
               '& .MuiOutlinedInput-root': { bgcolor: '#0F1119', '& fieldset': { borderColor: '#2A2F45' } },
@@ -302,7 +302,7 @@ export default function UserManage() {
           />
         </DialogContent>
         <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-          <Button onClick={() => setPwdOpen(false)} disabled={pwdLoading} sx={{ color: '#6B7394' }}>取消</Button>
+          <Button onClick={() => setPwdOpen(false)} disabled={pwdLoading} sx={{ color: '#8890A8' }}>取消</Button>
           <Button variant="contained" onClick={handleResetPwd}
             disabled={pwdLoading || pwdNew.length < 6}
             sx={{ bgcolor: '#D32F2F', color: '#FFF', fontWeight: 700, '&:hover': { bgcolor: '#B71C1C' } }}>
@@ -340,7 +340,7 @@ export default function UserManage() {
           />
         </DialogContent>
         <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-          <Button onClick={() => setBatchOpen(false)} disabled={batchLoading} sx={{ color: '#6B7394' }}>取消</Button>
+          <Button onClick={() => setBatchOpen(false)} disabled={batchLoading} sx={{ color: '#8890A8' }}>取消</Button>
           <Button variant="contained" onClick={handleBatchCreate}
             disabled={batchLoading || !batchText.trim()}
             sx={{ bgcolor: '#C8A951', color: '#0F1119', fontWeight: 700, '&:hover': { bgcolor: '#B8942E' } }}>

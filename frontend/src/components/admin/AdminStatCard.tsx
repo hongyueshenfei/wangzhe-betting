@@ -41,14 +41,14 @@ export default function AdminStatCard({
           </Box>
         )}
         <Box>
-          <Typography variant="body2" sx={{ color: '#6B7394' }}>
+          <Typography variant="body2" sx={{ color: '#8890A8' }}>
             {title}
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700, color: color }}>
             {value}
           </Typography>
           {subtitle && (
-            <Typography variant="caption" sx={{ color: '#6B7394' }}>
+            <Typography variant="caption" sx={{ color: '#8890A8' }}>
               {subtitle}
             </Typography>
           )}

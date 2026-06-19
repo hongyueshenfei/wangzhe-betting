@@ -21,7 +21,7 @@ export default function TeamRankTable({ teams }: TeamRankTableProps) {
   if (teams.length === 0) {
     return (
       <Box sx={{ py: 4, textAlign: 'center' }}>
-        <Typography sx={{ color: '#6B7394' }}>暂无战队排行数据</Typography>
+        <Typography sx={{ color: '#8890A8' }}>暂无战队排行数据</Typography>
       </Box>
     );
   }
@@ -101,7 +101,7 @@ export default function TeamRankTable({ teams }: TeamRankTableProps) {
               <TableCell align="right">{team.losses}</TableCell>
               <TableCell align="right">{team.forfeits}</TableCell>
               <TableCell>
-                <Typography variant="caption" sx={{ color: '#6B7394' }}>
+                <Typography variant="caption" sx={{ color: '#8890A8' }}>
                   {team.season.name}
                 </Typography>
               </TableCell>
