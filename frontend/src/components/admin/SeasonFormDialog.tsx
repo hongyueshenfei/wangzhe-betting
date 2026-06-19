@@ -62,18 +62,11 @@ export default function SeasonFormDialog({
       onClose={onClose}
       maxWidth="sm"
       fullWidth
-      PaperProps={{
-        sx: {
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-          color: '#E8EAF0',
-        },
-      }}
     >
       <DialogTitle sx={{ color: '#E8EAF0', fontWeight: 700 }}>
         {mode === 'create' ? '创建赛季' : '编辑赛季'}
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ pt: 3 }}>
         <TextField
           label="赛季名称"
           value={name}
@@ -81,16 +74,6 @@ export default function SeasonFormDialog({
           fullWidth
           margin="normal"
           placeholder="如: S1 春季赛"
-          InputLabelProps={{ sx: { color: '#8890A8' } }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              bgcolor: '#0F1119',
-              '& fieldset': { borderColor: '#2A2F45' },
-              '&:hover fieldset': { borderColor: '#3A3F58' },
-              '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-            },
-            input: { color: '#E8EAF0' },
-          }}
         />
         <TextField
           label="开始日期"
@@ -99,16 +82,8 @@ export default function SeasonFormDialog({
           onChange={(e) => setStartDate(e.target.value)}
           fullWidth
           margin="normal"
-          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              bgcolor: '#0F1119',
-              '& fieldset': { borderColor: '#2A2F45' },
-              '&:hover fieldset': { borderColor: '#3A3F58' },
-              '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-            },
-            input: { color: '#E8EAF0', colorScheme: 'dark' },
-          }}
+          InputLabelProps={{ shrink: true }}
+          inputProps={{ style: { colorScheme: 'dark' } }}
         />
         <TextField
           label="结束日期"
@@ -117,46 +92,16 @@ export default function SeasonFormDialog({
           onChange={(e) => setEndDate(e.target.value)}
           fullWidth
           margin="normal"
-          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              bgcolor: '#0F1119',
-              '& fieldset': { borderColor: '#2A2F45' },
-              '&:hover fieldset': { borderColor: '#3A3F58' },
-              '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-            },
-            input: { color: '#E8EAF0', colorScheme: 'dark' },
-          }}
+          InputLabelProps={{ shrink: true }}
+          inputProps={{ style: { colorScheme: 'dark' } }}
         />
-        {error && (
-          <Alert
-            severity="error"
-            sx={{ mt: 1, bgcolor: 'rgba(211,47,47,0.1)', color: '#EF5350' }}
-          >
-            {error}
-          </Alert>
-        )}
+        {error && <Alert severity="error" sx={{ mt: 1 }}>{error}</Alert>}
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2 }}>
-        <Button
-          onClick={onClose}
-          disabled={loading}
-          sx={{ color: '#8890A8' }}
-        >
+        <Button onClick={onClose} disabled={loading} color="inherit">
           取消
         </Button>
-        <Button
-          onClick={handleSubmit}
-          variant="contained"
-          disabled={loading}
-          sx={{
-            bgcolor: '#C8A951',
-            color: '#0F1119',
-            fontWeight: 700,
-            '&:hover': { bgcolor: '#B8942E' },
-            '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#8890A8' },
-          }}
-        >
+        <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading}>
           {loading ? '提交中...' : mode === 'create' ? '创建' : '保存'}
         </Button>
       </DialogActions>

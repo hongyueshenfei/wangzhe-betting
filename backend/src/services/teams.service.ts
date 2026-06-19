@@ -32,7 +32,7 @@ export class TeamsService {
         where,
         skip,
         take: limit,
-        orderBy: [{ wins: 'desc' }, { name: 'asc' }],
+        orderBy: { id: 'asc' },
         include: {
           season: { select: { id: true, name: true } },
         },
