@@ -4,15 +4,48 @@ import {
   Box,
   Typography,
   Button,
-  Paper,
   Chip,
   Grid,
 } from '@mui/material';
 import { getTeamById } from '../api/teams';
 import TeamRecord from '../components/team/TeamRecord';
+import SectionCard from '../components/common/SectionCard';
 import Loading from '../components/common/Loading';
 import ErrorAlert from '../components/common/ErrorAlert';
 import type { TeamDetail } from '../types';
+
+const POSITION_LABELS: Record<string, string> = {
+  topLaner: '上单', jungler: '打野', midLaner: '中单',
+  adc: '射手', support: '游走', substitute: '替补',
+};
+
+/** 解析 members JSON 并渲染为成员标签网格 */
+function MemberGrid({ membersStr }: { membersStr: string }) {
+  let members: Record<string, string> = {};
+  try { members = JSON.parse(membersStr); } catch { return <span>{membersStr}</span>; }
+
+  const entries = Object.entries(members).filter(([, v]) => v);
+  if (entries.length === 0) return null;
+
+  return (
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.8 }}>
+      {entries.map(([key, value]) => (
+        <Box key={key} sx={{
+          display: 'flex', alignItems: 'center', gap: 0.5,
+          px: 1.2, py: 0.4, borderRadius: 1,
+          bgcolor: '#0F1119', border: '1px solid #242840',
+        }}>
+          <Typography sx={{ fontSize: 11, color: '#8890A8', fontWeight: 600 }}>
+            {POSITION_LABELS[key] || key}
+          </Typography>
+          <Typography sx={{ fontSize: 12, color: '#E8EAF0', fontWeight: 600 }}>
+            {value}
+          </Typography>
+        </Box>
+      ))}
+    </Box>
+  );
+}
 
 export default function TeamDetail() {
   const { id } = useParams<{ id: string }>();
@@ -53,14 +86,7 @@ export default function TeamDetail() {
       </Button>
 
       {/* Header */}
-      <Paper
-        sx={{
-          p: 3,
-          mb: 3,
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
+      <SectionCard>
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={3} sx={{ textAlign: 'center' }}>
             <Box
@@ -115,13 +141,16 @@ export default function TeamDetail() {
               </Typography>
             )}
             {team.members && (
-              <Typography variant="body2" sx={{ color: '#8890A8' }}>
-                队员: {team.members}
-              </Typography>
+              <Box sx={{ mt: 1.5 }}>
+                <Typography variant="body2" sx={{ color: '#8890A8', mb: 0.8, fontWeight: 600 }}>
+                  队员阵容
+                </Typography>
+                <MemberGrid membersStr={team.members} />
+              </Box>
             )}
           </Grid>
         </Grid>
-      </Paper>
+      </SectionCard>
 
       {/* Recent matches */}
       <Typography variant="h5" sx={{ fontWeight: 700, color: '#E8EAF0', mb: 2 }}>
