@@ -4,11 +4,13 @@ import { getUserLeaderboard, getTeamLeaderboard } from '../api/leaderboard';
 import UserRankTable from '../components/leaderboard/UserRankTable';
 import TeamRankTable from '../components/leaderboard/TeamRankTable';
 import PageHeader from '../components/common/PageHeader';
-import Loading from '../components/common/Loading';
+import { RankListSkeleton } from '../components/common/Skeletons';
 import ErrorAlert from '../components/common/ErrorAlert';
+import { useAuth } from '../hooks/useAuth';
 import type { UserRank, TeamRank } from '../types';
 
 export default function Leaderboard() {
+  const { user } = useAuth();
   const [tab, setTab] = useState(0);
   const [users, setUsers] = useState<UserRank[]>([]);
   const [teams, setTeams] = useState<TeamRank[]>([]);
@@ -35,34 +37,23 @@ export default function Leaderboard() {
     load();
   }, []);
 
+  const currentUserId = user?.id;
+
   return (
     <Box>
       <PageHeader title="排行榜" subtitle="查看投注高手和最强战队" />
 
-      <Tabs
-        value={tab}
-        onChange={(_, v) => setTab(v)}
-        sx={{
-          mb: 2,
-          '& .MuiTabs-indicator': { bgcolor: '#C8A951' },
-          '& .MuiTab-root': {
-            color: '#6B7394',
-            fontWeight: 700,
-            '&.Mui-selected': { color: '#C8A951' },
-          },
-        }}
-        TabIndicatorProps={{ sx: { bgcolor: '#C8A951' } }}
-      >
+      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>
         <Tab label="投注英雄榜" />
         <Tab label="战队排行榜" />
       </Tabs>
 
       {loading ? (
-        <Loading />
+        <RankListSkeleton rows={8} />
       ) : error ? (
         <ErrorAlert message={error} />
       ) : tab === 0 ? (
-        <UserRankTable users={users} />
+        <UserRankTable users={users} currentUserId={currentUserId} />
       ) : (
         <TeamRankTable teams={teams} />
       )}

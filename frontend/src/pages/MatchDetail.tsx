@@ -5,7 +5,6 @@ import {
   Typography,
   Button,
   Chip,
-  Paper,
   Alert,
 } from '@mui/material';
 import { getMatchById } from '../api/matches';
@@ -14,6 +13,7 @@ import OddsDisplay from '../components/bet/OddsDisplay';
 import BracketView from '../components/match/BracketView';
 import Loading from '../components/common/Loading';
 import ErrorAlert from '../components/common/ErrorAlert';
+import SectionCard, { SplitPanel, CardTitle } from '../components/common/SectionCard';
 import { formatDateTime, getMatchStatusLabel, getMatchStatusColor } from '../utils/format';
 import { useAuth } from '../hooks/useAuth';
 import type { MatchDetail, MatchItem } from '../types';
@@ -64,15 +64,7 @@ export default function MatchDetail() {
       </Button>
 
       {/* Match header */}
-      <Paper
-        sx={{
-          p: 3,
-          mb: 3,
-          textAlign: 'center',
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
+      <SectionCard sx={{ textAlign: 'center' }}>
         <Box sx={{ mb: 1.5 }}>
           <Chip
             label={getMatchStatusLabel(match.status)}
@@ -172,19 +164,11 @@ export default function MatchDetail() {
             </Typography>
           </Box>
         </Box>
-      </Paper>
+      </SectionCard>
 
       {/* Team Members */}
-      <Paper
-        sx={{
-          p: { xs: 2, sm: 3 }, mb: 3,
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
-        <Typography sx={{ mb: 2, fontWeight: 700, color: '#E8EAF0', fontSize: { xs: 14, sm: 16 } }}>
-          👥 队员阵容
-        </Typography>
+      <SectionCard>
+        <CardTitle>👥 队员阵容</CardTitle>
         <Box sx={{
           display: 'flex', gap: { xs: 1, sm: 3 },
           flexDirection: { xs: 'column', sm: 'row' },
@@ -235,20 +219,11 @@ export default function MatchDetail() {
             );
           })}
         </Box>
-      </Paper>
+      </SectionCard>
 
       {/* Odds + Bet */}
-      <Paper
-        sx={{
-          p: 3,
-          mb: 3,
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
-        <Typography variant="h6" sx={{ mb: 2, fontWeight: 700, color: '#E8EAF0' }}>
-          赔率信息
-        </Typography>
+      <SectionCard>
+        <CardTitle>赔率信息</CardTitle>
         <OddsDisplay
           teamAName={match.teamA.name}
           teamBName={match.teamB.name}
@@ -333,7 +308,7 @@ export default function MatchDetail() {
             请先登录后再投注
           </Alert>
         )}
-      </Paper>
+      </SectionCard>
 
       {/* Bet count */}
       <Typography variant="body2" sx={{ color: '#6B7394', mb: 3 }}>

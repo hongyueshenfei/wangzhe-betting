@@ -7,7 +7,7 @@ import { useAuth } from '../hooks/useAuth';
 import MatchList from '../components/match/MatchList';
 import MatchFilter from '../components/match/MatchFilter';
 import PageHeader from '../components/common/PageHeader';
-import Loading from '../components/common/Loading';
+import { MatchCardSkeleton } from '../components/common/Skeletons';
 import ErrorAlert from '../components/common/ErrorAlert';
 import type { MatchItem, Season } from '../types';
 
@@ -80,22 +80,7 @@ export default function Matches() {
       <PageHeader title="比赛列表" subtitle="查看所有比赛，为你支持的战队投注" />
 
       {/* Season selector */}
-      <FormControl
-        size="small"
-        sx={{
-          minWidth: { xs: '100%', sm: 200 },
-          mb: 2,
-          '& .MuiInputLabel-root': { color: '#6B7394' },
-          '& .MuiOutlinedInput-root': {
-            bgcolor: '#0F1119',
-            color: '#E8EAF0',
-            '& fieldset': { borderColor: '#2A2F45' },
-            '&:hover fieldset': { borderColor: '#3A3F58' },
-            '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-          },
-          '& .MuiSvgIcon-root': { color: '#8890A8' },
-        }}
-      >
+      <FormControl size="small" sx={{ minWidth: { xs: '100%', sm: 200 }, mb: 2 }}>
         <InputLabel>赛季</InputLabel>
         <Select
           value={seasonId}
@@ -107,8 +92,6 @@ export default function Matches() {
           MenuProps={{
             PaperProps: {
               sx: {
-                bgcolor: '#1A1D2E',
-                border: '1px solid #1E2340',
                 '& .MuiMenuItem-root': { color: '#E8EAF0', '&:hover': { bgcolor: '#242840' } },
               },
             },
@@ -131,7 +114,9 @@ export default function Matches() {
       />
 
       {loading ? (
-        <Loading />
+        <Box sx={{ mt: 2 }}>
+          {Array.from({ length: 4 }).map((_, i) => <MatchCardSkeleton key={i} />)}
+        </Box>
       ) : error ? (
         <ErrorAlert message={error} onRetry={loadMatches} />
       ) : (
@@ -144,10 +129,6 @@ export default function Matches() {
                 page={page}
                 onChange={(_, p) => setPage(p)}
                 color="primary"
-                sx={{
-                  '& .MuiPaginationItem-root': { color: '#8890A8' },
-                  '& .Mui-selected': { bgcolor: '#C8A951', color: '#0F1119' },
-                }}
               />
             </Box>
           )}

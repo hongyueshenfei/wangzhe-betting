@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Box, TextField, Button, Typography, Alert, Paper } from '@mui/material';
+import { Box, TextField, Button, Typography, Alert } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { register } from '../api/auth';
 import { useAuth } from '../hooks/useAuth';
+import SectionCard from '../components/common/SectionCard';
 import PageHeader from '../components/common/PageHeader';
 
 export default function Register() {
@@ -45,99 +46,34 @@ export default function Register() {
   return (
     <Box sx={{ maxWidth: 448, mx: 'auto', mt: 8 }}>
       <PageHeader title="注册" subtitle="创建新账号，初始获得 100 投注币" />
-      <Paper
-        sx={{
-          p: 3,
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
+      <SectionCard>
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
             label="用户名"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            fullWidth
-            margin="normal"
             autoFocus
             helperText="2-20 个字符"
-            InputLabelProps={{ sx: { color: '#6B7394' } }}
-            FormHelperTextProps={{ sx: { color: '#6B7394' } }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                bgcolor: '#0F1119',
-                '& fieldset': { borderColor: '#2A2F45' },
-                '&:hover fieldset': { borderColor: '#3A3F58' },
-                '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-              },
-              input: { color: '#E8EAF0' },
-            }}
           />
-          <TextField
-            label="密码"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            fullWidth
-            margin="normal"
-            helperText="至少 6 位"
-            InputLabelProps={{ sx: { color: '#6B7394' } }}
-            FormHelperTextProps={{ sx: { color: '#6B7394' } }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                bgcolor: '#0F1119',
-                '& fieldset': { borderColor: '#2A2F45' },
-                '&:hover fieldset': { borderColor: '#3A3F58' },
-                '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-              },
-              input: { color: '#E8EAF0' },
-            }}
-          />
-          <TextField
-            label="确认密码"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{ sx: { color: '#6B7394' } }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                bgcolor: '#0F1119',
-                '& fieldset': { borderColor: '#2A2F45' },
-                '&:hover fieldset': { borderColor: '#3A3F58' },
-                '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-              },
-              input: { color: '#E8EAF0' },
-            }}
-          />
-          {error && (
-            <Alert
-              severity="error"
-              sx={{
-                mt: 2,
-                bgcolor: 'rgba(211,47,47,0.1)',
-                color: '#EF5350',
-              }}
-            >
-              {error}
-            </Alert>
-          )}
-          <Button
-            type="submit"
-            fullWidth
-            size="large"
-            disabled={loading}
-            sx={{
-              mt: 3,
-              py: 1.5,
-              bgcolor: '#C8A951',
-              color: '#0F1119',
-              fontWeight: 700,
-              '&:hover': { bgcolor: '#B8942E' },
-              '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#6B7394' },
-            }}
-          >
+          <Box sx={{ mt: 1.5 }}>
+            <TextField
+              label="密码"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              helperText="至少 6 位"
+            />
+          </Box>
+          <Box sx={{ mt: 1.5 }}>
+            <TextField
+              label="确认密码"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </Box>
+          {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}
+          <Button type="submit" variant="contained" color="primary" fullWidth size="large" disabled={loading} sx={{ mt: 3 }}>
             {loading ? '注册中...' : '注册'}
           </Button>
         </Box>
@@ -147,7 +83,7 @@ export default function Register() {
             去登录
           </RouterLink>
         </Typography>
-      </Paper>
+      </SectionCard>
     </Box>
   );
 }

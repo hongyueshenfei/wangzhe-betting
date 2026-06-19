@@ -10,7 +10,6 @@ import {
   Button,
   Alert,
   Typography,
-  Paper,
 } from '@mui/material';
 import { AccessTime, Pool } from '@mui/icons-material';
 import { getSeasonList } from '../api/seasons';
@@ -19,8 +18,10 @@ import { placeChampionBet, getChampionPoolStats, getMyChampionBets } from '../ap
 import { useAuth } from '../hooks/useAuth';
 import ChampionBetCard from '../components/bet/ChampionBetCard';
 import PageHeader from '../components/common/PageHeader';
+import SectionCard from '../components/common/SectionCard';
 import Loading from '../components/common/Loading';
 import ErrorAlert from '../components/common/ErrorAlert';
+import EmptyState from '../components/common/EmptyState';
 import { formatDateTime } from '../utils/format';
 import type { Season, Team, ChampionPoolStats } from '../api/bets';
 
@@ -174,11 +175,9 @@ export default function ChampionBet() {
 
           {/* Pool stats banner */}
           {poolStats && (
-            <Paper sx={{
-              bgcolor: '#1A1D2E', borderRadius: 2, p: { xs: 2, sm: 2.5 }, mb: 3,
-              border: '1px solid #242840',
+            <SectionCard sx={{
               display: 'flex', flexWrap: 'wrap', gap: { xs: 1.5, sm: 3 },
-              justifyContent: 'center',
+              justifyContent: 'center', border: '1px solid #242840',
             }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Pool sx={{ color: '#C8A951', fontSize: 20 }} />
@@ -205,11 +204,11 @@ export default function ChampionBet() {
                   <Typography sx={{ fontSize: 12, color: '#EF5350', fontWeight: 600 }}>投注已截止</Typography>
                 </Box>
               )}
-            </Paper>
+            </SectionCard>
           )}
 
           {teams.length === 0 ? (
-            <Box sx={{ textAlign: 'center', py: 8, color: '#6B7394', fontSize: 14 }}>该赛季暂无战队</Box>
+            <EmptyState title="该赛季暂无战队" />
           ) : (
             <Grid container spacing={3}>
               {teams.map((team) => (
@@ -229,8 +228,7 @@ export default function ChampionBet() {
       )}
 
       {/* Bet confirmation dialog */}
-      <Dialog open={betModalOpen} onClose={() => setBetModalOpen(false)} maxWidth="xs" fullWidth
-        PaperProps={{ sx: { bgcolor: '#1A1D2E', color: '#E8EAF0', border: '1px solid #242840', borderRadius: 3 } }}>
+      <Dialog open={betModalOpen} onClose={() => setBetModalOpen(false)} maxWidth="xs" fullWidth>
         <DialogTitle sx={{ fontWeight: 700, borderBottom: '1px solid #1E2340', pb: 2, fontSize: 16 }}>
           冠军投注
         </DialogTitle>
@@ -253,33 +251,18 @@ export default function ChampionBet() {
                 type="number"
                 value={betAmount}
                 onChange={(e) => setBetAmount(Math.max(1, Number(e.target.value)))}
-                fullWidth
                 helperText={user ? `可用余额: ${user.coins} 币` : ''}
-                InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
-                FormHelperTextProps={{ sx: { color: '#6B7394' } }}
-                inputProps={{ min: 1, style: { color: '#E8EAF0', fontSize: 15 } }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    bgcolor: '#0F1119',
-                    '& fieldset': { borderColor: '#2A2F45' },
-                    '&:hover fieldset': { borderColor: '#C8A951' },
-                  },
-                }}
+                inputProps={{ min: 1 }}
               />
             </>
           )}
-          {betError && (
-            <Alert severity="error" sx={{ mt: 2, bgcolor: 'rgba(211,47,47,0.08)', color: '#EF5350' }}>
-              {betError}
-            </Alert>
-          )}
+          {betError && <Alert severity="error" sx={{ mt: 2 }}>{betError}</Alert>}
         </DialogContent>
         <DialogActions sx={{ borderTop: '1px solid #1E2340', px: 3, py: 2 }}>
-          <Button onClick={() => setBetModalOpen(false)} disabled={betLoading} sx={{ color: '#6B7394' }}>
+          <Button onClick={() => setBetModalOpen(false)} disabled={betLoading} color="inherit">
             取消
           </Button>
-          <Button variant="contained" onClick={handleConfirmBet} disabled={betLoading}
-            sx={{ bgcolor: '#C8A951', color: '#0F1119', fontWeight: 700, '&:hover': { bgcolor: '#B8942E' } }}>
+          <Button variant="contained" color="primary" onClick={handleConfirmBet} disabled={betLoading}>
             {betLoading ? '投注中...' : '确认投注'}
           </Button>
         </DialogActions>

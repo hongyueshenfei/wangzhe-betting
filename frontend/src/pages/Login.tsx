@@ -39,51 +39,21 @@ export default function Login() {
         <Typography variant="body2" sx={{ color: '#6B7394', mt: 0.5 }}>登录你的账户参与竞猜</Typography>
       </Box>
 
-      {error && (
-        <Alert severity="error" sx={{ mb: 2, bgcolor: 'rgba(211,47,47,0.1)', color: '#EF5350' }}>
-          {error}
-        </Alert>
-      )}
+      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
       <Box component="form" onSubmit={handleSubmit} sx={{
         bgcolor: '#1A1D2E', borderRadius: 3, p: 3, border: '1px solid #1E2340',
       }}>
         <TextField
           label="用户名" value={username} onChange={e => setUsername(e.target.value)}
-          fullWidth margin="normal" autoFocus
-          InputLabelProps={{ sx: { color: '#6B7394' } }}
-          FormHelperTextProps={{ sx: { color: '#6B7394' } }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              bgcolor: '#0F1119', borderRadius: 1.5,
-              '& fieldset': { borderColor: '#2A2F45' },
-              '&:hover fieldset': { borderColor: '#3A3F58' },
-              '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-            },
-            input: { color: '#E8EAF0' },
-          }}
+          autoFocus
         />
-        <TextField
-          label="密码" type="password" value={password} onChange={e => setPassword(e.target.value)}
-          fullWidth margin="normal"
-          InputLabelProps={{ sx: { color: '#6B7394' } }}
-          FormHelperTextProps={{ sx: { color: '#6B7394' } }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              bgcolor: '#0F1119', borderRadius: 1.5,
-              '& fieldset': { borderColor: '#2A2F45' },
-              '&:hover fieldset': { borderColor: '#3A3F58' },
-              '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-            },
-            input: { color: '#E8EAF0' },
-          }}
-        />
-        <Button type="submit" fullWidth disabled={loading} sx={{
-          mt: 3, py: 1.5, borderRadius: 1.5, fontWeight: 700, fontSize: 15,
-          background: 'linear-gradient(135deg, #C8A951, #B8942E)', color: '#0F1119',
-          '&:hover': { background: 'linear-gradient(135deg, #B8942E, #A07D1A)' },
-          '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#6B7394' },
-        }}>
+        <Box sx={{ mt: 1.5 }}>
+          <TextField
+            label="密码" type="password" value={password} onChange={e => setPassword(e.target.value)}
+          />
+        </Box>
+        <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading} sx={{ mt: 3, py: 1.5 }}>
           {loading ? '登录中...' : '登 录'}
         </Button>
         <Box sx={{ textAlign: 'center', mt: 2 }}>

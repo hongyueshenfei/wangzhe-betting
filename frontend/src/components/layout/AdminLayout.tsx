@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText,
-  Toolbar, Typography, AppBar, IconButton,
+  Toolbar, Typography, AppBar, IconButton, Fade,
 } from '@mui/material';
 import { Dashboard, Event, Groups, SportsEsports, AttachMoney, People, Menu, Close } from '@mui/icons-material';
 import { useAuth } from '../../hooks/useAuth';
@@ -64,6 +64,7 @@ function AdminSidebar({ onNavigate }: { onNavigate: () => void }) {
 export default function AdminLayout() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -131,7 +132,9 @@ export default function AdminLayout() {
       <Box component="main" sx={{ flex: 1, overflow: 'auto', bgcolor: '#0B0E17' }}>
         <Toolbar />
         <Box sx={{ p: { xs: 1.5, sm: 2, md: 3 } }}>
-          <Outlet />
+          <Fade key={location.pathname} in={true} timeout={250}>
+            <Box><Outlet /></Box>
+          </Fade>
         </Box>
       </Box>
     </Box>

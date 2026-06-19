@@ -5,7 +5,7 @@ import { getMyTransactions, type CoinTransaction } from '../api/transactions';
 import BetHistory from '../components/bet/BetHistory';
 import TransactionList from '../components/bet/TransactionList';
 import PageHeader from '../components/common/PageHeader';
-import Loading from '../components/common/Loading';
+import { SectionSkeleton } from '../components/common/Skeletons';
 import ErrorAlert from '../components/common/ErrorAlert';
 import type { Bet, ChampionBet } from '../types';
 
@@ -74,29 +74,14 @@ export default function MyBets() {
     <Box>
       <PageHeader title="我的投注" subtitle="查看你的投注历史和金币流水" />
 
-      <Tabs
-        value={tab}
-        onChange={(_, v) => { setTab(v); setPage(1); }}
-        variant="scrollable"
-        scrollButtons="auto"
-        sx={{
-          mb: 2,
-          '& .MuiTabs-indicator': { bgcolor: '#C8A951' },
-          '& .MuiTab-root': {
-            color: '#6B7394',
-            fontWeight: 700,
-            fontSize: { xs: 12, sm: 14 }, minWidth: 'auto', px: { xs: 1.5, sm: 2.5 },
-            '&.Mui-selected': { color: '#C8A951' },
-          },
-        }}
-      >
+      <Tabs value={tab} onChange={(_, v) => { setTab(v); setPage(1); }} variant="scrollable" scrollButtons="auto" sx={{ mb: 2 }}>
         <Tab label="比赛投注" />
         <Tab label="冠军投注" />
         <Tab label="💰 流水" />
       </Tabs>
 
       {loading ? (
-        <Loading />
+        <SectionSkeleton lines={5} />
       ) : error ? (
         <ErrorAlert message={error} onRetry={loadBets} />
       ) : tab === 0 ? (
@@ -104,16 +89,7 @@ export default function MyBets() {
           <BetHistory bets={bets} />
           {total > limit && (
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-              <Pagination
-                count={Math.ceil(total / limit)}
-                page={page}
-                onChange={(_, p) => setPage(p)}
-                color="primary"
-                sx={{
-                  '& .MuiPaginationItem-root': { color: '#8890A8' },
-                  '& .Mui-selected': { bgcolor: '#C8A951', color: '#0F1119' },
-                }}
-              />
+              <Pagination count={Math.ceil(total / limit)} page={page} onChange={(_, p) => setPage(p)} color="primary" />
             </Box>
           )}
         </>
@@ -122,16 +98,7 @@ export default function MyBets() {
           <BetHistory bets={championBetDisplay} />
           {total > limit && (
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-              <Pagination
-                count={Math.ceil(total / limit)}
-                page={page}
-                onChange={(_, p) => setPage(p)}
-                color="primary"
-                sx={{
-                  '& .MuiPaginationItem-root': { color: '#8890A8' },
-                  '& .Mui-selected': { bgcolor: '#C8A951', color: '#0F1119' },
-                }}
-              />
+              <Pagination count={Math.ceil(total / limit)} page={page} onChange={(_, p) => setPage(p)} color="primary" />
             </Box>
           )}
         </>
@@ -140,16 +107,7 @@ export default function MyBets() {
           <TransactionList transactions={transactions} />
           {total > limit && (
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-              <Pagination
-                count={Math.ceil(total / limit)}
-                page={page}
-                onChange={(_, p) => setPage(p)}
-                color="primary"
-                sx={{
-                  '& .MuiPaginationItem-root': { color: '#8890A8' },
-                  '& .Mui-selected': { bgcolor: '#C8A951', color: '#0F1119' },
-                }}
-              />
+              <Pagination count={Math.ceil(total / limit)} page={page} onChange={(_, p) => setPage(p)} color="primary" />
             </Box>
           )}
         </>

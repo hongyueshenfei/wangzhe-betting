@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Box, Paper, Typography, Button, TextField, Alert, Divider } from '@mui/material';
+import { Box, Typography, Button, TextField, Alert } from '@mui/material';
 import { getMe } from '../api/auth';
 import { checkin } from '../api/checkin';
 import { useAuth } from '../hooks/useAuth';
 import CoinDisplay from '../components/common/CoinDisplay';
 import PageHeader from '../components/common/PageHeader';
+import SectionCard from '../components/common/SectionCard';
 import Loading from '../components/common/Loading';
 import type { User } from '../types';
 
@@ -58,8 +59,6 @@ export default function Profile() {
       return;
     }
     try {
-      const { updateMyProfile } = await import('../api/auth');
-      // Use the users service via a direct API call
       const client = (await import('../api/client')).default;
       await client.put('/users/me', { password: newPassword });
       setPassMsg('密码修改成功');
@@ -78,14 +77,7 @@ export default function Profile() {
       <PageHeader title="个人信息" />
 
       {/* Basic info */}
-      <Paper
-        sx={{
-          p: 3,
-          mb: 3,
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
+      <SectionCard>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 700, color: '#E8EAF0' }}>
           基本信息
         </Typography>
@@ -121,17 +113,10 @@ export default function Profile() {
             </Typography>
           </Box>
         </Box>
-      </Paper>
+      </SectionCard>
 
       {/* Check-in */}
-      <Paper
-        sx={{
-          p: 3,
-          mb: 3,
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
+      <SectionCard>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 700, color: '#E8EAF0' }}>
           每日签到
         </Typography>
@@ -140,15 +125,9 @@ export default function Profile() {
         </Typography>
         <Button
           variant="contained"
+          color="primary"
           onClick={handleCheckin}
           disabled={checkinLoading || !profile.canCheckIn}
-          sx={{
-            bgcolor: '#C8A951',
-            color: '#0F1119',
-            fontWeight: 700,
-            '&:hover': { bgcolor: '#B8942E' },
-            '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#6B7394' },
-          }}
         >
           {checkinLoading
             ? '签到中...'
@@ -159,61 +138,31 @@ export default function Profile() {
         {checkinMsg && (
           <Alert
             severity={checkinMsg.includes('成功') ? 'success' : 'warning'}
-            sx={{
-              mt: 1.5,
-              bgcolor: checkinMsg.includes('成功')
-                ? 'rgba(46,125,50,0.1)'
-                : 'rgba(237,108,2,0.1)',
-              color: checkinMsg.includes('成功') ? '#66BB6A' : '#FFA726',
-            }}
+            sx={{ mt: 1.5 }}
           >
             {checkinMsg}
           </Alert>
         )}
-      </Paper>
+      </SectionCard>
 
       {/* Change password */}
-      <Paper
-        sx={{
-          p: 3,
-          bgcolor: '#1A1D2E',
-          border: '1px solid #1E2340',
-        }}
-      >
+      <SectionCard noMargin>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 700, color: '#E8EAF0' }}>
           修改密码
         </Typography>
         <TextField
           label="新密码"
           type="password"
+          size="small"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          fullWidth
-          margin="normal"
+          sx={{ mb: 1.5 }}
           helperText="至少 6 位"
-          InputLabelProps={{ sx: { color: '#6B7394' } }}
-          FormHelperTextProps={{ sx: { color: '#6B7394' } }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              bgcolor: '#0F1119',
-              '& fieldset': { borderColor: '#2A2F45' },
-              '&:hover fieldset': { borderColor: '#3A3F58' },
-              '&.Mui-focused fieldset': { borderColor: '#C8A951' },
-            },
-            input: { color: '#E8EAF0' },
-          }}
         />
         <Button
           variant="contained"
+          color="primary"
           onClick={handleChangePassword}
-          sx={{
-            mt: 1.5,
-            bgcolor: '#C8A951',
-            color: '#0F1119',
-            fontWeight: 700,
-            '&:hover': { bgcolor: '#B8942E' },
-            '&.Mui-disabled': { bgcolor: '#2A2F45', color: '#6B7394' },
-          }}
           disabled={!newPassword}
         >
           修改密码
@@ -221,18 +170,12 @@ export default function Profile() {
         {passMsg && (
           <Alert
             severity={passMsg.includes('成功') ? 'success' : 'error'}
-            sx={{
-              mt: 1.5,
-              bgcolor: passMsg.includes('成功')
-                ? 'rgba(46,125,50,0.1)'
-                : 'rgba(211,47,47,0.1)',
-              color: passMsg.includes('成功') ? '#66BB6A' : '#EF5350',
-            }}
+            sx={{ mt: 1.5 }}
           >
             {passMsg}
           </Alert>
         )}
-      </Paper>
+      </SectionCard>
     </Box>
   );
 }
