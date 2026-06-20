@@ -99,10 +99,10 @@ export interface MatchItem {
   groupName: string | null;
   round: string | null;
   matchOrder: number | null;
-  teamAId: number;
-  teamBId: number;
-  teamA: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null };
-  teamB: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null };
+  teamAId: number | null;
+  teamBId: number | null;
+  teamA: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null } | null;
+  teamB: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null } | null;
   teamAScore: number | null;
   teamBScore: number | null;
   matchTime: string;
@@ -122,8 +122,8 @@ export interface MatchItem {
 }
 
 export interface MatchDetail extends MatchItem {
-  teamA: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null; wins: number; losses: number; members: string | null };
-  teamB: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null; wins: number; losses: number; members: string | null };
+  teamA: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null; wins: number; losses: number; members: string | null } | null;
+  teamB: { id: number; name: string; logoUrl: string | null; abbr?: string | null; color?: string | null; wins: number; losses: number; members: string | null } | null;
   _count?: { bets: number };
   userBet?: { amount: number; pickedTeamId: number; oddsAtBet: number } | null;
 }
@@ -143,8 +143,8 @@ export interface Bet {
   settledAt: string | null;
   match?: {
     id: number;
-    teamA: { id: number; name: string; logoUrl: string | null };
-    teamB: { id: number; name: string; logoUrl: string | null };
+    teamA: { id: number; name: string; logoUrl: string | null } | null;
+    teamB: { id: number; name: string; logoUrl: string | null } | null;
     season: { id: number; name: string };
   };
 }

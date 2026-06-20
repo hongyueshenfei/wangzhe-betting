@@ -30,8 +30,13 @@ export default function MatchCard({ match, hasBet }: MatchCardProps) {
   const navigate = useNavigate();
   const st = STATUS_CONFIG[match.status] || { bg: 'rgba(255,255,255,0.05)', fg: '#8890A8' };
 
-  const colorA = getTeamColor(match.teamA);
-  const colorB = getTeamColor(match.teamB);
+  const colorA = match.teamA ? getTeamColor(match.teamA) : null;
+  const colorB = match.teamB ? getTeamColor(match.teamB) : null;
+
+  // Skip rendering if teams are TBD (placeholder knockout matches)
+  if (!match.teamA || !match.teamB) {
+    return null;
+  }
 
   return (
     <Box

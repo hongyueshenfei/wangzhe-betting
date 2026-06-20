@@ -49,6 +49,21 @@ export default function MatchDetail() {
   if (error) return <ErrorAlert message={error} onRetry={loadMatch} />;
   if (!match) return <ErrorAlert message="比赛不存在" />;
 
+  // Placeholder knockout match (teams TBD — previous round not finished)
+  if (!match.teamA || !match.teamB) {
+    return (
+      <Box sx={{ maxWidth: '56rem', mx: 'auto' }}>
+        <Button onClick={() => navigate(-1)} sx={{ mb: 2, color: '#8890A8', fontSize: 14 }}>← 返回</Button>
+        <SectionCard sx={{ textAlign: 'center', py: 6 }}>
+          <Typography sx={{ color: '#8890A8', mb: 1, fontSize: 16 }}>⏳ 待定对阵</Typography>
+          <Typography sx={{ color: '#6B7394', fontSize: 13 }}>
+            该场次需前一轮比赛结束后才能确定对阵队伍
+          </Typography>
+        </SectionCard>
+      </Box>
+    );
+  }
+
   const canBet =
     isAuthenticated &&
     (match.status === 'UPCOMING' || match.status === 'LIVE');

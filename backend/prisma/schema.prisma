@@ -126,8 +126,8 @@ model Match {
   groupName    String?
   round        String?
   matchOrder   Int?
-  teamAId      Int
-  teamBId      Int
+  teamAId      Int?
+  teamBId      Int?
   teamAScore   Int?
   teamBScore   Int?
   matchTime    DateTime
@@ -144,8 +144,8 @@ model Match {
   updatedAt    DateTime    @updatedAt
 
   season      Season @relation(fields: [seasonId], references: [id])
-  teamA       Team   @relation("MatchTeamA", fields: [teamAId], references: [id])
-  teamB       Team   @relation("MatchTeamB", fields: [teamBId], references: [id])
+  teamA       Team?  @relation("MatchTeamA", fields: [teamAId], references: [id])
+  teamB       Team?  @relation("MatchTeamB", fields: [teamBId], references: [id])
   forfeitTeam Team?  @relation("MatchForfeit", fields: [forfeitTeamId], references: [id])
   winnerTeam  Team?  @relation("MatchWinner", fields: [winnerTeamId], references: [id])
   bets        Bet[]

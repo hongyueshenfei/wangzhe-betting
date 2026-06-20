@@ -281,61 +281,79 @@ export class MatchesService {
 
     const createdMatches: any[] = [];
 
+    // ── Generate all knockout rounds in one pass ────────────────────
+    // We track how many matches per round, then derive subsequent rounds
+    // For TBD slots (waiting for previous round results), teamAId/teamBId = null
+
+    let matchDayOffset = 8;
+
     for (let ri = 0; ri < knockoutRounds.length; ri++) {
       const round = knockoutRounds[ri];
       const roundName = round.name || `第${ri + 1}轮淘汰赛`;
 
-      // If first knockout round and cross-group seeding (2+ groups or single group with 4+ teams)
-      if (ri === 0 && round.seedingRule === 'cross_group' && currentRoundTeams.length >= 4) {
-        // Sort teams into group buckets
-        const groupA = currentRoundTeams.filter(() => true).slice(0, promotionCount);
-        const groupB = currentRoundTeams.filter(() => true).slice(promotionCount, promotionCount * 2);
+      if (ri === 0 && currentRoundTeams.length >= 2) {
+        // ── First knockout round: determined teams ──
+        let matchPairs: Array<{ teamAId: number | null; teamBId: number | null }> = [];
 
-        // Sort within groups by standing
-        groupA.sort((a, b) => b.points - a.points);
-        groupB.sort((a, b) => b.points - a.points);
+        if (round.seedingRule === 'cross_group' && groupNames.length >= 2 && currentRoundTeams.length >= 4) {
+          // Cross-group seeding: A1 vs B2, B1 vs A2
+          const groupA = [...currentRoundTeams].slice(0, promotionCount).sort((a, b) => b.points - a.points);
+          const groupB = [...currentRoundTeams].slice(promotionCount).sort((a, b) => b.points - a.points);
+          matchPairs = [
+            { teamAId: groupA[0].teamId, teamBId: groupB[1]?.teamId ?? null },
+            { teamAId: groupB[0].teamId, teamBId: groupA[1]?.teamId ?? null },
+          ];
+        } else {
+          // General pairing: rank by points, pair 1v2, 3v4, etc.
+          const sorted = [...currentRoundTeams].sort((a, b) => b.points - a.points || b.wins - a.wins);
+          for (let i = 0; i < sorted.length; i += 2) {
+            matchPairs.push({
+              teamAId: sorted[i]?.teamId ?? null,
+              teamBId: sorted[i + 1]?.teamId ?? null,
+            });
+          }
+        }
 
-        const matchPairs = [
-          { teamAId: groupA[0].teamId, teamBId: groupB[1].teamId },
-          { teamAId: groupB[0].teamId, teamBId: groupA[1].teamId },
-        ];
-
+        // Create this round's matches
         const newMatches = await prisma.$transaction(
           matchPairs.map((p, i) =>
             prisma.match.create({
               data: {
                 seasonId, stage: MatchStage.KNOCKOUT, round: roundName,
                 matchOrder: i, teamAId: p.teamAId, teamBId: p.teamBId,
-                matchTime: new Date(Date.now() + (8 + ri * 2 + i) * 24 * 60 * 60 * 1000),
+                matchTime: new Date(Date.now() + matchDayOffset * 24 * 60 * 60 * 1000),
               },
             }),
           ),
         );
         createdMatches.push(...newMatches);
-      } else if (currentRoundTeams.length >= 2) {
-        // General pairing: sort by standing and pair sequentially (1st vs 2nd, 3rd vs 4th, etc.)
-        currentRoundTeams.sort((a, b) => b.points - a.points || b.wins - a.wins);
-        const matchPairs = [];
-        for (let i = 0; i < currentRoundTeams.length; i += 2) {
-          if (i + 1 < currentRoundTeams.length) {
-            matchPairs.push({ teamAId: currentRoundTeams[i].teamId, teamBId: currentRoundTeams[i + 1].teamId });
-          }
-        }
 
-        if (matchPairs.length > 0) {
-          const newMatches = await prisma.$transaction(
-            matchPairs.map((p, i) =>
-              prisma.match.create({
-                data: {
-                  seasonId, stage: MatchStage.KNOCKOUT, round: roundName,
-                  matchOrder: i, teamAId: p.teamAId, teamBId: p.teamBId,
-                  matchTime: new Date(Date.now() + (8 + ri * 2 + i) * 24 * 60 * 60 * 1000),
-                },
-              }),
-            ),
+        // ── Subsequent rounds: generate placeholders ──
+        // Each round halves the number of teams, so N matches → N/2 matches next round
+        matchDayOffset += 2;
+        let advancingTeams = matchPairs.length; // number of current round matches = winners advancing
+        for (let sri = ri + 1; sri < knockoutRounds.length; sri++) {
+          const subRound = knockoutRounds[sri];
+          const subRoundName = subRound.name || `第${sri + 1}轮淘汰赛`;
+          const nextMatchCount = Math.floor(advancingTeams / 2);
+          if (nextMatchCount < 1) break;
+
+          const placeholderMatches = Array.from({ length: nextMatchCount }).map((_, i) =>
+            prisma.match.create({
+              data: {
+                seasonId, stage: MatchStage.KNOCKOUT, round: subRoundName,
+                matchOrder: i, teamAId: null, teamBId: null, // TBD — filled after previous round
+                matchTime: new Date(Date.now() + matchDayOffset * 24 * 60 * 60 * 1000),
+              },
+            }),
           );
-          createdMatches.push(...newMatches);
+
+          const subMatches = await prisma.$transaction(placeholderMatches);
+          createdMatches.push(...subMatches);
+          matchDayOffset += 2;
+          advancingTeams = nextMatchCount;
         }
+        break; // All rounds generated — exit the outer loop
       }
     }
 
@@ -343,7 +361,11 @@ export class MatchesService {
       throw new AppError('无法生成淘汰赛对阵，请检查小组赛结果和赛制配置', 400);
     }
 
-    return { created: createdMatches.length, matches: createdMatches, rounds: knockoutRounds };
+    // Update knockoutRounds to reflect actual rounds created (for return value)
+    const actualRoundNames = [...new Set(createdMatches.map((m: any) => m.round))];
+    const actualRounds = knockoutRounds.filter((r: any) => actualRoundNames.includes(r.name));
+
+    return { created: createdMatches.length, matches: createdMatches, rounds: actualRounds };
   }
 
   /**
