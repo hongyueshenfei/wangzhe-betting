@@ -28,12 +28,12 @@ export default function TeamCard({ team }: TeamCardProps) {
       {/* Champion Badge */}
       {isChampion && (
         <Box sx={{
-          position: 'absolute', top: -10, right: -8,
+          position: 'absolute', top: -12, right: -10,
           bgcolor: '#C8A951', color: '#0F1119',
-          borderRadius: 1, px: 1, py: 0.3,
-          fontSize: 11, fontWeight: 800,
-          display: 'flex', alignItems: 'center', gap: 0.3,
-          boxShadow: '0 2px 8px rgba(200,169,81,0.4)',
+          borderRadius: 1.5, px: 1.5, py: 0.5,
+          fontSize: 14, fontWeight: 800,
+          display: 'flex', alignItems: 'center', gap: 0.5,
+          boxShadow: '0 3px 12px rgba(200,169,81,0.5)',
           zIndex: 1,
         }}>
           👑 冠军

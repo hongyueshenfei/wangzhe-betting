@@ -89,11 +89,11 @@ export default function TeamDetail() {
       <SectionCard sx={{ position: 'relative', overflow: 'visible' }}>
         {team.season?.championTeamId === team.id && (
           <Box sx={{
-            position: 'absolute', top: -10, right: { xs: 8, md: 16 },
-            bgcolor: '#C8A951', color: '#0F1119', borderRadius: 1,
-            px: 1.5, py: 0.5, fontSize: { xs: 12, sm: 14 }, fontWeight: 800,
-            display: 'flex', alignItems: 'center', gap: 0.5, zIndex: 1,
-            boxShadow: '0 2px 10px rgba(200,169,81,0.5)',
+            position: 'absolute', top: -12, right: { xs: 8, md: 20 },
+            bgcolor: '#C8A951', color: '#0F1119', borderRadius: 1.5,
+            px: 2, py: 0.6, fontSize: { xs: 13, sm: 15 }, fontWeight: 800,
+            display: 'flex', alignItems: 'center', gap: 0.6, zIndex: 1,
+            boxShadow: '0 3px 12px rgba(200,169,81,0.5)',
           }}>
             👑 赛季冠军
           </Box>

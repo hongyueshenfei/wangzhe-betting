@@ -77,9 +77,6 @@ export default function UserRankTable({ users, currentUserId }: UserRankTablePro
                   </Typography>
                 )}
               </Box>
-              <Typography sx={{ fontSize: 10, color: '#8890A8' }}>
-                {user.winCount}胜{user.lossCount}负 · 胜率 {user.winRate}%
-              </Typography>
             </Box>
 
             {/* Coins */}
