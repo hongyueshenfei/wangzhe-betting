@@ -66,7 +66,7 @@ export interface Team {
   members: string | null;        // JSON string of TeamMemberPositions
   posterUrl: string | null;      // 战队海报
   seasonId: number | null;
-  season?: { id: number; name: string; status?: SeasonStatus };
+  season?: { id: number; name: string; status?: SeasonStatus; championTeamId?: number | null };
   wins: number;
   losses: number;
   forfeits: number;

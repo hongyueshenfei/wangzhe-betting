@@ -86,7 +86,18 @@ export default function TeamDetail() {
       </Button>
 
       {/* Header */}
-      <SectionCard>
+      <SectionCard sx={{ position: 'relative', overflow: 'visible' }}>
+        {team.season?.championTeamId === team.id && (
+          <Box sx={{
+            position: 'absolute', top: -10, right: { xs: 8, md: 16 },
+            bgcolor: '#C8A951', color: '#0F1119', borderRadius: 1,
+            px: 1.5, py: 0.5, fontSize: { xs: 12, sm: 14 }, fontWeight: 800,
+            display: 'flex', alignItems: 'center', gap: 0.5, zIndex: 1,
+            boxShadow: '0 2px 10px rgba(200,169,81,0.5)',
+          }}>
+            👑 赛季冠军
+          </Box>
+        )}
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={3} sx={{ textAlign: 'center' }}>
             <Box
@@ -100,7 +111,7 @@ export default function TeamDetail() {
                 justifyContent: 'center',
                 mx: 'auto',
                 overflow: 'hidden',
-                border: '2px solid #1E2340',
+                border: team.season?.championTeamId === team.id ? '2.5px solid #C8A951' : '2px solid #1E2340',
               }}
             >
               {team.logoUrl ? (
@@ -115,7 +126,7 @@ export default function TeamDetail() {
             </Box>
           </Grid>
           <Grid item xs={12} md={9}>
-            <Typography variant="h4" sx={{ fontWeight: 700, color: '#E8EAF0', mb: 1 }}>
+            <Typography variant="h4" sx={{ fontWeight: 700, color: team.season?.championTeamId === team.id ? '#C8A951' : '#E8EAF0', mb: 1 }}>
               {team.name}
             </Typography>
             {team.season && (

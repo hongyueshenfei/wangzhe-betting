@@ -34,7 +34,7 @@ export class TeamsService {
         take: limit,
         orderBy: { id: 'asc' },
         include: {
-          season: { select: { id: true, name: true } },
+          season: { select: { id: true, name: true, championTeamId: true } },
         },
       }),
       prisma.team.count({ where }),
