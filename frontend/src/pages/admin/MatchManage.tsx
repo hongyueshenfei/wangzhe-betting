@@ -199,7 +199,7 @@ export default function MatchManage() {
                 <TableCell sx={{ color: '#CBD0E0', fontSize: 12, borderColor: '#151827' }}>
                   {m.stage === 'GROUP' ? m.groupName : m.round}
                 </TableCell>
-                <TableCell sx={{ color: '#E8EAF0', fontSize: 13, fontWeight: 600, borderColor: '#151827' }}>{m.teamA.name}</TableCell>
+                <TableCell sx={{ color: '#E8EAF0', fontSize: 13, fontWeight: 600, borderColor: '#151827' }}>{m.teamA?.name || '待定'}</TableCell>
                 <TableCell sx={{ fontWeight: 800, fontSize: 14, borderColor: '#151827' }}>
                   {m.status === 'COMPLETED' ? (
                     <Typography sx={{ color: m.winnerTeamId === m.teamAId ? '#4CAF50' : '#E8EAF0', fontWeight: 800 }}>
@@ -209,7 +209,7 @@ export default function MatchManage() {
                     <Typography sx={{ color: '#C8A951', fontWeight: 800 }}>— : —</Typography>
                   )}
                 </TableCell>
-                <TableCell sx={{ color: '#E8EAF0', fontSize: 13, fontWeight: 600, borderColor: '#151827' }}>{m.teamB.name}</TableCell>
+                <TableCell sx={{ color: '#E8EAF0', fontSize: 13, fontWeight: 600, borderColor: '#151827' }}>{m.teamB?.name || '待定'}</TableCell>
                 <TableCell sx={{ borderColor: '#151827' }}>
                   <Typography
                     onClick={() => openTimeEdit(m)}
@@ -233,8 +233,8 @@ export default function MatchManage() {
                   <Box sx={{ display: 'flex', gap: 0.5 }}>
                     <Tooltip title="录入赛果"><IconButton size="small" onClick={() => setEditingMatchId(m.id)} sx={{ color: '#C8A951' }}><Edit fontSize="small" /></IconButton></Tooltip>
                     {m.status !== 'COMPLETED' && m.status !== 'FORFEITED' && (
-                      <Tooltip title={`标记 ${m.teamA.name} 弃赛`}>
-                        <IconButton size="small" onClick={() => { setConfirmAction({ type: 'forfeit', matchId: m.id, teamId: m.teamAId }); setConfirmOpen(true); }} sx={{ color: '#EF5350', '&:hover': { bgcolor: 'rgba(239,83,80,0.1)' } }}>
+                      <Tooltip title={`标记 ${m.teamA?.name || '?'} 弃赛`}>
+                        <IconButton size="small" onClick={() => { if (!m.teamAId) return; setConfirmAction({ type: 'forfeit', matchId: m.id, teamId: m.teamAId }); setConfirmOpen(true); }} sx={{ color: '#EF5350', '&:hover': { bgcolor: 'rgba(239,83,80,0.1)' } }}>
                           <RemoveCircle fontSize="small" />
                         </IconButton>
                       </Tooltip>

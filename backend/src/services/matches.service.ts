@@ -478,6 +478,33 @@ export class MatchesService {
       });
     }
 
+    // ── Auto-propagate winner to next knockout round ──
+    if (winnerTeamId && match.stage === 'KNOCKOUT' && match.matchOrder !== null) {
+      await this.propagateKnockoutWinner(match.seasonId, match.round || '', match.matchOrder, winnerTeamId);
+    }
+
+    // ── Auto-settle champion if final match completed ──
+    // Detect "final" by checking if no other knockout matches remain UPCOMING in downstream rounds
+    if (winnerTeamId && match.stage === 'KNOCKOUT') {
+      const downstreamUpcoming = await prisma.match.count({
+        where: {
+          seasonId: match.seasonId,
+          stage: 'KNOCKOUT',
+          status: 'UPCOMING',
+        },
+      });
+      if (downstreamUpcoming === 0) {
+        // All knockout matches are done — auto-settle champion
+        const { seasonsService } = await import('./seasons.service');
+        try {
+          await seasonsService.setChampion(match.seasonId, winnerTeamId);
+          // Don't throw — settlement is a side effect
+        } catch {
+          // Ignore errors (e.g. already settled)
+        }
+      }
+    }
+
     return { match: updated, settlement: settleResult };
   }
 
@@ -523,6 +550,22 @@ export class MatchesService {
       data: { forfeits: { increment: 1 } },
     });
 
+    // Auto-propagate to next knockout round
+    if (winnerTeamId && match.stage === 'KNOCKOUT' && match.matchOrder !== null) {
+      await this.propagateKnockoutWinner(match.seasonId, match.round || '', match.matchOrder, winnerTeamId);
+    }
+
+    // Auto-settle champion if final knockout match completed
+    if (winnerTeamId && match.stage === 'KNOCKOUT') {
+      const downstreamUpcoming = await prisma.match.count({
+        where: { seasonId: match.seasonId, stage: 'KNOCKOUT', status: 'UPCOMING' },
+      });
+      if (downstreamUpcoming === 0) {
+        const { seasonsService } = await import('./seasons.service');
+        try { await seasonsService.setChampion(match.seasonId, winnerTeamId); } catch {}
+      }
+    }
+
     return { match: updated, refund: refundResult };
   }
 
@@ -542,6 +585,42 @@ export class MatchesService {
     return prisma.match.update({
       where: { id: matchId },
       data: { matchTime },
+    });
+  }
+
+  /**
+   * After a knockout match completes, propagate the winner to the next round's TBD slot.
+   * Rule: matchOrder N in current round feeds into next round match at index floor(N/2).
+   *        Even N → teamA of next match; Odd N → teamB of next match.
+   */
+  private async propagateKnockoutWinner(seasonId: number, currentRound: string, matchOrder: number, winnerTeamId: number) {
+    // Find next round matches (stage=KNOCKOUT, same season, different round name)
+    const allKnockouts = await prisma.match.findMany({
+      where: { seasonId, stage: 'KNOCKOUT' },
+      select: { id: true, round: true, matchOrder: true, teamAId: true, teamBId: true },
+      orderBy: { matchOrder: 'asc' },
+    });
+
+    // Group by round to find which round is next
+    const rounds = [...new Set(allKnockouts.map(m => m.round))].filter(Boolean);
+    const currentIdx = rounds.indexOf(currentRound);
+    if (currentIdx === -1 || currentIdx >= rounds.length - 1) return; // No next round
+
+    const nextRound = rounds[currentIdx + 1];
+    const nextMatchOrder = Math.floor(matchOrder / 2);
+    const isEvenSlot = matchOrder % 2 === 0; // even → teamA, odd → teamB
+    const targetField = isEvenSlot ? 'teamAId' : 'teamBId';
+
+    // Find the target match in the next round
+    const targetMatch = allKnockouts.find(m => m.round === nextRound && m.matchOrder === nextMatchOrder);
+    if (!targetMatch) return;
+
+    // Only update if the slot is still TBD (null)
+    if (targetMatch[targetField] !== null) return;
+
+    await prisma.match.update({
+      where: { id: targetMatch.id },
+      data: { [targetField]: winnerTeamId },
     });
   }
 }
