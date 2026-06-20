@@ -266,10 +266,7 @@ export class MatchesService {
     const groupStandings = this.calculateGroupStandings(groupMatches);
     const groupNames = Array.from(groupStandings.keys()).sort();
 
-    if (groupNames.length < 2) {
-      throw new AppError('至少需要 2 个小组才能生成淘汰赛', 400);
-    }
-
+    // Proceed with only 1 group if enough teams promote (e.g. promotionCount >= 2)
     let currentRoundTeams: Array<{ teamId: number; teamName: string; wins: number; losses: number; points: number }> = [];
 
     // Build initial pool from group standings based on promotion count
@@ -288,7 +285,7 @@ export class MatchesService {
       const round = knockoutRounds[ri];
       const roundName = round.name || `第${ri + 1}轮淘汰赛`;
 
-      // If first knockout round and cross-group seeding
+      // If first knockout round and cross-group seeding (2+ groups or single group with 4+ teams)
       if (ri === 0 && round.seedingRule === 'cross_group' && currentRoundTeams.length >= 4) {
         // Sort teams into group buckets
         const groupA = currentRoundTeams.filter(() => true).slice(0, promotionCount);
@@ -315,8 +312,9 @@ export class MatchesService {
           ),
         );
         createdMatches.push(...newMatches);
-      } else if (ri > 0 && currentRoundTeams.length >= 2) {
-        // Subsequent rounds: auto-pairing by order
+      } else if (currentRoundTeams.length >= 2) {
+        // General pairing: sort by standing and pair sequentially (1st vs 2nd, 3rd vs 4th, etc.)
+        currentRoundTeams.sort((a, b) => b.points - a.points || b.wins - a.wins);
         const matchPairs = [];
         for (let i = 0; i < currentRoundTeams.length; i += 2) {
           if (i + 1 < currentRoundTeams.length) {
