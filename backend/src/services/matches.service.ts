@@ -329,12 +329,14 @@ export class MatchesService {
         createdMatches.push(...newMatches);
 
         // ── Subsequent rounds: generate placeholders ──
-        // Each round halves the number of teams, so N matches → N/2 matches next round
+        // Auto-derive all remaining rounds until the final (1 match)
         matchDayOffset += 2;
-        let advancingTeams = matchPairs.length; // number of current round matches = winners advancing
-        for (let sri = ri + 1; sri < knockoutRounds.length; sri++) {
-          const subRound = knockoutRounds[sri];
-          const subRoundName = subRound.name || `第${sri + 1}轮淘汰赛`;
+        let advancingTeams = matchPairs.length;
+        let sri = ri + 1;
+        while (advancingTeams > 1) {
+          const subRoundName = sri < knockoutRounds.length
+            ? (knockoutRounds[sri].name || `第${sri + 1}轮淘汰赛`)
+            : `第${sri + 1}轮`;
           const nextMatchCount = Math.floor(advancingTeams / 2);
           if (nextMatchCount < 1) break;
 
@@ -342,7 +344,7 @@ export class MatchesService {
             prisma.match.create({
               data: {
                 seasonId, stage: MatchStage.KNOCKOUT, round: subRoundName,
-                matchOrder: i, teamAId: null, teamBId: null, // TBD — filled after previous round
+                matchOrder: i, teamAId: null, teamBId: null,
                 matchTime: new Date(Date.now() + matchDayOffset * 24 * 60 * 60 * 1000),
               },
             }),
@@ -352,6 +354,7 @@ export class MatchesService {
           createdMatches.push(...subMatches);
           matchDayOffset += 2;
           advancingTeams = nextMatchCount;
+          sri++;
         }
         break; // All rounds generated — exit the outer loop
       }
