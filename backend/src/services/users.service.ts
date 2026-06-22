@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import { hashPassword, comparePassword } from '../utils/password';
 import { AppError } from './auth.service';
 import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../utils/constants';
-
-const prisma = new PrismaClient();
+import { prisma } from '../utils/prisma';
 
 export class UsersService {
   /**

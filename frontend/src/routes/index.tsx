@@ -22,7 +22,6 @@ import Dashboard from '../pages/admin/Dashboard';
 import SeasonManage from '../pages/admin/SeasonManage';
 import TeamManage from '../pages/admin/TeamManage';
 import MatchManage from '../pages/admin/MatchManage';
-import OddsManage from '../pages/admin/OddsManage';
 import UserManage from '../pages/admin/UserManage';
 
 /** Route guard: redirects to /login if not authenticated */
@@ -85,7 +84,6 @@ export default function AppRoutes() {
         <Route path="/admin/seasons" element={<SeasonManage />} />
         <Route path="/admin/teams" element={<TeamManage />} />
         <Route path="/admin/matches" element={<MatchManage />} />
-        <Route path="/admin/odds" element={<OddsManage />} />
         <Route path="/admin/users" element={<UserManage />} />
       </Route>
 

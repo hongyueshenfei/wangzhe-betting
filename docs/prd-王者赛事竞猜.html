@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王者赛事竞猜 - 产品需求文档</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #FFFFFF;
+  --text: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --accent: #2563EB;
+  --accent-light: #EFF6FF;
+  --border: #E5E5E5;
+  --code-bg: #F5F5F0;
+  --tip-bg: #F0FDF4;
+  --tip-border: #22C55E;
+  --warn-bg: #FEF2F2;
+  --warn-border: #EF4444;
+  --highlight: #FFFBEB;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'Inter', -apple-system, system-ui, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--bg);
+  padding-bottom: 60px;
+}
+
+/* ==================== Cover ==================== */
+
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 55px;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 25%, #FFFFFF 100%);
+  position: relative;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  width: 80px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+.cover-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  font-family: 'Inter', sans-serif;
+}
+
+.cover h1 {
+  font-size: 36pt;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.cover-subtitle {
+  font-size: 14pt;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+.cover-en {
+  font-family: 'Inter', sans-serif;
+  font-size: 11pt;
+  color: #9CA3AF;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 50px;
+}
+
+.cover-meta {
+  font-size: 9.5pt;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  line-height: 2;
+}
+
+.cover-meta strong { color: var(--text); font-weight: 600; }
+
+.cover-disclaimer {
+  margin-top: 40px;
+  font-size: 8.5pt;
+  color: #9CA3AF;
+  line-height: 1.8;
+}
+
+/* ==================== TOC ==================== */
+
+.toc {
+  padding: 40px 55px 0;
+  page-break-after: always;
+}
+
+.toc h2 {
+  font-size: 22pt;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.toc-sub {
+  font-size: 10pt;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.toc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px dotted #D4D4D4;
+  font-size: 10.5pt;
+}
+
+.toc-item .num {
+  color: var(--accent);
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  margin-right: 10px;
+  min-width: 32px;
+  font-size: 10pt;
+}
+
+.toc-item .title { font-weight: 500; }
+
+.toc-item a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+}
+
+/* ==================== Content ==================== */
+
+.content {
+  padding: 0 55px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h2.section-title {
+  font-size: 20pt;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 45px;
+  margin-bottom: 6px;
+  padding-top: 18px;
+  border-top: 3px solid var(--accent);
+  page-break-after: avoid;
+}
+
+h2.section-title .num {
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  margin-right: 6px;
+  font-size: 18pt;
+}
+
+.section-en {
+  font-family: 'Inter', sans-serif;
+  font-size: 10pt;
+  color: #9CA3AF;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.section-intro {
+  font-size: 11.5pt;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 13pt;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+p { margin-bottom: 10px; }
+
+.tip {
+  background: var(--tip-bg);
+  border-left: 4px solid var(--tip-border);
+  padding: 12px 16px;
+  margin: 14px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+.warning {
+  background: var(--warn-bg);
+  border-left: 4px solid var(--warn-border);
+  padding: 12px 16px;
+  margin: 14px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+.tip::before { content: '提示'; display: block; font-weight: 700; font-size: 8.5pt; color: #16A34A; margin-bottom: 3px; }
+.warning::before { content: '注意'; display: block; font-weight: 700; font-size: 8.5pt; color: #DC2626; margin-bottom: 3px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+
+thead th {
+  background: #F5F5F0;
+  font-weight: 600;
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 2px solid var(--border);
+  font-size: 8.5pt;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+
+ul, ol { margin: 6px 0 12px 22px; }
+li { margin-bottom: 3px; }
+
+strong { font-weight: 600; }
+
+.page-break { page-break-before: always; }
+
+.story {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  padding: 16px;
+  margin: 14px 0;
+  border-radius: 0 8px 8px 0;
+  page-break-inside: avoid;
+}
+
+.story h4 { margin-top: 0; color: var(--accent); }
+
+.diagram {
+  background: #F9FAFB;
+  border: 2px dashed #D1D5DB;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  color: #9CA3AF;
+  font-size: 9pt;
+  page-break-inside: avoid;
+  overflow-x: auto;
+}
+
+.diagram pre {
+  background: transparent;
+  border: none;
+  margin: 0;
+  text-align: left;
+  font-size: 8pt;
+  line-height: 1.4;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9pt;
+  line-height: 1.6;
+  margin: 10px 0 14px;
+  page-break-inside: avoid;
+}
+
+code { font-family: 'JetBrains Mono', monospace; font-size: 9pt; background: var(--code-bg); padding: 1px 4px; border-radius: 3px; }
+pre code { background: none; padding: 0; }
+
+/* ==================== Back page ==================== */
+
+.back-page {
+  page-break-before: always;
+  page-break-inside: avoid;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 55px 40px;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 25%, #FFFFFF 100%);
+  text-align: center;
+  margin-top: 60px;
+}
+
+.back-page-title {
+  font-size: 22pt;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.back-page-subtitle {
+  font-size: 12pt;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+
+.back-page-info {
+  font-size: 9.5pt;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.back-page-info strong { color: var(--text); font-weight: 600; }
+
+.back-page-footer {
+  margin-top: 28px;
+  font-size: 8.5pt;
+  color: #B0B0B0;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover" style="page-break-after: always;">
+  <div class="cover-badge">PRODUCT REQUIREMENTS DOCUMENT</div>
+  <h1>王者赛事竞猜<br><em>产品需求文档</em></h1>
+  <div class="cover-subtitle">基于 React + Express 的全栈竞猜平台，为 KPL 赛事提供完整的赛事投注与管理能力</div>
+  <div class="cover-en">KingPro Betting Platform — Full-Stack Product Specification</div>
+  <div class="cover-meta">
+    <strong>文档版本：</strong>v1.0.0<br>
+    <strong>产品名称：</strong>王者赛事竞猜<br>
+    <strong>产品类型：</strong>Web 应用（PC + 移动端响应式）<br>
+    <strong>文档类型：</strong>精简核心版 PRD<br>
+    <strong>发布时间：</strong>2026-06-22<br>
+    <strong>项目状态：</strong>基础功能已开发完成
+  </div>
+  <div class="cover-disclaimer">
+    本文档为内部使用，仅供项目团队参考。文档覆盖产品概述、信息架构、功能规格、数据模型、技术方案及项目规划等核心章节。
+  </div>
+</div>
+
+<!-- ==================== TOC ==================== -->
+<div class="toc">
+  <h2>目录</h2>
+  <div class="toc-sub">Table of Contents</div>
+
+  <div class="toc-item"><a href="#ch1"><span class="num">01</span><span class="title">项目概述</span></a></div>
+  <div class="toc-item"><a href="#ch2"><span class="num">02</span><span class="title">信息架构</span></a></div>
+  <div class="toc-item"><a href="#ch3"><span class="num">03</span><span class="title">用户流程</span></a></div>
+  <div class="toc-item"><a href="#ch4"><span class="num">04</span><span class="title">需求清单</span></a></div>
+  <div class="toc-item"><a href="#ch5"><span class="num">05</span><span class="title">功能规格</span></a></div>
+  <div class="toc-item"><a href="#ch6"><span class="num">06</span><span class="title">数据模型</span></a></div>
+  <div class="toc-item"><a href="#ch7"><span class="num">07</span><span class="title">技术方案</span></a></div>
+  <div class="toc-item"><a href="#ch8"><span class="num">08</span><span class="title">非功能需求</span></a></div>
+  <div class="toc-item"><a href="#ch9"><span class="num">09</span><span class="title">项目计划</span></a></div>
+</div>
+
+<!-- ==================== CONTENT ==================== -->
+<div class="content">
+
+<!-- ===== Chapter 1: 项目概述 ===== -->
+<h2 class="section-title" id="ch1"><span class="num">01</span> 项目概述</h2>
+<div class="section-en">Project Overview</div>
+<div class="section-intro">产品背景、目标定位、用户画像与产品范围</div>
+
+<h3>1.1 项目背景</h3>
+<p>《王者荣耀》作为国内最热门的移动电竞游戏，KPL（王者荣耀职业联赛）拥有庞大的观众群体。竞猜是电竞赛事生态中重要的互动形式，能够显著提升观众参与度和赛事黏性。</p>
+<p>本项目旨在构建一个轻量级的内部赛事竞猜平台，为团队提供一个便捷的竞猜工具，用户通过虚拟金币对 KPL 赛事进行投注，体验竞猜乐趣。</p>
+
+<h3>1.2 产品目标</h3>
+<ul>
+  <li><strong>核心目标：</strong>提供一个稳定、易用的赛事竞猜平台，支持赛季全生命周期管理</li>
+  <li><strong>用户体验：</strong>简洁直观的操作界面，关键路径（投注、查看结果）不超过 3 步</li>
+  <li><strong>管理效率：</strong>管理员可一站式完成赛季创建、赛程生成、赛果录入等操作</li>
+  <li><strong>内部使用：</strong>无需对外推广，聚焦功能完整性和稳定性</li>
+</ul>
+
+<h3>1.3 用户画像</h3>
+<table>
+  <thead>
+    <tr><th>用户类型</th><th>角色</th><th>核心需求</th><th>使用频次</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>普通玩家</td><td>BETTOR</td>
+      <td>每日签到、查看比赛、投注、查看结果和排行榜</td>
+      <td>每日 1-3 次</td>
+    </tr>
+    <tr>
+      <td>管理员</td><td>ADMIN</td>
+      <td>赛季管理、战队管理、赛程生成、赛果录入、用户管理</td>
+      <td>赛季期间按需操作</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>1.4 产品范围</h3>
+<table>
+  <thead>
+    <tr><th>范围</th><th>包含</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>功能范围</strong></td>
+      <td>用户认证、赛季管理、战队管理、比赛管理、赛程生成、投注（单场+冠军）、动态赔率、自动结算、弃赛退款、排行榜、签到、管理后台</td>
+    </tr>
+    <tr>
+      <td><strong>非功能范围</strong></td>
+      <td>响应式 Web 界面、JWT 认证、数据持久化、CI 门禁</td>
+    </tr>
+    <tr>
+      <td><strong>明确不包含</strong></td>
+      <td>移动端 App、社交分享、支付系统、实时直播集成、多语言</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="tip">该平台为内部工具，不涉及真实货币交易，所有金币为虚拟积分。</div>
+
+<!-- ===== Chapter 2: 信息架构 ===== -->
+<h2 class="section-title" id="ch2"><span class="num">02</span> 信息架构</h2>
+<div class="section-en">Information Architecture</div>
+<div class="section-intro">产品结构、页面层级与导航设计</div>
+
+<h3>2.1 产品结构图</h3>
+
+<div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│                    王者赛事竞猜 平台结构                            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌──────────────────────────────────────────────────────┐       │
+│  │  「公开区域」无需登录                                    │       │
+│  │  首页 │ 比赛列表 │ 比赛详情 │ 战队列表 │ 战队详情         │       │
+│  │  排行榜 │ 登录 │ 注册                                  │       │
+│  └──────────────────────────────────────────────────────┘       │
+│                              │                                    │
+│               ┌──────────────┴──────────────┐                    │
+│               ▼                              ▼                    │
+│  ┌────────────────────────┐  ┌──────────────────────────┐       │
+│  │  「用户区」需登录          │  │  「管理区」管理员            │       │
+│  │  个人信息 │ 我的投注      │  │  数据看板 │ 赛季管理        │       │
+│  │  冠军投注 │ 金币流水      │  │  战队管理 │ 比赛管理        │       │
+│  └────────────────────────┘  │  赔率管理 │ 用户管理        │       │
+│                               └──────────────────────────┘       │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<h3>2.2 页面层级</h3>
+
+<h4>公开页面（无需登录）</h4>
+<table>
+  <thead>
+    <tr><th>页面</th><th>路由</th><th>核心内容</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>首页</td><td><code>/</code></td><td>进行中的比赛预告、排行榜预览、赛季概览</td></tr>
+    <tr><td>比赛列表</td><td><code>/matches</code></td><td>全部比赛列表，支持按赛季/阶段/状态筛选</td></tr>
+    <tr><td>比赛详情</td><td><code>/matches/:id</code></td><td>对阵信息、赔率、投注按钮（需登录）</td></tr>
+    <tr><td>战队列表</td><td><code>/teams</code></td><td>参赛战队一览，支持按赛季筛选</td></tr>
+    <tr><td>战队详情</td><td><code>/teams/:id</code></td><td>战队信息、战绩、选手列表</td></tr>
+    <tr><td>排行榜</td><td><code>/leaderboard</code></td><td>用户排行榜与战队排行榜</td></tr>
+    <tr><td>登录 / 注册</td><td><code>/login</code> / <code>/register</code></td><td>用户认证</td></tr>
+  </tbody>
+</table>
+
+<h4>用户页面（需登录）</h4>
+<table>
+  <thead>
+    <tr><th>页面</th><th>路由</th><th>核心内容</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>个人信息</td><td><code>/profile</code></td><td>用户信息、金币余额、签到入口</td></tr>
+    <tr><td>我的投注</td><td><code>/my-bets</code></td><td>投注记录，支持按状态/赛季筛选</td></tr>
+    <tr><td>冠军投注</td><td><code>/champion-bet</code></td><td>赛季冠军投注</td></tr>
+    <tr><td>金币流水</td><td>嵌入用户区</td><td>交易流水明细</td></tr>
+  </tbody>
+</table>
+
+<h4>管理页面（仅管理员）</h4>
+<table>
+  <thead>
+    <tr><th>页面</th><th>路由</th><th>核心内容</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>数据看板</td><td><code>/admin</code></td><td>平台统计概览：用户数、投注总额、比赛数量</td></tr>
+    <tr><td>赛季管理</td><td><code>/admin/seasons</code></td><td>赛季 CRUD、状态管理、设置冠军</td></tr>
+    <tr><td>战队管理</td><td><code>/admin/teams</code></td><td>战队 CRUD、Logo 上传</td></tr>
+    <tr><td>比赛管理</td><td><code>/admin/matches</code></td><td>比赛管理、赛程生成、赛果录入、弃赛处理</td></tr>
+    <tr><td>赔率管理</td><td><code>/admin/odds</code></td><td>查看/手动调整比赛赔率</td></tr>
+    <tr><td>用户管理</td><td><code>/admin/users</code></td><td>用户列表、封禁/解封、金币调整、密码重置</td></tr>
+  </tbody>
+</table>
+
+<h3>2.3 导航设计</h3>
+<ul>
+  <li><strong>公共导航栏：</strong>首页 | 比赛 | 战队 | 排行榜 | 登录/注册</li>
+  <li><strong>用户导航栏：</strong>个人信息 | 我的投注 | 冠军投注 | 退出</li>
+  <li><strong>管理员侧边栏：</strong>数据看板 | 赛季 | 战队 | 比赛 | 赔率 | 用户</li>
+  <li><strong>金币余额：</strong>全局显示在导航栏右上角，用户登录后可见</li>
+</ul>
+
+<div class="tip">管理后台采用独立布局（AdminLayout），与公共/用户区域完全分离，权限不足时自动跳转。</div>
+
+<!-- ===== Chapter 3: 用户流程 ===== -->
+<h2 class="section-title" id="ch3"><span class="num">03</span> 用户流程</h2>
+<div class="section-en">User Flows</div>
+<div class="section-intro">核心业务流程与关键交互路径</div>
+
+<h3>3.1 赛季生命周期</h3>
+<div class="diagram">
+<pre>
+  ┌────────────┐    管理员创建     ┌──────────┐    管理员激活     ┌──────────┐
+  │  UPCOMING  │ ───────────────→ │  ACTIVE  │ ───────────────→ │ COMPLETED │
+  │  （即将开始）│                   │  （进行中）│                    │  （已结束）  │
+  └────────────┘                   └──────────┘                    └──────────┘
+       │                               │                               │
+       │ 管理员设置赛季信息              │ 管理员创建战队、                   │ 管理员设置冠军 →
+       │ 起止时间、赛制配置              │ 生成赛程、录入赛果                 │ 触发冠军投注结算
+                                       │ 用户投注、每日签到
+</pre>
+</div>
+
+<h3>3.2 投注流程</h3>
+<div class="diagram">
+<pre>
+用户浏览比赛列表
+       │
+       ▼
+选择比赛 → 查看详情页
+       │
+       ▼
+选择支持战队 + 输入投注金额
+       │
+       ▼
+┌──→ 系统校验 ──────────────┐
+│  ✓ 比赛状态为 UPCOMING/LIVE│
+│  ✓ 用户余额 ≥ 投注金额    │   ── 失败 ──→ 返回错误提示
+│  ✓ 未对该比赛投注过       │
+│  ✓ 投注金额 ≥ 1           │
+└──────────────────────────┘
+       │ 通过
+       ▼
+扣减用户金币 → 创建投注记录 → 更新比赛投注池 → 重新计算赔率
+       │
+       ▼
+投注成功，返回更新后的赔率
+</pre>
+</div>
+
+<h3>3.3 结算流程</h3>
+<div class="diagram">
+<pre>
+管理员录入比赛结果（设置胜者）
+       │
+       ▼
+┌───────────────────────────────────┐
+│        Settlement Engine          │
+│  (Prisma 事务保证一致性)          │
+├───────────────────────────────────┤
+│  1. 查询该比赛所有 PENDING 投注    │
+│  2. 遍历每笔投注：                  │
+│     ├─ 猜中 → 状态 = WON           │
+│     │         派发 amount × odds   │
+│     ├─ 猜错 → 状态 = LOST           │
+│     └─ 弃赛 → 状态 = REFUNDED       │
+│            全额退款                 │
+│  3. 更新战队胜负场统计              │
+│  4. 淘汰赛：自动传播胜者至下一轮     │
+└───────────────────────────────────┘
+       │
+       ▼
+确认结算完成
+</pre>
+</div>
+
+<h3>3.4 淘汰赛晋级传播</h3>
+<div class="diagram">
+<pre>
+Round of 8          Quarter-Final        Semi-Final          Final
+  Match 1 ────────→  Winner 1
+  Match 2 ────────→           ────────→  Winner 1/2
+  Match 3 ────────→  Winner 3               │
+  Match 4 ────────→           ────────→           ────────→  Champion
+  Match 5 ────────→  Winner 5               │
+  Match 6 ────────→           ────────→  Winner 5/6
+  Match 7 ────────→  Winner 7
+  Match 8 ────────→
+
+每场比赛结束后，胜者自动填充到下一轮的对应位置。
+若下一轮位置已满（两队都确定），则该轮比赛自动变为 UPCOMING 状态。
+</pre>
+</div>
+
+<h3>3.5 每日签到流程</h3>
+<div class="diagram">
+<pre>
+用户点击签到
+       │
+       ▼
+校验是否已签到（检查 lastCheckInDate）
+       │
+  ┌────┴────┐
+  │ 已签到   │ 已签到 → 提示"今日已签到"
+  │ 未签到   │
+  └────┬────┘
+       ▼ 未签到
+发放 5 金币 → 更新 lastCheckInDate → 记录流水 → 签到成功
+</pre>
+</div>
+
+<!-- ===== Chapter 4: 需求清单 ===== -->
+<h2 class="section-title" id="ch4"><span class="num">04</span> 需求清单</h2>
+<div class="section-en">Requirements Checklist</div>
+<div class="section-intro">全平台功能清单、优先级与实现状态</div>
+
+<h3>4.1 功能清单总览</h3>
+<table>
+  <thead>
+    <tr><th>模块</th><th>功能</th><th>优先级</th><th>角色</th><th>状态</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="3">认证</td><td>用户注册</td><td>P0</td><td>公开</td><td>✅ 已完成</td></tr>
+    <tr><td>用户登录（JWT）</td><td>P0</td><td>公开</td><td>✅ 已完成</td></tr>
+    <tr><td>获取当前用户信息</td><td>P0</td><td>登录</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="2">签到</td><td>每日签到</td><td>P0</td><td>登录</td><td>✅ 已完成</td></tr>
+    <tr><td>签到状态校验（防重复）</td><td>P0</td><td>登录</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="3">用户</td><td>个人信息查看/更新</td><td>P1</td><td>登录</td><td>✅ 已完成</td></tr>
+    <tr><td>用户公开信息查看</td><td>P1</td><td>公开</td><td>✅ 已完成</td></tr>
+    <tr><td>金币流水记录</td><td>P0</td><td>登录</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="4">赛季</td><td>赛季 CRUD</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>赛季列表/详情查看</td><td>P0</td><td>公开</td><td>✅ 已完成</td></tr>
+    <tr><td>赛季状态管理</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>设置赛季冠军（触发结算）</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="3">战队</td><td>战队 CRUD</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>战队列表/详情查看</td><td>P0</td><td>公开</td><td>✅ 已完成</td></tr>
+    <tr><td>Logo / 海报上传</td><td>P1</td><td>管理员</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="6">比赛</td><td>比赛 CRUD</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>小组赛程自动生成</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>淘汰赛程自动生成</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>比赛结果录入</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>弃赛处理（全额退款）</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>淘汰赛晋级自动传播</td><td>P1</td><td>自动</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="4">投注</td><td>单场比赛投注</td><td>P0</td><td>登录</td><td>✅ 已完成</td></tr>
+    <tr><td>冠军投注</td><td>P0</td><td>登录</td><td>✅ 已完成</td></tr>
+    <tr><td>我的投注记录</td><td>P0</td><td>登录</td><td>✅ 已完成</td></tr>
+    <tr><td>冠军投注池统计</td><td>P1</td><td>公开</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="2">赔率</td><td>动态赔率计算</td><td>P0</td><td>自动</td><td>✅ 已完成</td></tr>
+    <tr><td>管理员手动调整赔率</td><td>P1</td><td>管理员</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="3">排行榜</td><td>用户排行榜（按盈利/胜率）</td><td>P0</td><td>公开</td><td>✅ 已完成</td></tr>
+    <tr><td>战队排行榜（按战绩）</td><td>P0</td><td>公开</td><td>✅ 已完成</td></tr>
+    <tr><td>支持赛季筛选</td><td>P1</td><td>公开</td><td>✅ 已完成</td></tr>
+
+    <tr><td rowspan="5">管理后台</td><td>数据看板统计</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>用户列表 + 搜索</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>封禁/解封用户</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>用户金币调整</td><td>P0</td><td>管理员</td><td>✅ 已完成</td></tr>
+    <tr><td>密码重置</td><td>P1</td><td>管理员</td><td>✅ 已完成</td></tr>
+  </tbody>
+</table>
+
+<h3>4.2 优先级定义</h3>
+<table>
+  <thead>
+    <tr><th>级别</th><th>定义</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>P0</strong></td><td>核心功能</td><td>产品正常运行必不可少，缺失则无法使用</td></tr>
+    <tr><td><strong>P1</strong></td><td>重要功能</td><td>提升体验和效率，缺失会影响运营质量</td></tr>
+    <tr><td><strong>P2</strong></td><td>增强功能</td><td>锦上添花，可在后续迭代中添加</td></tr>
+  </tbody>
+</table>
+
+<div class="tip">当前平台所有已完成功能均为核心级（P0-P1），基础能力完整覆盖。</div>
+
+<!-- ===== Chapter 5: 功能规格 ===== -->
+<h2 class="section-title" id="ch5"><span class="num">05</span> 功能规格</h2>
+<div class="section-en">Functional Specifications</div>
+<div class="section-intro">详细功能说明、业务规则与权限矩阵</div>
+
+<h3>5.1 权限矩阵</h3>
+<table>
+  <thead>
+    <tr><th>功能</th><th>未登录</th><th>BETTOR</th><th>ADMIN</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>查看首页、比赛列表、排行榜</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>查看比赛详情（含赔率）</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>查看战队列表/详情</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>注册/登录</td><td>✅</td><td>—</td><td>—</td></tr>
+    <tr><td>每日签到</td><td>❌</td><td>✅</td><td>✅</td></tr>
+    <tr><td>投注比赛 / 冠军投注</td><td>❌</td><td>✅</td><td>✅</td></tr>
+    <tr><td>查看我的投注 / 金币流水</td><td>❌</td><td>✅</td><td>✅</td></tr>
+    <tr><td>查看管理后台</td><td>❌</td><td>❌</td><td>✅</td></tr>
+    <tr><td>赛季/战队/比赛 CRUD</td><td>❌</td><td>❌</td><td>✅</td></tr>
+    <tr><td>赛程生成</td><td>❌</td><td>❌</td><td>✅</td></tr>
+    <tr><td>赛果录入 / 弃赛处理</td><td>❌</td><td>❌</td><td>✅</td></tr>
+    <tr><td>赔率手动调整</td><td>❌</td><td>❌</td><td>✅</td></tr>
+    <tr><td>用户管理（封禁/金币调整）</td><td>❌</td><td>❌</td><td>✅</td></tr>
+    <tr><td>文件上传</td><td>❌</td><td>❌</td><td>✅</td></tr>
+  </tbody>
+</table>
+
+<h3>5.2 核心业务规则</h3>
+
+<h4>用户 & 金币系统</h4>
+<table>
+  <thead>
+    <tr><th>规则</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>初始金币</td><td>新注册用户获得 100 金币</td></tr>
+    <tr><td>签到奖励</td><td>每日签到领取 5 金币，截止日期为次日 00:00</td></tr>
+    <tr><td>封禁处理</td><td>封禁用户无法投注、签到，已有投注正常结算</td></tr>
+    <tr><td>金币下限</td><td>金币余额不能为负，投注金额必须 ≤ 当前余额</td></tr>
+    <tr><td>交易流水</td><td>每一笔金币变动均记录 CoinTransaction，含 before/after 快照</td></tr>
+  </tbody>
+</table>
+
+<h4>投注规则</h4>
+<table>
+  <thead>
+    <tr><th>规则</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>投注条件</td><td>比赛状态为 UPCOMING 或 LIVE 方可投注</td></tr>
+    <tr><td>唯一性约束</td><td>同一用户对同一比赛只能投注一次（userId + matchId 唯一）</td></tr>
+    <tr><td>最低投注额</td><td>每次投注至少 1 金币</td></tr>
+    <tr><td>最高投注额</td><td>不设上限，受用户余额约束</td></tr>
+    <tr><td>赔率锁定</td><td>投注时锁定当前赔率，后续赔率变化不影响已下注</td></tr>
+    <tr><td>冠军投注</td><td>同一用户对同一赛季的同一战队只能投注一次（userId + seasonId + teamId 唯一）</td></tr>
+    <tr><td>冠军结算</td><td>采用资金池模型，猜中者按投注额比例瓜分总投注池</td></tr>
+  </tbody>
+</table>
+
+<h4>赔率计算规则</h4>
+<div class="diagram">
+<pre>
+adjustedPool = betTotalA + betTotalB + BASE_BET × 2
+oddsA = clamp(adjustedPool / (betTotalA + BASE_BET) × PLATFORM_FEE, MIN_ODDS, MAX_ODDS)
+oddsB = clamp(adjustedPool / (betTotalB + BASE_BET) × PLATFORM_FEE, MIN_ODDS, MAX_ODDS)
+
+参数：
+  BASE_BET     = 300（虚拟基础投注，防止极端赔率）
+  MIN_ODDS     = 1.3
+  MAX_ODDS     = 5.0
+  PLATFORM_FEE = 1.0（无抽水）
+  DEFAULT_ODDS = 2.0（初始默认值）
+</pre>
+</div>
+
+<table>
+  <thead>
+    <tr><th>规则</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>动态计算</td><td>每次新投注后自动重新计算对阵双方赔率</td></tr>
+    <tr><td>BASE_BET</td><td>300 虚拟投注保底，确保赔率不会出现极端值</td></tr>
+    <tr><td>管理员覆写</td><td>管理员可手动设置固定赔率，覆盖动态计算值</td></tr>
+    <tr><td>范围限制</td><td>赔率始终在 [1.3, 5.0] 区间内</td></tr>
+  </tbody>
+</table>
+
+<h4>结算规则</h4>
+<table>
+  <thead>
+    <tr><th>规则</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>结算触发</td><td>管理员录入比赛胜者后自动触发</td></tr>
+    <tr><td>事务保证</td><td>整批结算在 Prisma 事务中执行，保证数据一致性</td></tr>
+    <tr><td>幂等性</td><td>重复调用结算不产生重复派发（已结算投注跳过）</td></tr>
+    <tr><td>赔付计算</td><td>WON = 投注额 × 投注时赔率；LOST = 0；REFUNDED = 全额退还</td></tr>
+    <tr><td>弃赛退款</td><td>标记 FORFEITED 后，该比赛所有投注全额退款</td></tr>
+    <tr><td>晋级传播</td><td>淘汰赛结束后，胜者自动填充到下一轮对应位置</td></tr>
+  </tbody>
+</table>
+
+<h4>赛程生成规则</h4>
+<table>
+  <thead>
+    <tr><th>规则</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>小组赛</td><td>圆桌旋转算法（Circle Method），每个小组内所有队伍两两对决</td></tr>
+    <tr><td>淘汰赛</td><td>支持两种模式：A1vsB2（交叉对阵）或按小组排名对阵</td></tr>
+    <tr><td>分级赛程</td><td>小组赛循环赛 → 淘汰赛（Bo1），自动生成后续轮次占位</td></tr>
+    <tr><td>时间间隔</td><td>每个比赛日之间的间隔由管理员在 UI 中配置</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== Chapter 6: 数据模型 ===== -->
+<h2 class="section-title" id="ch6"><span class="num">06</span> 数据模型</h2>
+<div class="section-en">Data Model</div>
+<div class="section-intro">实体关系与核心数据字典</div>
+
+<h3>6.1 实体关系图</h3>
+<div class="diagram">
+<pre>
+  ┌─────────┐    1:N    ┌──────────┐
+  │  Season  │──────────→│  Team    │
+  │          │          │  (战队)   │
+  │ (赛季)    │          │          │
+  └────┬─────┘          └──────────┘
+       │                      │
+       │ 1:N                  │ 1:N
+       ▼                      ▼
+  ┌──────────┐          ┌──────────┐
+  │  Match   │          │  Bet     │
+  │  (比赛)   │←─── 1:N ──│  (投注)   │
+  └──────────┘          └────┬─────┘
+                              │
+                      ┌───────┴───────┐
+                      │               │
+                      ▼               ▼
+                 ┌─────────┐   ┌──────────────┐
+                 │  User   │   │ChampionBet    │
+                 │  (用户)  │   │(冠军投注)      │
+                 └─────────┘   └──────────────┘
+                      │
+                      │ 1:N
+                      ▼
+                 ┌──────────────┐
+                 │CoinTransaction│
+                 │(金币流水)      │
+                 └──────────────┘
+</pre>
+</div>
+
+<h3>6.2 数据字典</h3>
+
+<h4>User（用户）</h4>
+<table>
+  <thead>
+    <tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>Int</td><td>PK, Auto</td><td>用户 ID</td></tr>
+    <tr><td>username</td><td>String</td><td>Unique</td><td>用户名，3-20 字符</td></tr>
+    <tr><td>passwordHash</td><td>String</td><td>—</td><td>bcrypt 哈希密码</td></tr>
+    <tr><td>role</td><td>Enum</td><td>ADMIN / BETTOR</td><td>用户角色</td></tr>
+    <tr><td>coins</td><td>Int</td><td>Default 100</td><td>当前金币余额</td></tr>
+    <tr><td>isBanned</td><td>Boolean</td><td>Default false</td><td>是否被封禁</td></tr>
+    <tr><td>lastCheckInDate</td><td>DateTime?</td><td>Nullable</td><td>最后签到日期（用于跨日判断）</td></tr>
+  </tbody>
+</table>
+
+<h4>Season（赛季）</h4>
+<table>
+  <thead>
+    <tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>Int</td><td>PK, Auto</td><td>赛季 ID</td></tr>
+    <tr><td>name</td><td>String</td><td>—</td><td>赛季名称</td></tr>
+    <tr><td>status</td><td>Enum</td><td>UPCOMING/ACTIVE/COMPLETED</td><td>赛季状态</td></tr>
+    <tr><td>startDate</td><td>DateTime</td><td>—</td><td>开始日期</td></tr>
+    <tr><td>endDate</td><td>DateTime</td><td>—</td><td>结束日期</td></tr>
+    <tr><td>championTeamId</td><td>Int?</td><td>FK → Team</td><td>赛季冠军战队</td></tr>
+    <tr><td>tournamentConfig</td><td>String</td><td>JSON 文本</td><td>赛制配置（小组数、晋级规则等）</td></tr>
+  </tbody>
+</table>
+
+<h4>Team（战队）</h4>
+<table>
+  <thead>
+    <tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>Int</td><td>PK, Auto</td><td>战队 ID</td></tr>
+    <tr><td>name</td><td>String</td><td>—</td><td>战队名称</td></tr>
+    <tr><td>abbr</td><td>String</td><td>—</td><td>简称（如 AG、ES）</td></tr>
+    <tr><td>color</td><td>String</td><td>—</td><td>主题色（十六进制）</td></tr>
+    <tr><td>logoUrl</td><td>String?</td><td>Nullable</td><td>Logo 图片 URL</td></tr>
+    <tr><td>description</td><td>String?</td><td>Nullable</td><td>战队描述</td></tr>
+    <tr><td>members</td><td>String</td><td>JSON 文本</td><td>队员信息列表</td></tr>
+    <tr><td>posterUrl</td><td>String?</td><td>Nullable</td><td>战队海报 URL</td></tr>
+    <tr><td>seasonId</td><td>Int</td><td>FK → Season</td><td>所属赛季</td></tr>
+    <tr><td>wins / losses / forfeits</td><td>Int</td><td>Default 0</td><td>胜负弃场数</td></tr>
+  </tbody>
+</table>
+
+<h4>Match（比赛）</h4>
+<table>
+  <thead>
+    <tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>Int</td><td>PK, Auto</td><td>比赛 ID</td></tr>
+    <tr><td>seasonId</td><td>Int</td><td>FK → Season</td><td>所属赛季</td></tr>
+    <tr><td>stage</td><td>Enum</td><td>GROUP / KNOCKOUT</td><td>比赛阶段</td></tr>
+    <tr><td>groupName</td><td>String?</td><td>Nullable</td><td>小组名（小组赛时）</td></tr>
+    <tr><td>round</td><td>Int</td><td>—</td><td>轮次/圈数</td></tr>
+    <tr><td>matchOrder</td><td>Int</td><td>—</td><td>本阶段内排序</td></tr>
+    <tr><td>teamA / teamB</td><td>Int?</td><td>FK → Team</td><td>对阵双方</td></tr>
+    <tr><td>oddsA / oddsB</td><td>Float</td><td>Default 2.0</td><td>当前赔率</td></tr>
+    <tr><td>matchTime</td><td>DateTime</td><td>—</td><td>比赛时间</td></tr>
+    <tr><td>status</td><td>Enum</td><td>UPCOMING/LIVE/COMPLETED/FORFEITED</td><td>比赛状态</td></tr>
+    <tr><td>betTotalA/B, betCountA/B</td><td>Int</td><td>Default 0</td><td>投注池统计</td></tr>
+  </tbody>
+</table>
+
+<h4>Bet（投注）</h4>
+<table>
+  <thead>
+    <tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>Int</td><td>PK, Auto</td><td>投注 ID</td></tr>
+    <tr><td>userId</td><td>Int</td><td>FK → User</td><td>投注用户</td></tr>
+    <tr><td>matchId</td><td>Int</td><td>FK → Match</td><td>投注比赛</td></tr>
+    <tr><td>pickedTeamId</td><td>Int</td><td>FK → Team</td><td>支持战队</td></tr>
+    <tr><td>amount</td><td>Int</td><td>≥ 1</td><td>投注金额</td></tr>
+    <tr><td>oddsAtBet</td><td>Float</td><td>—</td><td>投注时锁定赔率</td></tr>
+    <tr><td>status</td><td>Enum</td><td>PENDING/WON/LOST/REFUNDED</td><td>投注状态</td></tr>
+    <tr><td>—</td><td colspan="3">唯一约束: @@unique([userId, matchId])</td></tr>
+  </tbody>
+</table>
+
+<h4>ChampionBet（冠军投注）</h4>
+<table>
+  <thead>
+    <tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>Int</td><td>PK, Auto</td><td>冠军投注 ID</td></tr>
+    <tr><td>userId</td><td>Int</td><td>FK → User</td><td>投注用户</td></tr>
+    <tr><td>seasonId</td><td>Int</td><td>FK → Season</td><td>目标赛季</td></tr>
+    <tr><td>teamId</td><td>Int</td><td>FK → Team</td><td>押注战队</td></tr>
+    <tr><td>amount</td><td>Int</td><td>≥ 1</td><td>投注金额</td></tr>
+    <tr><td>status</td><td>Enum</td><td>同 Bet</td><td>投注状态</td></tr>
+    <tr><td>—</td><td colspan="3">唯一约束: @@unique([userId, seasonId, teamId])</td></tr>
+  </tbody>
+</table>
+
+<h4>CoinTransaction（金币流水）</h4>
+<table>
+  <thead>
+    <tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>Int</td><td>PK, Auto</td><td>流水 ID</td></tr>
+    <tr><td>userId</td><td>Int</td><td>FK → User</td><td>所属用户</td></tr>
+    <tr><td>amount</td><td>Int</td><td>—</td><td>变动金额（正/负）</td></tr>
+    <tr><td>type</td><td>Enum</td><td>11 种类型</td><td>交易类型</td></tr>
+    <tr><td>referenceType</td><td>String?</td><td>Nullable</td><td>关联对象类型</td></tr>
+    <tr><td>referenceId</td><td>Int?</td><td>Nullable</td><td>关联对象 ID</td></tr>
+    <tr><td>balanceAfter</td><td>Int</td><td>—</td><td>变动后余额</td></tr>
+  </tbody>
+</table>
+
+<h3>6.3 枚举值集合</h3>
+<table>
+  <thead>
+    <tr><th>枚举</th><th>取值</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Role</td><td>ADMIN, BETTOR</td></tr>
+    <tr><td>SeasonStatus</td><td>UPCOMING, ACTIVE, COMPLETED</td></tr>
+    <tr><td>MatchStage</td><td>GROUP, KNOCKOUT</td></tr>
+    <tr><td>MatchStatus</td><td>UPCOMING, LIVE, COMPLETED, FORFEITED</td></tr>
+    <tr><td>BetStatus</td><td>PENDING, WON, LOST, REFUNDED</td></tr>
+    <tr><td>TransactionType</td><td>INITIAL, CHECKIN, BET, BET_WIN, BET_LOST, BET_REFUND, CHAMPION_BET, CHAMPION_WIN, CHAMPION_LOST, CHAMPION_REFUND, ADMIN_ADJUST</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== Chapter 7: 技术方案 ===== -->
+<h2 class="section-title" id="ch7"><span class="num">07</span> 技术方案</h2>
+<div class="section-en">Technical Architecture</div>
+<div class="section-intro">系统架构、技术选型与接口设计</div>
+
+<h3>7.1 系统架构</h3>
+<div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│                    客户端 (Browser)                               │
+│  React 18 + MUI 6 + Tailwind + Zustand + Axios                  │
+└────────────────────────┬────────────────────────────────────────┘
+                         │ HTTP / JSON
+                         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    服务端 (Express.js)                            │
+├─────────────────────────────────────────────────────────────────┤
+│  Routes (薄层) → Controllers (校验+格式化) → Services (业务)    │
+├─────────────────────────────────────────────────────────────────┤
+│  Middleware: JWT Auth │ Admin Guard │ Error Handler │ File Upload│
+└────────────────────────┬────────────────────────────────────────┘
+                         │ Prisma ORM
+                         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                 数据库 (SQLite/MySQL)                             │
+│  6 个模型 + 6 个枚举 + 4 个唯一约束                              │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<h3>7.2 技术选型明细</h3>
+<table>
+  <thead>
+    <tr><th>层级</th><th>技术</th><th>版本</th><th>选型理由</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="5">前端</td>
+      <td>React</td><td>^18.3</td><td>成熟的前端框架，生态丰富</td>
+    </tr>
+    <tr><td>Material UI (MUI)</td><td>^6.1</td><td>开箱即用的组件库，快速搭建后台 UI</td></tr>
+    <tr><td>Tailwind CSS</td><td>^3.4</td><td>原子化 CSS，配合 MUI 实现灵活样式</td></tr>
+    <tr><td>Zustand</td><td>^5.0</td><td>轻量级状态管理，比 Redux 更简洁</td></tr>
+    <tr><td>React Router</td><td>^7.0</td><td>标准路由方案 + 权限守卫</td></tr>
+    <tr>
+      <td rowspan="4">后端</td>
+      <td>Express.js</td><td>^4.21</td><td>Node.js 最成熟的 Web 框架</td>
+    </tr>
+    <tr><td>Prisma</td><td>^6.0</td><td>类型安全的 ORM，自动生成 TypeScript 类型</td></tr>
+    <tr><td>JWT (jsonwebtoken)</td><td>^9.0</td><td>无状态认证，7 天过期</td></tr>
+    <tr><td>Zod</td><td>^3.24</td><td>请求校验，类型安全的 Schema 验证</td></tr>
+    <tr>
+      <td rowspan="2">数据库</td>
+      <td>SQLite</td><td>—</td><td>开发环境，零配置，文件级数据库</td>
+    </tr>
+    <tr><td>MySQL</td><td>—</td><td>生产环境，成熟的关系型数据库</td></tr>
+  </tbody>
+</table>
+
+<h3>7.3 架构分层原则</h3>
+<h4>三层分离架构</h4>
+<table>
+  <thead>
+    <tr><th>层</th><th>职责</th><th>禁止</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Routes</strong></td>
+      <td>定义路由映射、注册中间件、参数透传</td>
+      <td>不包含任何业务逻辑或数据校验</td>
+    </tr>
+    <tr>
+      <td><strong>Controllers</strong></td>
+      <td>请求参数提取与校验（Zod）、响应格式化</td>
+      <td>不写业务逻辑，不直接操作数据库</td>
+    </tr>
+    <tr>
+      <td><strong>Services</strong></td>
+      <td>全部业务逻辑：校验、计算、数据库操作、事务</td>
+      <td>不直接处理 HTTP 请求/响应</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>7.4 API 概览</h3>
+<table>
+  <thead>
+    <tr><th>模块</th><th>方法</th><th>路径模式</th><th>权限</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="3">认证</td><td>POST</td><td><code>/api/auth/register</code></td><td>公开</td></tr>
+    <tr><td>POST</td><td><code>/api/auth/login</code></td><td>公开</td></tr>
+    <tr><td>GET</td><td><code>/api/auth/me</code></td><td>需登录</td></tr>
+    <tr><td>签到</td><td>POST</td><td><code>/api/checkin</code></td><td>需登录</td></tr>
+    <tr><td rowspan="3">用户</td><td>GET/PUT</td><td><code>/api/users/me</code></td><td>需登录</td></tr>
+    <tr><td>GET</td><td><code>/api/users/:id</code></td><td>需登录</td></tr>
+    <tr><td>GET</td><td><code>/api/transactions/my</code></td><td>需登录</td></tr>
+    <tr><td rowspan="5">赛季</td><td>GET</td><td><code>/api/seasons</code></td><td>公开</td></tr>
+    <tr><td>GET</td><td><code>/api/seasons/:id</code></td><td>公开</td></tr>
+    <tr><td>POST</td><td><code>/api/seasons</code></td><td>管理员</td></tr>
+    <tr><td>PUT</td><td><code>/api/seasons/:id</code></td><td>管理员</td></tr>
+    <tr><td>PUT</td><td><code>/api/seasons/:id/champion</code></td><td>管理员</td></tr>
+    <tr><td rowspan="5">战队</td><td>GET</td><td><code>/api/teams</code></td><td>公开</td></tr>
+    <tr><td>GET</td><td><code>/api/teams/:id</code></td><td>公开</td></tr>
+    <tr><td>POST</td><td><code>/api/teams</code></td><td>管理员</td></tr>
+    <tr><td>PUT</td><td><code>/api/teams/:id</code></td><td>管理员</td></tr>
+    <tr><td>DELETE</td><td><code>/api/teams/:id</code></td><td>管理员</td></tr>
+    <tr><td rowspan="7">比赛</td><td>GET</td><td><code>/api/matches</code></td><td>公开</td></tr>
+    <tr><td>GET</td><td><code>/api/matches/:id</code></td><td>公开（可选认证）</td></tr>
+    <tr><td>POST</td><td><code>/api/matches/generate</code></td><td>管理员</td></tr>
+    <tr><td>POST</td><td><code>/api/matches/generate-knockout</code></td><td>管理员</td></tr>
+    <tr><td>PUT</td><td><code>/api/matches/:id</code></td><td>管理员</td></tr>
+    <tr><td>PATCH</td><td><code>/api/matches/:id/time</code></td><td>管理员</td></tr>
+    <tr><td>PUT</td><td><code>/api/matches/:id/forfeit</code></td><td>管理员</td></tr>
+    <tr><td rowspan="5">投注</td><td>POST</td><td><code>/api/bets</code></td><td>需登录</td></tr>
+    <tr><td>GET</td><td><code>/api/bets/mine</code></td><td>需登录</td></tr>
+    <tr><td>POST</td><td><code>/api/bets/champion</code></td><td>需登录</td></tr>
+    <tr><td>GET</td><td><code>/api/bets/champion/mine</code></td><td>需登录</td></tr>
+    <tr><td>GET</td><td><code>/api/bets/champion/pool/:seasonId</code></td><td>公开</td></tr>
+    <tr><td rowspan="2">赔率</td><td>GET</td><td><code>/api/odds/:matchId</code></td><td>公开</td></tr>
+    <tr><td>PUT</td><td><code>/api/odds/:matchId</code></td><td>管理员</td></tr>
+    <tr><td rowspan="2">排行榜</td><td>GET</td><td><code>/api/leaderboard/users</code></td><td>公开</td></tr>
+    <tr><td>GET</td><td><code>/api/leaderboard/teams</code></td><td>公开</td></tr>
+    <tr><td rowspan="6">管理后台</td><td>GET</td><td><code>/api/admin/dashboard</code></td><td>管理员</td></tr>
+    <tr><td>GET/PUT</td><td><code>/api/admin/users</code> / <code>.../users/:id/ban</code></td><td>管理员</td></tr>
+    <tr><td>PUT</td><td><code>/api/admin/users/:id/coins</code></td><td>管理员</td></tr>
+    <tr><td>POST</td><td><code>/api/admin/users/:id/reset-password</code></td><td>管理员</td></tr>
+    <tr><td>POST</td><td><code>/api/admin/users/batch</code></td><td>管理员</td></tr>
+    <tr><td>POST</td><td><code>/api/upload</code></td><td>管理员</td></tr>
+  </tbody>
+</table>
+
+<h3>7.5 API 响应规范</h3>
+<pre>
+// 成功响应
+{ "code": 0, "data": { ... } }
+
+// 分页响应
+{ "code": 0, "data": { "list": [...], "total": 100, "page": 1, "limit": 20 } }
+
+// 错误响应
+{ "code": 1, "message": "错误描述" }
+
+// 认证
+Authorization: Bearer &lt;JWT&gt;
+</pre>
+
+<!-- ===== Chapter 8: 非功能需求 ===== -->
+<h2 class="section-title" id="ch8"><span class="num">08</span> 非功能需求</h2>
+<div class="section-en">Non-Functional Requirements</div>
+<div class="section-intro">性能、安全、兼容性、可扩展性</div>
+
+<h3>8.1 性能要求</h3>
+<table>
+  <thead>
+    <tr><th>指标</th><th>目标值</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>页面加载时间</td><td>&lt; 2s</td><td>首屏可交互时间（FID），含静态资源加载</td></tr>
+    <tr><td>API 响应时间</td><td>&lt; 500ms</td><td>95% 百分位响应时间</td></tr>
+    <tr><td>并发用户数</td><td>≥ 50</td><td>同时在线用户数支持</td></tr>
+    <tr><td>数据库查询</td><td>&lt; 200ms</td><td>95% 百分位查询时间（使用索引优化）</td></tr>
+  </tbody>
+</table>
+
+<h3>8.2 安全要求</h3>
+<table>
+  <thead>
+    <tr><th>类别</th><th>要求</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>密码存储</td><td>bcrypt 哈希存储，不存明文</td></tr>
+    <tr><td>认证方式</td><td>JWT 令牌，7 天过期，Bearer 头传递</td></tr>
+    <tr><td>权限控制</td><td>JWT 中间件 + Admin 中间件双层校验</td></tr>
+    <tr><td>输入校验</td><td>Zod Schema 验证所有请求参数</td></tr>
+    <tr><td>文件上传</td><td>multer 中间件，限制文件类型和大小</td></tr>
+    <tr><td>数据一致</td><td>Prisma 事务保证投注/结算的 ACID</td></tr>
+  </tbody>
+</table>
+
+<h3>8.3 兼容性</h3>
+<table>
+  <thead>
+    <tr><th>类别</th><th>支持范围</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>浏览器</td><td>Chrome ≥ 90, Firefox ≥ 90, Safari ≥ 15, Edge ≥ 90</td></tr>
+    <tr><td>屏幕尺寸</td><td>320px 起响应式适配，支持 PC/平板/手机</td></tr>
+    <tr><td>后端环境</td><td>Node.js ≥ 18</td></tr>
+  </tbody>
+</table>
+
+<h3>8.4 可扩展性</h3>
+<ul>
+  <li><strong>数据库切换：</strong>Prisma ORM 支持一键切换 SQLite ↔ MySQL，修改 provider + DATABASE_URL 即可</li>
+  <li><strong>模块化服务：</strong>12 个 Service 相互独立，新增功能只需新增 Service + Route + Controller</li>
+  <li><strong>前端组件化：</strong>5 大类 30+ 组件，页面由组件拼接，新增页面成本低</li>
+  <li><strong>API 版本控制：</strong>路由以 <code>/api/</code> 前缀统一管理，未来可通过 <code>/api/v2/</code> 扩展</li>
+</ul>
+
+<h3>8.5 质量保障</h3>
+<table>
+  <thead>
+    <tr><th>维度</th><th>措施</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>单元测试</td><td>Vitest + 独立 SQLite 测试库，覆盖 4 个核心 Service（31 个测试用例）</td></tr>
+    <tr><td>类型检查</td><td>TypeScript strict 模式，<code>tsc --noEmit</code> 前置检查</td></tr>
+    <tr><td>CI 门禁</td><td>GitHub Actions：push/PR 自动触发 tsc → test 流水线</td></tr>
+    <tr><td>测试纪律</td><td>集成测试禁止 mock 数据库，共享 Prisma 实例避免重复连接</td></tr>
+    <tr><td>错误处理</td><td>全局 Error Handler 中间件，统一错误响应格式</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== Chapter 9: 项目计划 ===== -->
+<h2 class="section-title" id="ch9"><span class="num">09</span> 项目计划</h2>
+<div class="section-en">Project Plan</div>
+<div class="section-intro">里程碑、阶段说明与风险管理</div>
+
+<h3>9.1 项目阶段</h3>
+<table>
+  <thead>
+    <tr><th>阶段</th><th>核心工作</th><th>状态</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Phase 1: 基础设施</strong></td>
+      <td>项目搭建、技术选型、数据库 Schema、认证系统</td>
+      <td>✅ 已完成</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 2: 核心功能</strong></td>
+      <td>赛季/战队/比赛 CRUD、赛程生成、投注引擎、动态赔率、结算引擎</td>
+      <td>✅ 已完成</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 3: 用户功能</strong></td>
+      <td>用户页面（首页、比赛列表、战队详情、排行榜）、签到、我的投注</td>
+      <td>✅ 已完成</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 4: 管理后台</strong></td>
+      <td>数据看板、用户管理、所有管理页面 UI</td>
+      <td>✅ 已完成</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 5: 质量保障</strong></td>
+      <td>单元测试（Vitest, 31 tests）、CI 门禁（GitHub Actions）、AGENTS.md、.cursorrules</td>
+      <td>✅ 已完成</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 6: 文档与交付</strong></td>
+      <td>系统设计文档、PRD、API 文档、原型</td>
+      <td>✅ 已完成（本 PRD 覆盖此阶段）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>9.2 已实现的核心能力</h3>
+<ul>
+  <li><strong>后端：</strong>12 个路由模块、15 个 Controller、11 个 Service、22 个 API 端点</li>
+  <li><strong>前端：</strong>16 个页面、30+ UI 组件、11 个 API 模块、响应式布局</li>
+  <li><strong>数据库：</strong>7 个数据模型、6 个枚举、完整的关系约束和唯一索引</li>
+  <li><strong>测试：</strong>31 个单元测试覆盖 4 个核心 Service，CI 自动运行</li>
+  <li><strong>AI 辅助编码：</strong>.cursorrules（20 条硬约束）、AGENTS.md（认知地图）、AI-CODING-METHODOLOGY.md</li>
+</ul>
+
+<h3>9.3 风险与缓解</h3>
+<table>
+  <thead>
+    <tr><th>风险</th><th>影响</th><th>概率</th><th>缓解措施</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>并发投注数据不一致</td><td>高</td><td>低</td>
+      <td>Prisma 事务 + 数据库唯一约束保证一致性</td>
+    </tr>
+    <tr>
+      <td>结算重复执行</td><td>高</td><td>低</td>
+      <td>幂等性检查，已结算投注自动跳过</td>
+    </tr>
+    <tr>
+      <td>前端兼容性问题</td><td>中</td><td>低</td>
+      <td>React + MUI 主流浏览器兼容，Tailwind 响应式设计</td>
+    </tr>
+    <tr>
+      <td>数据丢失</td><td>高</td><td>低</td>
+      <td>SQLite 文件定期备份 / MySQL 数据库备份</td>
+    </tr>
+    <tr>
+      <td>浏览器兼容性</td><td>中</td><td>低</td>
+      <td>Tailwind + MUI 跨浏览器兼容</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>9.4 后续迭代建议</h3>
+<table>
+  <thead>
+    <tr><th>建议方向</th><th>说明</th><th>优先级</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>投注加时/让分</td><td>支持更多投注类型，如大小分、让分盘</td>
+      <td>P2</td>
+    </tr>
+    <tr>
+      <td>用户成就系统</td><td>连胜奖励、等级徽章、成就记录</td>
+      <td>P2</td>
+    </tr>
+    <tr>
+      <td>数据导出</td><td>比赛结果 / 投注记录导出为 CSV / Excel</td>
+      <td>P2</td>
+    </tr>
+    <tr>
+      <td>通知推送</td><td>比赛开始提醒、结算结果通知</td>
+      <td>P2</td>
+    </tr>
+    <tr>
+      <td>历史赛季归档</td><td>已结束赛季的查看和统计</td>
+      <td>P1</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<!-- ==================== BACK PAGE ==================== -->
+<div class="back-page">
+  <div class="back-page-title">王者赛事竞猜</div>
+  <div class="back-page-subtitle">产品需求文档 · v1.0.0</div>
+  <div class="back-page-info">
+    <strong>产品名称：</strong>王者赛事竞猜<br>
+    <strong>文档版本：</strong>v1.0.0<br>
+    <strong>发布日期：</strong>2026-06-22<br>
+    <strong>文档类型：</strong>精简核心版 PRD<br>
+    <strong>覆盖章节：</strong>9 章<br>
+  </div>
+  <div class="back-page-footer">
+    © 2026 王者赛事竞猜 · 内部文档<br>
+    Built with PRD FullStack Skill · WorkBuddy
+  </div>
+</div>
+
+</body>
+</html>

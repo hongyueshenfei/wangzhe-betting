@@ -15,7 +15,7 @@ export default function MatchFilter({
   onStatusChange,
 }: MatchFilterProps) {
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: { xs: 1, sm: 2 }, mb: 3 }}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: { xs: 1.5, sm: 2 }, mb: 3 }}>
       {/* Stage filter */}
       <ToggleButtonGroup
         value={stage}
@@ -24,18 +24,35 @@ export default function MatchFilter({
         size="small"
         sx={{
           width: { xs: '100%', sm: 'auto' },
+          gap: 0.5,
+          '& .MuiToggleButtonGroup-grouped': {
+            borderRadius: '20px !important',
+            border: '1px solid #2A2F45',
+            mx: 0.25,
+            '&:not(:last-of-type)': { borderRight: '1px solid #2A2F45' },
+            '&.Mui-selected': { borderColor: '#C8A951' },
+          },
           '& .MuiToggleButton-root': {
             flex: { xs: 1, sm: 'none' },
             color: '#8890A8',
-            borderColor: '#2A2F45',
-            fontSize: { xs: 11, sm: 12 },
-            px: { xs: 1, sm: 1.5 },
+            bgcolor: '#0F1119',
+            fontWeight: 500,
+            fontSize: { xs: 12, sm: 13 },
+            lineHeight: 1.6,
+            px: { xs: 1.5, sm: 3 },
+            py: 0.8,
+            textTransform: 'none',
+            transition: 'all 0.2s ease',
             '&.Mui-selected': {
-              color: '#C8A951',
-              bgcolor: 'rgba(200,169,81,0.1)',
-              borderColor: '#C8A951',
+              color: '#FFFFFF',
+              bgcolor: '#C8A951',
+              fontWeight: 700,
             },
-            '&:hover': { bgcolor: 'rgba(200,169,81,0.05)' },
+            '&.Mui-selected:hover': { bgcolor: '#B8942E' },
+            '&:hover': {
+              bgcolor: 'rgba(200,169,81,0.08)',
+              borderColor: '#3A3F58',
+            },
           },
         }}
       >
@@ -56,6 +73,7 @@ export default function MatchFilter({
           '& .MuiOutlinedInput-root': {
             bgcolor: '#0F1119',
             color: '#E8EAF0',
+            borderRadius: '20px',
             '& fieldset': { borderColor: '#2A2F45' },
             '&:hover fieldset': { borderColor: '#3A3F58' },
             '&.Mui-focused fieldset': { borderColor: '#C8A951' },

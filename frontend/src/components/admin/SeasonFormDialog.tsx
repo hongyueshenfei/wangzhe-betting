@@ -66,7 +66,7 @@ export default function SeasonFormDialog({
       <DialogTitle sx={{ color: '#E8EAF0', fontWeight: 700 }}>
         {mode === 'create' ? '创建赛季' : '编辑赛季'}
       </DialogTitle>
-      <DialogContent sx={{ pt: 3 }}>
+      <DialogContent sx={{ pt: 4 }}>
         <TextField
           label="赛季名称"
           value={name}
@@ -74,6 +74,7 @@ export default function SeasonFormDialog({
           fullWidth
           margin="normal"
           placeholder="如: S1 春季赛"
+          InputLabelProps={{ shrink: true }}
         />
         <TextField
           label="开始日期"
@@ -84,6 +85,12 @@ export default function SeasonFormDialog({
           margin="normal"
           InputLabelProps={{ shrink: true }}
           inputProps={{ style: { colorScheme: 'dark' } }}
+          sx={{
+            '& input[type="date"]::-webkit-calendar-picker-indicator': {
+              filter: 'invert(0.7)', cursor: 'pointer', padding: '8px',
+            },
+            '& input[type="date"]::-webkit-calendar-picker-indicator:hover': { filter: 'invert(1)' },
+          }}
         />
         <TextField
           label="结束日期"
@@ -94,6 +101,12 @@ export default function SeasonFormDialog({
           margin="normal"
           InputLabelProps={{ shrink: true }}
           inputProps={{ style: { colorScheme: 'dark' } }}
+          sx={{
+            '& input[type="date"]::-webkit-calendar-picker-indicator': {
+              filter: 'invert(0.7)', cursor: 'pointer', padding: '8px',
+            },
+            '& input[type="date"]::-webkit-calendar-picker-indicator:hover': { filter: 'invert(1)' },
+          }}
         />
         {error && <Alert severity="error" sx={{ mt: 1 }}>{error}</Alert>}
       </DialogContent>

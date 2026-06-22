@@ -1,9 +1,8 @@
-import { PrismaClient, MatchStatus, BetStatus } from '@prisma/client';
+import { MatchStatus, BetStatus } from '@prisma/client';
 import { AppError } from './auth.service';
 import { MIN_BET_AMOUNT } from '../utils/constants';
+import { prisma } from '../utils/prisma';
 import type { PlaceBetDTO, PlaceChampionBetDTO } from '../types/index';
-
-const prisma = new PrismaClient();
 
 export class BetsService {
   /**

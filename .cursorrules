@@ -1,0 +1,54 @@
+# 王者荣耀竞猜平台 · AI 编码规则
+
+## 架构分层约束
+- controllers/ 禁止写业务逻辑，只做：参数解析与校验 → 调用 Service → 响应格式化
+- services/ 禁止 import controller/、routes/、middleware/
+- services/ 中的业务错误必须使用 AppError（throw new AppError(message, statusCode)）
+- 所有数据库查询必须通过 Prisma Client，禁止裸 SQL
+- 全局错误由 errorHandler middleware 统一兜底，Controller 中 catch 到非 AppError 的异常直接 next(err)
+
+## 错误处理规则
+- 错误只处理一次：throw AppError（让上层处理）或 catch 后 next(err)，不能两者都做
+- 所有业务错误必须使用 AppError，禁止 throw new Error('xxx')
+- Controller 中的 catch 块：AppError 用 error() 响应返回，非 AppError 用 next(err) 交给全局处理器
+- 错误消息使用中文，语义明确，带上上下文信息
+
+## API 响应规范
+- 所有 API 响应必须使用 response.ts 中的工具函数：success() / error() / paginated()
+- 成功响应：success(res, data, statusCode) → { code: 0, data }
+- 错误响应：error(res, message, statusCode) → { code: 1, message }
+- 分页响应：paginated(res, list, total, page, limit) → { code: 0, data: { list, total, page, limit } }
+- 状态码规范：成功 200、创建 201、参数错误 400、认证失败 401、无权限 403、资源不存在 404
+
+## 安全规则
+- JWT 必须在 auth middleware 中统一校验（authRequired / authOptional），禁止在 Controller 或 Service 中手动解析 token
+- 管理员接口必须 authRequired + adminOnly 双层守卫，顺序不可颠倒
+- bcrypt 比较必须使用 await（防止时序攻击）
+- 禁止在日志或返回信息中暴露用户密码、密码哈希、JWT secret
+- 用户输入的数值参数（ID、金额等）必须在 Controller 中 parseInt 校验有效性
+
+## 命名规范
+- API 路由路径统一为 /api/<resource>（如 /api/bets、/api/matches）
+- Prisma 模型名 PascalCase，字段名 camelCase
+- 枚举值统一大写下划线风格
+- Service 类名：XxxService（PascalCase），Controller 类名：XxxController
+- 文件命名：xx.service.ts、xx.controller.ts、xx.routes.ts、xx.middleware.ts
+
+## 代码质量
+- 函数不超过 60 行
+- 禁止 console.log / console.error，使用项目中已有的日志工具
+- API 响应工具函数（success/error/paginated）是同步函数且有 return void，调用后必须 return
+- 分页参数默认：page=1, limit=20，统一在 Controller 中解析
+- 翻页查询使用 skip=(page-1)*limit + take=limit 模式
+
+## AI 作用域约束
+- 未经过确认，不得修改非目标目录的文件
+- 重构任务中，禁止 import 旧包路径——如有旧代码引用，先在 Rule 中追加禁令
+- 当不确定某个文件是否应修改时，优先询问而非猜测
+- 集成测试禁止 mock 数据库层，使用测试数据库或 SQLite in-memory
+
+## Prisma 使用规范
+- 关联查询使用 include（同步加载关联数据），避免 N+1
+- 金额扣减使用 prisma.coins.decrement，禁止读取→计算→写入（有并发安全问题）
+- 涉及多个写操作的业务必须使用 prisma.$transaction 包裹
+- 事务中的错误必须 throw，让 Prisma 自动回滚

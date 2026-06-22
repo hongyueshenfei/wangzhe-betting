@@ -1,9 +1,7 @@
 import app from './app';
 import config from './config/index';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './utils/prisma';
 import fs from 'fs';
-
-const prisma = new PrismaClient();
 
 async function main(): Promise<void> {
   // Ensure upload directory exists

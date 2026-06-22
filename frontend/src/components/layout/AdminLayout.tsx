@@ -4,7 +4,7 @@ import {
   Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText,
   Toolbar, Typography, AppBar, IconButton, Fade,
 } from '@mui/material';
-import { Dashboard, Event, Groups, SportsEsports, AttachMoney, People, Menu, Close } from '@mui/icons-material';
+import { Dashboard, Event, Groups, SportsEsports, People, Menu, Close } from '@mui/icons-material';
 import { useAuth } from '../../hooks/useAuth';
 
 const DRAWER_WIDTH = 220;
@@ -14,7 +14,6 @@ const menuItems = [
   { path: '/admin/seasons', label: '赛季管理', icon: <Event /> },
   { path: '/admin/teams', label: '队伍管理', icon: <Groups /> },
   { path: '/admin/matches', label: '比赛管理', icon: <SportsEsports /> },
-  { path: '/admin/odds', label: '赔率管理', icon: <AttachMoney /> },
   { path: '/admin/users', label: '用户管理', icon: <People /> },
 ];
 

@@ -1,9 +1,8 @@
-import { PrismaClient, SeasonStatus } from '@prisma/client';
+import { SeasonStatus } from '@prisma/client';
 import { AppError } from './auth.service';
 import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../utils/constants';
+import { prisma } from '../utils/prisma';
 import type { CreateSeasonDTO, UpdateSeasonDTO } from '../types/index';
-
-const prisma = new PrismaClient();
 
 export class SeasonsService {
   /**

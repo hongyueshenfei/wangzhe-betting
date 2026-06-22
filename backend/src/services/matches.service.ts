@@ -1,9 +1,8 @@
-import { PrismaClient, MatchStage, MatchStatus } from '@prisma/client';
+import { MatchStage, MatchStatus } from '@prisma/client';
 import { AppError } from './auth.service';
 import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../utils/constants';
+import { prisma } from '../utils/prisma';
 import type { GenerateMatchesDTO, UpdateMatchResultDTO } from '../types/index';
-
-const prisma = new PrismaClient();
 
 /**
  * Generate round-robin pairings using the circle method.

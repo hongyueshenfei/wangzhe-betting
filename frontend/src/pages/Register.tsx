@@ -54,6 +54,7 @@ export default function Register() {
             onChange={(e) => setUsername(e.target.value)}
             autoFocus
             helperText="2-20 个字符"
+            InputLabelProps={{ shrink: true }}
           />
           <Box sx={{ mt: 1.5 }}>
             <TextField
@@ -62,6 +63,7 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               helperText="至少 6 位"
+              InputLabelProps={{ shrink: true }}
             />
           </Box>
           <Box sx={{ mt: 1.5 }}>
@@ -70,6 +72,7 @@ export default function Register() {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              InputLabelProps={{ shrink: true }}
             />
           </Box>
           {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}

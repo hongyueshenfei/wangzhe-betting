@@ -236,7 +236,8 @@ export default function UserManage() {
         <DialogTitle sx={{ fontWeight: 700, borderBottom: '1px solid #1E2340', pb: 2, fontSize: 16 }}>
           调整余额 - {adjustTarget?.username}
         </DialogTitle>
-        <DialogContent sx={{ pt: 3 }}>
+        <DialogContent sx={{ pt: 1 }}>
+          <Box sx={{ height: 32 }} />
           <TextField
             label="调整金额"
             type="number"
@@ -244,7 +245,9 @@ export default function UserManage() {
             onChange={(e) => setAdjustAmount(Number(e.target.value))}
             fullWidth
             helperText="正数 = 增加，负数 = 减少"
-            InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+            slotProps={{
+              inputLabel: { shrink: true, sx: { color: '#8890A8', fontSize: 14 } },
+            }}
             FormHelperTextProps={{ sx: { color: '#8890A8' } }}
             InputProps={{
               startAdornment: <InputAdornment position="start"><Typography sx={{ color: '#8890A8' }}>💰</Typography></InputAdornment>,
@@ -260,7 +263,7 @@ export default function UserManage() {
             onChange={(e) => setAdjustReason(e.target.value)}
             fullWidth
             placeholder="调整原因（可选）"
-            InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+            InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
             sx={{
               '& .MuiOutlinedInput-root': { bgcolor: '#0F1119', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0' } },
             }}
@@ -282,7 +285,7 @@ export default function UserManage() {
         <DialogTitle sx={{ fontWeight: 700, borderBottom: '1px solid #1E2340', pb: 2, fontSize: 16 }}>
           重置密码 - {pwdTarget?.username}
         </DialogTitle>
-        <DialogContent sx={{ pt: 3 }}>
+        <DialogContent sx={{ pt: 4 }}>
           <Typography sx={{ fontSize: 13, color: '#8890A8', mb: 2 }}>
             为用户 <strong style={{ color: '#C8A951' }}>{pwdTarget?.username}</strong> 设置新密码
           </Typography>
@@ -293,7 +296,7 @@ export default function UserManage() {
             onChange={(e) => setPwdNew(e.target.value)}
             fullWidth
             helperText="至少 6 位字符"
-            InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+            InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
             FormHelperTextProps={{ sx: { color: '#8890A8' } }}
             inputProps={{ minLength: 6, style: { color: '#E8EAF0', fontSize: 15 } }}
             sx={{

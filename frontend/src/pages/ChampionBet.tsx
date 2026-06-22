@@ -224,7 +224,7 @@ export default function ChampionBet() {
         <DialogTitle sx={{ fontWeight: 700, borderBottom: '1px solid #1E2340', pb: 2, fontSize: 16 }}>
           冠军投注
         </DialogTitle>
-        <DialogContent sx={{ pt: 3 }}>
+        <DialogContent sx={{ pt: 4 }}>
           {selectedTeam && activeSeason && (
             <>
               <Typography sx={{ fontSize: 14, color: '#E8EAF0', mb: 2.5, textAlign: 'center' }}>
@@ -245,6 +245,7 @@ export default function ChampionBet() {
                 onChange={(e) => setBetAmountText(e.target.value)}
                 helperText={user ? `可用余额: ${user.coins} 币` : ''}
                 inputProps={{ min: 1 }}
+                InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
               />
             </>
           )}

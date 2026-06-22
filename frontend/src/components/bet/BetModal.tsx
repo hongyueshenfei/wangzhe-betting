@@ -37,7 +37,7 @@ export default function BetModal({ open, match, onClose, onSuccess }: BetModalPr
         <PaidIcon sx={{ color: '#C8A951' }} />
         投注
       </DialogTitle>
-      <DialogContent sx={{ pt: 3, pb: 1 }}>
+      <DialogContent sx={{ pt: 4, pb: 1 }}>
         {/* Match info */}
         <Box sx={{
           mb: 3, p: 2.5,

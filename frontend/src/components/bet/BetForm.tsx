@@ -147,7 +147,7 @@ export default function BetForm({ match, onSuccess, onClose }: BetFormProps) {
         onChange={(e) => setAmount(Math.max(MIN_BET_AMOUNT, Number(e.target.value)))}
         fullWidth
         inputProps={{ min: MIN_BET_AMOUNT, max: user?.coins || 99999, style: { color: '#E8EAF0', fontSize: 16 } }}
-        InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+        InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
         InputProps={{
           endAdornment: <InputAdornment position="end">
             <Typography sx={{ color: '#8890A8', fontSize: 13 }}>币</Typography>

@@ -239,7 +239,7 @@ export default function MatchFormDialog({
                 onChange={(e) => setTeamAScore(Math.max(0, Number(e.target.value)))}
                 fullWidth
                 inputProps={{ min: 0, style: { fontSize: 28, fontWeight: 700, textAlign: 'center' } }}
-                InputLabelProps={{ sx: { color: '#8890A8', fontSize: 13 } }}
+                InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 13 } }}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     bgcolor: '#0F1119',
@@ -256,7 +256,7 @@ export default function MatchFormDialog({
                 onChange={(e) => setTeamBScore(Math.max(0, Number(e.target.value)))}
                 fullWidth
                 inputProps={{ min: 0, style: { fontSize: 28, fontWeight: 700, textAlign: 'center' } }}
-                InputLabelProps={{ sx: { color: '#8890A8', fontSize: 13 } }}
+                InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 13 } }}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     bgcolor: '#0F1119',

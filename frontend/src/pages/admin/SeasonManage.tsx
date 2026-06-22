@@ -24,7 +24,7 @@ function defaultRound(type: RoundType, order: number): RoundConfig {
     return {
       name: order === 1 ? '小组积分赛' : `第${order}轮 · 循环赛`,
       type: 'round_robin', order, matchFormat: 'BO1',
-      groups: 2, teamsPerGroup: 4, pointsWin: 3, pointsDraw: 1, pointsLoss: 0, promotionCount: 2,
+      groups: 1, teamsPerGroup: 4, pointsWin: 1, pointsDraw: 0, pointsLoss: 0, promotionCount: 2,
     };
   }
   return {
@@ -190,7 +190,8 @@ export default function SeasonManage() {
         <DialogTitle sx={{ fontWeight: 700, borderBottom: '1px solid #1E2340', pb: 2, flexShrink: 0 }}>
           {editingId ? '编辑赛季' : '创建新赛季'}
         </DialogTitle>
-        <DialogContent sx={{ pt: 4, px: 4, overflow: 'auto', flex: 1 }}>
+        <DialogContent sx={{ pt: 2, px: 4, overflow: 'auto', flex: 1 }}>
+          <Box sx={{ height: 32 }} />
           {/* Basic info */}
           <Grid container spacing={3} sx={{ mb: 4 }}>
             <Grid item xs={12} sm={5}>
@@ -201,12 +202,26 @@ export default function SeasonManage() {
             <Grid item xs={6} sm={3.5}>
               <TextField label="开始日期" type="date" value={startDate} onChange={e => setStartDate(e.target.value)} fullWidth
                 InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 15 } }}
-                sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#0F1119', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
+                sx={{
+                  '& .MuiOutlinedInput-root': { bgcolor: '#0F1119', '& fieldset': { borderColor: '#2A2F45' } },
+                  '& input': { color: '#E8EAF0', fontSize: 15, colorScheme: 'dark' },
+                  '& input[type="date"]::-webkit-calendar-picker-indicator': {
+                    filter: 'invert(0.7)', cursor: 'pointer', padding: '8px', marginRight: '2px',
+                  },
+                  '& input[type="date"]::-webkit-calendar-picker-indicator:hover': { filter: 'invert(1)' },
+                }} />
             </Grid>
             <Grid item xs={6} sm={3.5}>
               <TextField label="结束日期" type="date" value={endDate} onChange={e => setEndDate(e.target.value)} fullWidth
                 InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 15 } }}
-                sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#0F1119', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
+                sx={{
+                  '& .MuiOutlinedInput-root': { bgcolor: '#0F1119', '& fieldset': { borderColor: '#2A2F45' } },
+                  '& input': { color: '#E8EAF0', fontSize: 15, colorScheme: 'dark' },
+                  '& input[type="date"]::-webkit-calendar-picker-indicator': {
+                    filter: 'invert(0.7)', cursor: 'pointer', padding: '8px', marginRight: '2px',
+                  },
+                  '& input[type="date"]::-webkit-calendar-picker-indicator:hover': { filter: 'invert(1)' },
+                }} />
             </Grid>
           </Grid>
 
@@ -248,9 +263,9 @@ export default function SeasonManage() {
                 <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center', flexWrap: 'wrap' }}>
                   <TextField label="轮次名称" size="small" value={round.name}
                     onChange={e => updateRound(idx, { name: e.target.value })}
+                    InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 13 } }}
                     sx={{
                       width: 180, '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 14 } },
-                      '& .MuiInputLabel-root': { color: '#8890A8', fontSize: 13 },
                     }}
                   />
                   <FormControl size="small" sx={{ width: 160 }}>
@@ -279,39 +294,39 @@ export default function SeasonManage() {
               {round.type === 'round_robin' ? (
                 <Grid container spacing={3}>
                   <Grid item xs={6} sm={4}>
-                    <TextField label="分组数" type="number" size="medium" value={round.groups || ''}
+                    <TextField label="分组数" type="number" size="medium" value={round.groups ?? ''}
                       onChange={e => updateRound(idx, { groups: Number(e.target.value) })} fullWidth
-                      InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+                      InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
                       sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
                   </Grid>
                   <Grid item xs={6} sm={4}>
-                    <TextField label="每组队伍数" type="number" size="medium" value={round.teamsPerGroup || ''}
+                    <TextField label="每组队伍数" type="number" size="medium" value={round.teamsPerGroup ?? ''}
                       onChange={e => updateRound(idx, { teamsPerGroup: Number(e.target.value) })} fullWidth
-                      InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+                      InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
                       sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
                   </Grid>
                   <Grid item xs={6} sm={4}>
-                    <TextField label="每组晋级人数" type="number" size="medium" value={round.promotionCount || ''}
+                    <TextField label="每组晋级人数" type="number" size="medium" value={round.promotionCount ?? ''}
                       onChange={e => updateRound(idx, { promotionCount: Number(e.target.value) })} fullWidth
-                      InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+                      InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
                       sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
                   </Grid>
                   <Grid item xs={6} sm={4}>
-                    <TextField label="胜场积分" type="number" size="medium" value={round.pointsWin || ''}
+                    <TextField label="胜场积分" type="number" size="medium" value={round.pointsWin ?? ''}
                       onChange={e => updateRound(idx, { pointsWin: Number(e.target.value) })} fullWidth
-                      InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+                      InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
                       sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
                   </Grid>
                   <Grid item xs={6} sm={4}>
-                    <TextField label="平局积分" type="number" size="medium" value={round.pointsDraw || ''}
+                    <TextField label="平局积分" type="number" size="medium" value={round.pointsDraw ?? ''}
                       onChange={e => updateRound(idx, { pointsDraw: Number(e.target.value) })} fullWidth
-                      InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+                      InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
                       sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
                   </Grid>
                   <Grid item xs={6} sm={4}>
-                    <TextField label="负场积分" type="number" size="medium" value={round.pointsLoss || ''}
+                    <TextField label="负场积分" type="number" size="medium" value={round.pointsLoss ?? ''}
                       onChange={e => updateRound(idx, { pointsLoss: Number(e.target.value) })} fullWidth
-                      InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+                      InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
                       sx={{ '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 15 } } }} />
                   </Grid>
                   <Grid item xs={12}>

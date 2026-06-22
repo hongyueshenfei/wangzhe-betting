@@ -254,7 +254,27 @@ export default function MatchManage() {
 
       {total > 20 && (
         <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
-          <Pagination count={Math.ceil(total / 20)} page={page} onChange={(_, p) => setPage(p)} sx={{ '& .MuiPaginationItem-root': { color: '#CBD0E0' } }} />
+          <Pagination count={Math.ceil(total / 20)} page={page} onChange={(_, p) => setPage(p)} sx={{
+            '& .MuiPaginationItem-root': {
+              color: '#8890A8',
+              bgcolor: '#0F1119',
+              border: '1px solid #2A2F45',
+              borderRadius: '20px',
+              fontWeight: 500,
+              fontSize: 13,
+              minWidth: 34,
+              height: 34,
+              transition: 'all 0.15s ease',
+              '&.Mui-selected': {
+                color: '#FFFFFF',
+                bgcolor: '#C8A951',
+                borderColor: '#C8A951',
+                fontWeight: 700,
+              },
+              '&.Mui-selected:hover': { bgcolor: '#B8942E' },
+              '&:hover': { bgcolor: 'rgba(200,169,81,0.08)', borderColor: '#3A3F58' },
+            },
+          }} />
         </Box>
       )}
 
@@ -262,7 +282,7 @@ export default function MatchManage() {
       <Dialog open={genDialogOpen} onClose={() => setGenDialogOpen(false)} maxWidth="sm" fullWidth fullScreen={isMobile}
         PaperProps={{ sx: { bgcolor: '#1A1D2E', color: '#E8EAF0', border: '1px solid #242840', borderRadius: 3 } }}>
         <DialogTitle sx={{ fontWeight: 700, borderBottom: '1px solid #1E2340' }}>生成赛程</DialogTitle>
-        <DialogContent sx={{ pt: 3 }}>
+        <DialogContent sx={{ pt: 4 }}>
           {config ? (
             <Box>
               <Typography sx={{ mb: 2, fontSize: 13, color: '#8890A8' }}>
@@ -296,7 +316,12 @@ export default function MatchManage() {
                       InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 13 } }}
                       sx={{
                         flex: 1,
-                        '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' }, input: { color: '#E8EAF0', fontSize: 14 } },
+                        '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' } },
+                        '& input': { color: '#E8EAF0', fontSize: 14, colorScheme: 'dark' },
+                        '& input[type="date"]::-webkit-calendar-picker-indicator': {
+                          filter: 'invert(0.7)', cursor: 'pointer', padding: '6px', marginRight: '0',
+                        },
+                        '& input[type="date"]::-webkit-calendar-picker-indicator:hover': { filter: 'invert(1)' },
                       }}
                     />
                     <TextField
@@ -306,7 +331,7 @@ export default function MatchManage() {
                       value={genMatchesPerDay}
                       onChange={(e) => setGenMatchesPerDay(Math.max(1, Number(e.target.value)))}
                       inputProps={{ min: 1, max: 8, style: { fontSize: 14, color: '#E8EAF0' } }}
-                      InputLabelProps={{ sx: { color: '#8890A8', fontSize: 13 } }}
+                      InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 13 } }}
                       sx={{
                         width: 120,
                         '& .MuiOutlinedInput-root': { bgcolor: '#1A1D2E', '& fieldset': { borderColor: '#2A2F45' } },

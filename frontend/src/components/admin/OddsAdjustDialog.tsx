@@ -101,7 +101,7 @@ export default function OddsAdjustDialog({
             onChange={(e) => setOddsA(Number(e.target.value))}
             fullWidth
             inputProps={{ step: 0.01, min: MIN_ODDS, max: MAX_ODDS, style: { fontSize: 20, fontWeight: 700, textAlign: 'center', color: '#E8EAF0' } }}
-            InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+            InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
             InputProps={{
               startAdornment: <InputAdornment position="start">
                 <Typography sx={{ color: '#8890A8', fontSize: 13 }}>赔</Typography>
@@ -124,7 +124,7 @@ export default function OddsAdjustDialog({
             onChange={(e) => setOddsB(Number(e.target.value))}
             fullWidth
             inputProps={{ step: 0.01, min: MIN_ODDS, max: MAX_ODDS, style: { fontSize: 20, fontWeight: 700, textAlign: 'center', color: '#E8EAF0' } }}
-            InputLabelProps={{ sx: { color: '#8890A8', fontSize: 14 } }}
+            InputLabelProps={{ shrink: true, sx: { color: '#8890A8', fontSize: 14 } }}
             InputProps={{
               startAdornment: <InputAdornment position="start">
                 <Typography sx={{ color: '#8890A8', fontSize: 13 }}>赔</Typography>

@@ -47,10 +47,12 @@ export default function Login() {
         <TextField
           label="用户名" value={username} onChange={e => setUsername(e.target.value)}
           autoFocus
+          InputLabelProps={{ shrink: true }}
         />
         <Box sx={{ mt: 1.5 }}>
           <TextField
             label="密码" type="password" value={password} onChange={e => setPassword(e.target.value)}
+            InputLabelProps={{ shrink: true }}
           />
         </Box>
         <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading} sx={{ mt: 3, py: 1.5 }}>

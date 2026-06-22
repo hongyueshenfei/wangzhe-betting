@@ -16,7 +16,7 @@ export const MAX_ODDS = 5.0;
 export const DEFAULT_ODDS = 2.0;
 
 /** Virtual base bet to prevent extreme odds from lopsided pools */
-export const BASE_BET = 300;
+export const BASE_BET = 200;
 
 /** Minimum bet amount */
 export const MIN_BET_AMOUNT = 1;

@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import { AppError } from './auth.service';
 import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../utils/constants';
+import { prisma } from '../utils/prisma';
 import type { CreateTeamDTO, UpdateTeamDTO } from '../types/index';
-
-const prisma = new PrismaClient();
 
 export class TeamsService {
   /**

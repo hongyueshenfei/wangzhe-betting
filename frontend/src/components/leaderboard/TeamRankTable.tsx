@@ -102,7 +102,7 @@ export default function TeamRankTable({ teams }: TeamRankTableProps) {
               <TableCell align="right">{team.forfeits}</TableCell>
               <TableCell>
                 <Typography variant="caption" sx={{ color: '#8890A8' }}>
-                  {team.season.name}
+                  {team.season?.name ?? '-'}
                 </Typography>
               </TableCell>
             </TableRow>

@@ -129,6 +129,34 @@ export default function Matches() {
                 page={page}
                 onChange={(_, p) => setPage(p)}
                 color="primary"
+                sx={{
+                  '& .MuiPaginationItem-root': {
+                    color: '#8890A8',
+                    bgcolor: '#0F1119',
+                    border: '1px solid #2A2F45',
+                    borderRadius: '20px',
+                    fontWeight: 500,
+                    fontSize: 13,
+                    minWidth: 36,
+                    height: 36,
+                    mx: 1.5,
+                    transition: 'all 0.15s ease',
+                    '&.Mui-selected': {
+                      color: '#FFFFFF',
+                      bgcolor: '#C8A951',
+                      borderColor: '#C8A951',
+                      fontWeight: 700,
+                    },
+                    '&.Mui-selected:hover': { bgcolor: '#B8942E' },
+                    '&:hover': {
+                      bgcolor: 'rgba(200,169,81,0.08)',
+                      borderColor: '#3A3F58',
+                    },
+                    '&.MuiPaginationItem-previousNext': {
+                      fontSize: 18,
+                    },
+                  },
+                }}
               />
             </Box>
           )}

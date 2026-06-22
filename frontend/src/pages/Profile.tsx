@@ -158,6 +158,7 @@ export default function Profile() {
           onChange={(e) => setNewPassword(e.target.value)}
           sx={{ mb: 1.5 }}
           helperText="至少 6 位"
+          InputLabelProps={{ shrink: true }}
         />
         <Button
           variant="contained"

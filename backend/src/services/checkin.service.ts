@@ -1,8 +1,6 @@
-import { PrismaClient } from '@prisma/client';
 import { CHECKIN_REWARD } from '../utils/constants';
 import { AppError } from './auth.service';
-
-const prisma = new PrismaClient();
+import { prisma } from '../utils/prisma';
 
 export class CheckinService {
   /**

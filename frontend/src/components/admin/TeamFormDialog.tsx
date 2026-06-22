@@ -192,7 +192,7 @@ export default function TeamFormDialog({
       <DialogTitle sx={{ color: '#E8EAF0', fontWeight: 700 }}>
         {mode === 'create' ? '创建战队' : '编辑战队'}
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ pt: 4 }}>
         {/* ── Basic Info ─────────────────────────── */}
         <TextField
           label="战队名称"
@@ -201,7 +201,7 @@ export default function TeamFormDialog({
           fullWidth
           margin="normal"
           required
-          InputLabelProps={{ sx: { color: '#8890A8' } }}
+          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
           sx={{
             '& .MuiOutlinedInput-root': {
               bgcolor: '#0F1119',
@@ -256,6 +256,7 @@ export default function TeamFormDialog({
             label="战队简称"
             value={abbr}
             onChange={(e) => setAbbr(e.target.value)}
+            InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
             size="small"
             placeholder="如: AG"
             sx={{ flex: 1 }}
@@ -264,6 +265,7 @@ export default function TeamFormDialog({
             label="代表色 (HEX)"
             value={color}
             onChange={(e) => setColor(e.target.value)}
+            InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
             size="small"
             placeholder="如: #1565C0"
             sx={{ flex: 1 }}
@@ -283,7 +285,7 @@ export default function TeamFormDialog({
           margin="normal"
           multiline
           rows={2}
-          InputLabelProps={{ sx: { color: '#8890A8' } }}
+          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
           sx={{
             '& .MuiOutlinedInput-root': {
               bgcolor: '#0F1119',
@@ -350,7 +352,7 @@ export default function TeamFormDialog({
           margin="normal"
           size="small"
           placeholder="上传后自动填入，或手动输入 URL"
-          InputLabelProps={{ sx: { color: '#8890A8' } }}
+          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
           sx={{
             '& .MuiOutlinedInput-root': {
               bgcolor: '#0F1119',
@@ -418,7 +420,7 @@ export default function TeamFormDialog({
           margin="normal"
           size="small"
           placeholder="上传后自动填入，或手动输入 URL"
-          InputLabelProps={{ sx: { color: '#8890A8' } }}
+          InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
           sx={{
             '& .MuiOutlinedInput-root': {
               bgcolor: '#0F1119',
@@ -445,7 +447,7 @@ export default function TeamFormDialog({
               onChange={(e) => handlePositionChange(key, e.target.value)}
               size="small"
               placeholder={`输入${POSITION_LABELS[key]}选手`}
-              InputLabelProps={{ sx: { color: '#8890A8' } }}
+              InputLabelProps={{ shrink: true, sx: { color: '#8890A8' } }}
               sx={{
                 '& .MuiOutlinedInput-root': {
                   bgcolor: '#0F1119',
