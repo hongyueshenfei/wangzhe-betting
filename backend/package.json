@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "tsx src/index.ts",
+    "deploy": "cd ../frontend && npx vite build && cd ../backend && npx tsx src/index.ts",
     "build": "tsc",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --name init",

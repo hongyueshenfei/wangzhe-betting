@@ -17,9 +17,10 @@ async function main(): Promise<void> {
   console.log('🗄️  Database connected');
 
   // Start server
-  app.listen(config.PORT, () => {
+  app.listen(config.PORT, '0.0.0.0', () => {
     console.log(`🚀 王者荣耀竞猜平台 API running on http://localhost:${config.PORT}`);
-    console.log(`📡 CORS origin: ${config.CORS_ORIGIN}`);
+    console.log(`📡 CORS origin: * (LAN access enabled)`);
+    console.log(`💡 局域网内其他设备请访问 http://你的IP:${config.PORT}`);
   });
 }
 
