@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { matchesController } from '../controllers/matches.controller';
-import { authRequired, authOptional } from '../middleware/auth';
-import { adminOnly } from '../middleware/admin';
+import { authRequired, authOptional } from '../middleware/auth.middleware';
+import { adminOnly } from '../middleware/admin.middleware';
 
 const router = Router();
 

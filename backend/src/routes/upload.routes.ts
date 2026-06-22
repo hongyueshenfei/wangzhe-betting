@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { uploadController } from '../controllers/upload.controller';
-import { authRequired } from '../middleware/auth';
-import { adminOnly } from '../middleware/admin';
+import { authRequired } from '../middleware/auth.middleware';
+import { adminOnly } from '../middleware/admin.middleware';
 
 const router = Router();
 

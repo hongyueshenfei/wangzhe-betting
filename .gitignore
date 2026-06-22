@@ -7,3 +7,11 @@ dist/
 .env.local
 *.log
 .DS_Store
+
+# 工具/IDE 生成目录
+.workbuddy/
+.playwright-cli/
+
+# 用户上传文件（保留目录，不跟踪内容）
+backend/uploads/*
+!backend/uploads/.gitkeep

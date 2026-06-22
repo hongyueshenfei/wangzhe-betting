@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { betsController } from '../controllers/bets.controller';
-import { authRequired } from '../middleware/auth';
+import { authRequired } from '../middleware/auth.middleware';
 
 const router = Router();
 
