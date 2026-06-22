@@ -393,8 +393,9 @@ export default function TeamManage() {
         </Box>
       )}
 
-      {/* Create/Edit Dialog */}
+      {/* Create/Edit Dialog — key forces remount on team change so initialData is applied */}
       <TeamFormDialog
+        key={`${dialogMode}-${editTeam?.id ?? 'new'}`}
         open={dialogOpen}
         mode={dialogMode}
         seasons={seasons}

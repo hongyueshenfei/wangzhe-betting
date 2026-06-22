@@ -81,13 +81,29 @@ export default function Profile() {
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 700, color: '#E8EAF0' }}>
           基本信息
         </Typography>
-        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
           <Box>
             <Typography variant="body2" sx={{ color: '#8890A8' }}>
               用户名
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: 700, color: '#E8EAF0' }}>
               {profile.username}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="body2" sx={{ color: '#8890A8' }}>
+              真实姓名
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#E8EAF0' }}>
+              {profile.realName || '未填写'}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="body2" sx={{ color: '#8890A8' }}>
+              手机号
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#E8EAF0' }}>
+              {profile.phone || '未填写'}
             </Typography>
           </Box>
           <Box>

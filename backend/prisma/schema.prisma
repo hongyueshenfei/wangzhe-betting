@@ -66,6 +66,8 @@ model User {
   role            Role      @default(BETTOR)
   coins           Int       @default(100)
   isBanned        Boolean   @default(false)
+  realName        String?
+  phone           String?   @unique
   lastCheckInDate DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt

@@ -56,6 +56,10 @@ export default function BetHistory({ bets }: BetHistoryProps) {
                         {bet.match.season?.name}
                       </Typography>
                     </Box>
+                  ) : bet.pickedTeam ? (
+                    <Typography variant="body2">
+                      冠军投注 · {bet.pickedTeam.name}
+                    </Typography>
                   ) : (
                     <Typography variant="body2" color="text.secondary">
                       比赛 #{bet.matchId}
@@ -100,7 +104,9 @@ export default function BetHistory({ bets }: BetHistoryProps) {
                 <Typography sx={{ fontSize: 14, fontWeight: 700 }}>
                   {bet.match
                     ? `${bet.match.teamA.name} VS ${bet.match.teamB.name}`
-                    : `比赛 #${bet.matchId}`}
+                    : bet.pickedTeam
+                      ? `冠军投注 · ${bet.pickedTeam.name}`
+                      : `比赛 #${bet.matchId}`}
                 </Typography>
                 {bet.match?.season?.name && (
                   <Typography sx={{ fontSize: 11, color: '#8890A8' }}>

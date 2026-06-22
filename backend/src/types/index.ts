@@ -37,6 +37,8 @@ export interface AuthRequest extends Request {
 export interface RegisterDTO {
   username: string;
   password: string;
+  realName?: string;
+  phone?: string;
 }
 
 export interface LoginDTO {

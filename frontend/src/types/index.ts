@@ -14,6 +14,8 @@ export interface User {
   role: Role;
   coins: number;
   isBanned: boolean;
+  realName?: string | null;
+  phone?: string | null;
   lastCheckInDate: string | null;
   createdAt: string;
   updatedAt: string;

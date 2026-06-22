@@ -26,6 +26,14 @@ export class AuthService {
       throw new AppError('密码长度不能少于 6 位', 400);
     }
 
+    // Check for duplicate phone
+    if (dto.phone) {
+      const existingPhone = await prisma.user.findUnique({ where: { phone: dto.phone } });
+      if (existingPhone) {
+        throw new AppError('该手机号已被注册', 400);
+      }
+    }
+
     const passwordHash = await hashPassword(dto.password);
 
     const user = await prisma.user.create({
@@ -34,6 +42,8 @@ export class AuthService {
         passwordHash,
         coins: INITIAL_COINS,
         role: 'BETTOR',
+        realName: dto.realName || null,
+        phone: dto.phone || null,
       },
     });
 
@@ -93,6 +103,8 @@ export class AuthService {
         role: true,
         coins: true,
         isBanned: true,
+        realName: true,
+        phone: true,
         lastCheckInDate: true,
         createdAt: true,
         updatedAt: true,
@@ -122,6 +134,8 @@ export class AuthService {
     role: string;
     coins: number;
     isBanned: boolean;
+    realName?: string | null;
+    phone?: string | null;
     lastCheckInDate: Date | null;
     createdAt: Date;
     updatedAt: Date;

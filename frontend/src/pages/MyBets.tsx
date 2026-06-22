@@ -48,7 +48,7 @@ export default function MyBets() {
     loadBets();
   }, [loadBets]);
 
-  // Convert champion bets to display
+  // Convert champion bets to display (no match info needed)
   const championBetDisplay = championBets.map((cb) => ({
     id: cb.id,
     userId: cb.userId,
@@ -60,14 +60,7 @@ export default function MyBets() {
     status: cb.status,
     createdAt: cb.createdAt,
     settledAt: cb.settledAt,
-    match: cb.season
-      ? {
-          id: cb.seasonId,
-          teamA: { id: 1, name: '冠军', logoUrl: null },
-          teamB: { id: 2, name: cb.team?.name || '', logoUrl: null },
-          season: { id: cb.seasonId, name: cb.season?.name || '' },
-        }
-      : undefined,
+    match: undefined,
   }));
 
   return (

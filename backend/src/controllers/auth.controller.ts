@@ -7,12 +7,12 @@ class AuthController {
   /** POST /api/auth/register */
   async register(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { username, password } = req.body;
+      const { username, password, realName, phone } = req.body;
       if (!username || !password) {
         error(res, '用户名和密码不能为空', 400);
         return;
       }
-      const result = await authService.register({ username, password });
+      const result = await authService.register({ username, password, realName, phone });
       success(res, result, 201);
     } catch (err) {
       if (err instanceof AppError) {
